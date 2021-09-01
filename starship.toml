@@ -1,0 +1,11 @@
+# Which is equivalent to
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$memory_usage\
+$time\
+$status\
+$shell\
+$character"""
