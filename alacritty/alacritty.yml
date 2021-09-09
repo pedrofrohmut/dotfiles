@@ -1,10 +1,8 @@
 shell:
   program: /bin/zsh
 
-
 window:
   startup_mode: Maximized
-
 
 font:
   normal: 
