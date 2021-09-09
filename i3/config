@@ -120,11 +120,9 @@ bindsym $mod+Shift+c reload
 # --- Restart i3 ---
 bindsym $mod+Shift+r restart
  
-# --- Exit i3 ---
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-
 # --- Resize mode ---
-mode "resize" {
+set $resize_mode Resize Mode (j and l) to grow, (h and k) to shrink or (Esc) to exit
+mode "$resize_mode" {
         bindsym h resize shrink width  10 px or 10 ppt
         bindsym j resize grow   height 10 px or 10 ppt
         bindsym k resize shrink height 10 px or 10 ppt
@@ -135,9 +133,23 @@ mode "resize" {
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
 }
-bindsym $mod+r mode "resize"
+bindsym $mod+r mode "$resize_mode"
 
-# --- Client Colors ---
+# --- System mode ---
+set $mode_system System ($mod + 1) logout, ($mod + 2) suspend, ($mod + 3) reboot, ($mod + 4) shutdown or (Esc) Cancel
+mode "$mode_system" {
+  bindsym $mod+1 exec exit; mode "default"
+  bindsym $mod+2 exec systemctl suspend; mode "default"
+  bindsym $mod+3 exec systemctl reboot; mode "default"
+  bindsym $mod+4 exec systemctl poweroff; mode "default"
+  # back to default
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+  bindsym $mod+F4 mode "default"
+}
+bindsym $mod+F4 mode "$mode_system"
+
+# --- Client Colors [Dracula palette] ---
 # Class                 Border  Backgr. Text    Indicator Child_border
 client.focused          #44475a #44475a #ffffff #44475a   #44475a
 client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
@@ -171,8 +183,7 @@ bar {
   font pango: Monospace 10
   position top
   status_command /usr/bin/bumblebee-status \
-    -m  redshift pasink pasource date time\
-      #cpu memory
+    -m  redshift pasink pasource date time
 }
 
 # --- Gaps ---
