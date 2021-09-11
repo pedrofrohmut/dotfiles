@@ -3,13 +3,16 @@ shell:
 
 window:
   startup_mode: Maximized
+  opacity: 0.9
+
+background_opacity: 0.9
 
 font:
   normal: 
-    family: FiraCode Nerd Font Mono
+    family: Fira Code Nerd Font Mono
     style: Regular
   bold:
-    family: FiraCode Nerd Font Mono
+    family: Fira Code Nerd Font Mono
     style: Bold
   size: 10.0
 

@@ -9,7 +9,7 @@ font pango: Hack Nerd Font Mono 11
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-#exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # --- NetworkManager ---
 exec --no-startup-id nm-applet
@@ -18,7 +18,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id nitrogen --restore
 
 # --- Picom compositor ---
-exec --no-startup-id picom
+exec --no-startup-id picom -b -i 1.0 --inactive-dim 0.35
 
 # --- Redshift nightlight [-l coords / -t screen temperature (6500k for neutral)] ---
 exec --no-startup-id redshift -l -23.52:-46.35 -t 5700:3600
@@ -37,7 +37,7 @@ exec --no-startup-id redshift -l -23.52:-46.35 -t 5700:3600
 # bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+1 i3blocks
 
 # Use Mouse+$mod to drag floating windows to their wanted position
-#floating_modifier $mod
+floating_modifier $mod
 
 # --- Terminal ---
 bindsym $mod+Return exec alacritty
@@ -54,17 +54,28 @@ focus_follows_mouse no
 
 # --- Change focus ---
 bindsym $mod+h focus left
-bindsym $mod+Tab focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
+
+bindsym $mod+Tab focus left
 bindsym $mod+shift+Tab focus right
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
 
 # --- Move focused window ---
 bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
 
 # --- Splits ---
 bindsym $mod+s split h
@@ -77,6 +88,9 @@ bindsym $mod+f fullscreen toggle
 bindsym $mod+u layout stacking
 bindsym $mod+i layout tabbed
 bindsym $mod+o layout toggle split
+
+# --- Tilling / Float toggle
+bindsym $mod+Shift+space floating toggle
 
 # --- Workspace names ---
 set $ws1 "1"
@@ -136,12 +150,15 @@ mode "$resize_mode" {
 bindsym $mod+r mode "$resize_mode"
 
 # --- System mode ---
-set $mode_system System ($mod + 1) logout, ($mod + 2) suspend, ($mod + 3) reboot, ($mod + 4) shutdown or (Esc) Cancel
+set $mode_system System ($mod + 1) lock, ($mod + 2) logout, ($mod + 3) suspend, ($mod + 4) reboot, ($mod + 5) shutdown or (Esc) Cancel
+set $locker i3lock -i /home/pedro/Imagens/wallpapers/lock1_converted.png -u
 mode "$mode_system" {
-  bindsym $mod+1 exec exit; mode "default"
-  bindsym $mod+2 exec systemctl suspend; mode "default"
-  bindsym $mod+3 exec systemctl reboot; mode "default"
-  bindsym $mod+4 exec systemctl poweroff; mode "default"
+  # [-i for bg lockscreen / -u not show feedback when typing]
+  bindsym $mod+1 exec $locker; mode "default"
+  bindsym $mod+2 exec i3-msg exit; mode "default"
+  bindsym $mod+3 exec $locker && systemctl suspend; mode "default"
+  bindsym $mod+4 exec systemctl reboot; mode "default"
+  bindsym $mod+5 exec systemctl poweroff; mode "default"
   # back to default
   bindsym Return mode "default"
   bindsym Escape mode "default"
@@ -149,46 +166,40 @@ mode "$mode_system" {
 }
 bindsym $mod+F4 mode "$mode_system"
 
+# --- Bumblebee Status Bar ---
+bar {
+  font pango: Hack Nerd Font Mono 11
+  position top
+  status_command /usr/bin/bumblebee-status \
+    -m pasink pasource date time \
+    -t dracula-powerline
+  colors {
+    background #282a36
+    statusline #f0f1f4
+    separator #666666
+  # Class              Border     Background  Text
+    focused_workspace  #8a3ef4    #8a3ef4     #ffffff
+    active_workspace   #333333    #5f676a     #ffffff
+    inactive_workspace #363949    #363949     #999999
+    urgent_workspace   #2f343a    #900000     #ffffff
+    binding_mode       #2f343a    #900000     #ffffff
+  }
+}
+
 # --- Client Colors [Dracula palette] ---
 # Class                 Border  Backgr. Text    Indicator Child_border
-client.focused          #44475a #44475a #ffffff #44475a   #44475a
-client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+client.focused          #44575a #44575a #ffffff #44575a   #44575a
+client.focused_inactive #282a36 #282a36 #ffffff #282a36   #282a36
 client.unfocused        #333333 #222222 #888888 #292d2e   #222222
 client.urgent           #2f343a #900000 #ffffff #900000   #900000
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
-client.background               #ffffff
-
-# --- Polybar ---
-#exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-
-# --- Default i3status bar ---
-# bar {
-#   status_command i3status
-#   colors {
-#     background #282a36
-#     statusline #f0f1f4
-#     separator #666666
-#   # Class              Border     Background  Text
-#     focused_workspace  #8a3ef4    #8a3ef4     #ffffff
-#     active_workspace   #333333    #5f676a     #ffffff
-#     inactive_workspace #363949    #363949     #999999
-#     urgent_workspace   #2f343a    #900000     #ffffff
-#     binding_mode       #2f343a    #900000     #ffffff
-#   }
-# }
-
-# --- Bumblebee Status Bar ---
-bar {
-  font pango: Monospace 10
-  position top
-  status_command /usr/bin/bumblebee-status \
-    -m  redshift pasink pasource date time
-}
+client.background               #000000
 
 # --- Gaps ---
 for_window [class=".*"] border pixel 3
 gaps inner 13
+smart_gaps on
 
 # ---  Audio switch script ---
 bindsym $mod+t exec $HOME/.config/i3/scripts/i3-sound-switcher/switch-audio-output
