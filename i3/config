@@ -1,15 +1,14 @@
+# Mod4 = Super
+# Mod1 = Alt
+
 # --- Mod key ---
 set $mod Mod4
 
 # --- Font ---
 font pango: Hack Nerd Font Mono 11
 
-# The combination of xss-lock, nm-applet and pactl is a popular choice, so
-# they are included here as an example. Modify as you see fit.
-
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+# --- polkit kde ---
+exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1 &
 
 # --- NetworkManager ---
 exec --no-startup-id nm-applet
@@ -23,18 +22,9 @@ exec --no-startup-id picom -b -i 1.0 --inactive-dim 0.35
 # --- Redshift nightlight [-l coords / -t screen temperature (6500k for neutral)] ---
 exec --no-startup-id redshift -l -23.52:-46.35 -t 5700:3600
 
-# Use pactl to adjust volume in PulseAudio.
-# set $refresh_i3status killall -SIGUSR1 i3status
-# bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-# bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-# bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-# bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-
-# --- Bar: Volume ---
-# change volume or toggle mute
-# bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks
-# bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
-# bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+1 i3blocks
+# set floating (nontiling)for apps needing it
+for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
+for_window [class="Pamac-manager"] floating enable
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -45,21 +35,24 @@ bindsym $mod+Return exec alacritty
 # --- Kill focused window ---
 bindsym $mod+q kill
 
-# --- Laucher ---
-bindsym ctrl+$mod+space exec --no-startup-id rofi -show
-bindsym $mod+space exec --no-startup-id dmenu_run
-
 # --- Focus ---
 focus_follows_mouse no
 
 # --- Change focus ---
+bindsym Mod1+Tab workspace prev
+bindsym Mod1+Shift+Tab workspace next
+bindsym $mod+Tab focus next
+bindsym $mod+shift+Tab focus prev
+
+bindsym Mod1+h workspace prev
+bindsym Mod1+l workspace next
+bindsym Mod1+k focus next
+bindsym Mod1+j focus prev
+
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
-
-bindsym $mod+Tab focus left
-bindsym $mod+shift+Tab focus right
 
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -89,8 +82,9 @@ bindsym $mod+u layout stacking
 bindsym $mod+i layout tabbed
 bindsym $mod+o layout toggle split
 
-# --- Tilling / Float toggle
+# --- Tilling / Float ---
 bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
 
 # --- Workspace names ---
 set $ws1 "1"
@@ -101,8 +95,6 @@ set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
 
 # --- Switch to workspace ---
 bindsym $mod+1 workspace number $ws1
@@ -113,8 +105,6 @@ bindsym $mod+5 workspace number $ws5
 bindsym $mod+6 workspace number $ws6
 bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
-bindsym $mod+9 workspace number $ws9
-bindsym $mod+0 workspace number $ws10
 
 # --- Move focused container to workspace ---
 bindsym $mod+Shift+1 move container to workspace number $ws1
@@ -125,8 +115,6 @@ bindsym $mod+Shift+5 move container to workspace number $ws5
 bindsym $mod+Shift+6 move container to workspace number $ws6
 bindsym $mod+Shift+7 move container to workspace number $ws7
 bindsym $mod+Shift+8 move container to workspace number $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # --- Reload i3 ---
 bindsym $mod+Shift+c reload
@@ -167,39 +155,52 @@ mode "$mode_system" {
 bindsym $mod+F4 mode "$mode_system"
 
 # --- Bumblebee Status Bar ---
+bindsym $mod+m bar mode toggle
 bar {
   font pango: Hack Nerd Font Mono 11
   position top
   status_command /usr/bin/bumblebee-status \
     -m pasink pasource date time \
-    -t dracula-powerline
+    -t onedark-powerline
   colors {
     background #282a36
     statusline #f0f1f4
     separator #666666
-  # Class              Border     Background  Text
-    focused_workspace  #8a3ef4    #8a3ef4     #ffffff
+    # Class            Border     Background  Text
+    focused_workspace  #555555    #555555     #cccccc
     active_workspace   #333333    #5f676a     #ffffff
-    inactive_workspace #363949    #363949     #999999
+    inactive_workspace #222222    #222222     #999999
     urgent_workspace   #2f343a    #900000     #ffffff
     binding_mode       #2f343a    #900000     #ffffff
   }
 }
 
-# --- Client Colors [Dracula palette] ---
+# --- Client Colors ---
 # Class                 Border  Backgr. Text    Indicator Child_border
-client.focused          #44575a #44575a #ffffff #44575a   #44575a
+client.focused          #282a36 #282a36 #ffffff #282a36   #282a36
 client.focused_inactive #282a36 #282a36 #ffffff #282a36   #282a36
-client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.unfocused        #222222 #222222 #666666 #222222   #222222
 client.urgent           #2f343a #900000 #ffffff #900000   #900000
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
 client.background               #000000
 
 # --- Gaps ---
-for_window [class=".*"] border pixel 3
-gaps inner 13
+for_window [class=".*"] border pixel 0
+gaps inner 0
 smart_gaps on
 
 # ---  Audio switch script ---
 bindsym $mod+t exec $HOME/.config/i3/scripts/i3-sound-switcher/switch-audio-output
+
+# --- Dmenu ---
+bindsym $mod+d exec --no-startup-id dmenu_run
+
+# --- Rofi ---
+## Application menu
+bindsym Mod1+space exec rofi -modi drun -show drun \
+		-config ~/.config/rofi/rofidmenu.rasi
+                
+## Window menu
+bindsym ctrl+Mod1+space exec rofi -show window \
+		-config ~/.config/rofi/rofidmenu.rasi 
