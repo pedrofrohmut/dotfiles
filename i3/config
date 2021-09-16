@@ -8,7 +8,7 @@ set $mod Mod4
 font pango: Hack Nerd Font Mono 11
 
 # --- polkit kde ---
-exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1 &
+exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
 
 # --- NetworkManager ---
 exec --no-startup-id nm-applet
@@ -25,6 +25,18 @@ exec --no-startup-id redshift -l -23.52:-46.35 -t 5700:3600
 # set floating (nontiling)for apps needing it
 for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
 for_window [class="Pamac-manager"] floating enable
+for_window [title="alsamixer"] floating enable border pixel 1
+for_window [class="calamares"] floating enable border normal
+for_window [class="Clipgrab"] floating enable
+for_window [title="File Transfer*"] floating enable
+for_window [title="i3_help"] floating enable sticky enable border normal
+for_window [class="Lxappearance"] floating enable sticky enable border normal
+for_window [class="Manjaro-hello"] floating enable
+for_window [class="Manjaro Settings Manager"] floating enable border normal
+for_window [class="Nitrogen"] floating enable sticky enable border normal
+for_window [class="Pamac-manager"] floating enable
+for_window [class="Pavucontrol"] floating enable
+for_window [class="(?i)virtualbox"] floating enable border normal
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -173,6 +185,7 @@ bar {
     urgent_workspace   #2f343a    #900000     #ffffff
     binding_mode       #2f343a    #900000     #ffffff
   }
+  tray_output primary
 }
 
 # --- Client Colors ---
@@ -190,17 +203,29 @@ for_window [class=".*"] border pixel 0
 gaps inner 0
 smart_gaps on
 
-# ---  Audio switch script ---
-bindsym $mod+t exec $HOME/.config/i3/scripts/i3-sound-switcher/switch-audio-output
-
 # --- Dmenu ---
 bindsym $mod+d exec --no-startup-id dmenu_run
 
-# --- Rofi ---
-## Application menu
+# --- Rofi application menu --- 
 bindsym Mod1+space exec rofi -modi drun -show drun \
 		-config ~/.config/rofi/rofidmenu.rasi
                 
-## Window menu
+# --- Rofi window menu --- 
 bindsym ctrl+Mod1+space exec rofi -show window \
 		-config ~/.config/rofi/rofidmenu.rasi 
+
+# --- Dolphin ---
+exec --no-startup-id dolphin --deamon &
+bindsym $mod+e exec dolphin --new-window $HOME
+
+# --- Pamac tray ---
+exec --no-startup-id pamac-tray
+
+# --- Audio ---
+bindsym $mod+plus exec amixer -q -D pulse sset Master 5%+
+bindsym $mod+minus exec amixer -q -D pulse sset Master 5%-
+bindsym $mod+0 exec amixer -q -D pulse sset Master toggle
+
+# ---  Audio switch script ---
+bindsym $mod+t exec $HOME/.config/i3/scripts/i3-sound-switcher/switch-audio-output
+bindsym $mod+9 exec $HOME/.config/i3/scripts/i3-sound-switcher/switch-audio-output
