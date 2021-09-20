@@ -51,10 +51,7 @@ bindsym $mod+q kill
 focus_follows_mouse no
 
 # --- Change focus ---
-bindsym Mod1+Tab workspace prev
-bindsym Mod1+Shift+Tab workspace next
-bindsym $mod+Tab focus next
-bindsym $mod+shift+Tab focus prev
+bindsym Mod1+Tab workspace back_and_forth
 
 bindsym Mod1+h workspace prev
 bindsym Mod1+l workspace next
