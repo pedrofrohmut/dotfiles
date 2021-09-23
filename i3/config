@@ -8,19 +8,19 @@ set $mod Mod4
 font pango: Hack Nerd Font Mono 11
 
 # --- polkit kde ---
-exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
+exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1 &
 
 # --- NetworkManager ---
-exec --no-startup-id nm-applet
+exec --no-startup-id nm-applet &
 
 # --- Wallpaper [restore previous] ---
-exec --no-startup-id nitrogen --restore
+exec --no-startup-id nitrogen --restore &
 
 # --- Picom compositor ---
-exec --no-startup-id picom -b -i 1.0 --inactive-dim 0.35
+exec --no-startup-id picom -b -i 1.0 --inactive-dim 0.35 &
 
 # --- Redshift nightlight [-l coords / -t screen temperature (6500k for neutral)] ---
-exec --no-startup-id redshift -l -23.52:-46.35 -t 5700:3600
+exec --no-startup-id redshift -l -23.52:-46.35 -t 5700:3600 &
 
 # set floating (nontiling)for apps needing it
 for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
