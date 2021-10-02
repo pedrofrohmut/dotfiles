@@ -163,7 +163,7 @@ bindsym       $mod+r        mode "$resize_mode"
 set $mode_system System  1.lock,  2.logout,  3.suspend,  4.reboot,  5.shutdown or (Esc) Cancel
 
 # [-i for bg lockscreen / -u not show feedback when typing]
-set $locker i3lock -i /home/pedro/media/wallpaper/lock.png -u
+set $locker i3lock -i /home/pedro/media/images/wallpaper/lock.png -u
 
 # --- System mode ---
 mode "$mode_system" {
@@ -188,7 +188,7 @@ bindsym       $mod+F4       mode "$mode_system"
 bindsym       $mod+m        bar mode toggle
 
 bar {
-  font pango:             Hack Nerd Font Mono 10
+  font pango:             Hack Nerd Font Mono 9
   
   position                top
   
@@ -236,7 +236,7 @@ bindsym     $mod+e              exec dolphin $HOME
 bindsym     $mod+d              exec --no-startup-id dmenu_run
 
 # --- Rofi application menu --- 
-bindsym     Mod1+space          exec rofi -modi drun -show drun
+bindsym     $mod+p              exec rofi -modi drun -show drun
                 
 # --- Rofi window menu --- 
-bindsym     ctrl+Mod1+space     exec rofi -show windowb
+bindsym     Mod1+space          exec rofi -show windowb
