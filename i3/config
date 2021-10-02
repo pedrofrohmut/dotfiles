@@ -8,19 +8,25 @@ set $mod Mod4
 font pango: Hack Nerd Font Mono 11
 
 # --- polkit kde ---
-exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1 &
+#exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1 &
 
 # --- NetworkManager ---
-exec --no-startup-id nm-applet &
+#exec --no-startup-id nm-applet &
 
 # --- Wallpaper [restore previous] ---
-exec --no-startup-id nitrogen --restore &
+#exec --no-startup-id nitrogen --restore &
 
 # --- Picom compositor ---
-exec --no-startup-id picom -b -i 1.0 --inactive-dim 0.35 &
+#exec --no-startup-id picom -b -i 1.0 --inactive-dim 0.35 &
 
 # --- Redshift nightlight [-l coords / -t screen temperature (6500k for neutral)] ---
-exec --no-startup-id redshift -l -23.52:-46.35 -t 5700:3600 &
+#exec --no-startup-id redshift -l -23.52:-46.35 -t 5700:3600 &
+
+# --- Pamac tray ---
+#exec --no-startup-id pamac-tray
+
+# --- Dolphin ---
+#exec --no-startup-id dolphin --deamon &
 
 # set floating (nontiling)for apps needing it
 for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
@@ -148,7 +154,7 @@ bindsym $mod+r mode "$resize_mode"
 
 # --- System mode ---
 set $mode_system System ($mod + 1) lock, ($mod + 2) logout, ($mod + 3) suspend, ($mod + 4) reboot, ($mod + 5) shutdown or (Esc) Cancel
-set $locker i3lock -i /home/pedro/Imagens/wallpapers/lock1_converted.png -u
+set $locker i3lock -u -i /home/pedro/media/images/wallpaper/lock.png
 mode "$mode_system" {
   # [-i for bg lockscreen / -u not show feedback when typing]
   bindsym $mod+1 exec $locker; mode "default"
@@ -163,14 +169,16 @@ mode "$mode_system" {
 }
 bindsym $mod+F4 mode "$mode_system"
 
-# --- Bumblebee Status Bar ---
 bindsym $mod+m bar mode toggle
 bar {
-  font pango: Hack Nerd Font Mono 11
+  # --- i3blocks ---
+  status_command i3blocks
+  # --- Bumblebee Status Bar ---
+  # status_command /usr/bin/bumblebee-status \
+  #   -m pasink pasource date time \
+  #   -t onedark-powerline
+  font pango: Hack Nerd Font Mono 10
   position top
-  status_command /usr/bin/bumblebee-status \
-    -m pasink pasource date time \
-    -t onedark-powerline
   colors {
     background #282a36
     statusline #f0f1f4
@@ -182,7 +190,6 @@ bar {
     urgent_workspace   #2f343a    #900000     #ffffff
     binding_mode       #2f343a    #900000     #ffffff
   }
-  tray_output primary
 }
 
 # --- Client Colors ---
@@ -212,11 +219,7 @@ bindsym ctrl+Mod1+space exec rofi -show window \
 		-config ~/.config/rofi/rofidmenu.rasi 
 
 # --- Dolphin ---
-exec --no-startup-id dolphin --deamon &
 bindsym $mod+e exec dolphin --new-window $HOME
-
-# --- Pamac tray ---
-exec --no-startup-id pamac-tray
 
 # --- Audio ---
 bindsym $mod+plus exec amixer -q -D pulse sset Master 5%+

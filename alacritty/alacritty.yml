@@ -2,7 +2,7 @@ shell:
   program: /bin/zsh
 
 window:
-  startup_mode: Maximized
+  # startup_mode: Maximized
   padding:
     x: 4
     y: 4

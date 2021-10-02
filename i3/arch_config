@@ -1,0 +1,242 @@
+# Mod4 = Super
+# Mod1 = Alt
+
+# --- Mod key ---
+set $mod Mod4
+
+# --- Font ---
+font pango: Hack Nerd Font Mono 11
+
+# --- Mouse modifier ---
+floating_modifier $mod
+
+# --- Window title ---
+for_window [class=".*"] border pixel 2
+
+# --- Client Colors ---
+# Class                 Border     Backgr.    Text       Indicator    Child_border
+client.focused          #282a36    #282a36    #ffffff    #282a36      #282a36
+client.focused_inactive #282a36    #282a36    #ffffff    #282a36      #282a36
+client.unfocused        #222222    #222222    #666666    #222222      #222222
+client.urgent           #2f343a    #900000    #ffffff    #900000      #900000
+client.placeholder      #000000    #0c0c0c    #ffffff    #000000      #0c0c0c
+
+client.background                  #000000
+
+# --- Focus ---
+focus_follows_mouse no
+
+# --- Workspace names ---
+set    $ws1    "1"
+set    $ws2    "2"
+set    $ws3    "3"
+set    $ws4    "4"
+set    $ws5    "5"
+set    $ws6    "6"
+set    $ws7    "7"
+set    $ws8    "8"
+
+# --- Gaps ---
+gaps inner 5
+smart_gaps on
+
+####################################################################################################
+### Floating #######################################################################################
+####################################################################################################
+
+for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
+for_window [class="Pamac-manager"]                      floating enable
+for_window [title="alsamixer"]                          floating enable border pixel 1
+for_window [class="calamares"]                          floating enable border normal
+for_window [class="Clipgrab"]                           floating enable
+for_window [title="File Transfer*"]                     floating enable
+for_window [title="i3_help"]                            floating enable sticky enable border normal
+for_window [class="Lxappearance"]                       floating enable sticky enable border normal
+for_window [class="Manjaro-hello"]                      floating enable
+for_window [class="Manjaro Settings Manager"]           floating enable border normal
+for_window [class="Nitrogen"]                           floating enable sticky enable border normal
+for_window [class="Pamac-manager"]                      floating enable
+for_window [class="Pavucontrol"]                        floating enable
+for_window [class="(?i)virtualbox"]                     floating enable border normal
+
+####################################################################################################
+### i3 Keybinds ####################################################################################
+####################################################################################################
+
+# --- Kill focused window ---
+bindsym         $mod+q              kill
+
+# --- Change focus ---
+bindsym         Mod1+Tab            workspace back_and_forth
+
+bindsym         Mod1+h              workspace prev
+bindsym         Mod1+l              workspace next
+bindsym         Mod1+k              focus next
+bindsym         Mod1+j              focus prev
+
+bindsym         $mod+h              focus left
+bindsym         $mod+j              focus down
+bindsym         $mod+k              focus up
+bindsym         $mod+l              focus right
+
+# --- Move focused window ---
+bindsym         $mod+Shift+h        move left
+bindsym         $mod+Shift+j        move down
+bindsym         $mod+Shift+k        move up
+bindsym         $mod+Shift+l        move right
+
+bindsym         $mod+Left           move left
+bindsym         $mod+Down           move down
+bindsym         $mod+Up             move up
+bindsym         $mod+Right          move right
+
+bindsym         $mod+Shift+Left     move left
+bindsym         $mod+Shift+Down     move down
+bindsym         $mod+Shift+Up       move up
+bindsym         $mod+Shift+Right    move right
+
+# --- Splits ---
+bindsym         $mod+s              split h
+bindsym         $mod+v              split v
+
+# --- Fullscreen ---
+bindsym         $mod+f              fullscreen toggle
+
+# --- Change layout ---
+bindsym         $mod+u              layout stacking
+bindsym         $mod+i              layout tabbed
+bindsym         $mod+o              layout toggle split
+
+# --- Tilling / Float ---
+bindsym         $mod+Shift+space    floating toggle
+bindsym         $mod+space          focus mode_toggle
+
+# --- Switch to workspace ---
+bindsym         $mod+1              workspace number      $ws1
+bindsym         $mod+2              workspace number      $ws2
+bindsym         $mod+3              workspace number      $ws3
+bindsym         $mod+4              workspace number      $ws4
+bindsym         $mod+5              workspace number      $ws5
+bindsym         $mod+6              workspace number      $ws6
+bindsym         $mod+7              workspace number      $ws7
+bindsym         $mod+8              workspace number      $ws8
+
+# --- Move focused container to workspace ---
+bindsym         $mod+Shift+1        move container to workspace number      $ws1
+bindsym         $mod+Shift+2        move container to workspace number      $ws2
+bindsym         $mod+Shift+3        move container to workspace number      $ws3
+bindsym         $mod+Shift+4        move container to workspace number      $ws4
+bindsym         $mod+Shift+5        move container to workspace number      $ws5
+bindsym         $mod+Shift+6        move container to workspace number      $ws6
+bindsym         $mod+Shift+7        move container to workspace number      $ws7
+bindsym         $mod+Shift+8        move container to workspace number      $ws8
+
+# --- Reload i3 ---
+bindsym         $mod+Shift+c        reload
+
+# --- Restart i3 ---
+bindsym         $mod+Shift+r        restart
+ 
+
+####################################################################################################
+### Modes ##########################################################################################
+####################################################################################################
+
+set $resize_mode Resize Mode (j and l) to grow, (h and k) to shrink or (Esc) to exit
+
+# --- Resize mode ---
+mode "$resize_mode" {
+  bindsym     h             resize shrink           width  10 px or 10 ppt
+  bindsym     j             resize grow             height 10 px or 10 ppt
+  bindsym     k             resize shrink           height 10 px or 10 ppt
+  bindsym     l             resize grow             width  10 px or 10 ppt
+
+  # back to normal: Enter or Escape or $mod+r
+  bindsym     Return        mode "default"
+  bindsym     Escape        mode "default"
+  bindsym     $mod+r        mode "default"
+}
+
+# --- Resize mode key ---
+bindsym       $mod+r        mode "$resize_mode"
+
+set $mode_system System  1.lock,  2.logout,  3.suspend,  4.reboot,  5.shutdown or (Esc) Cancel
+
+# [-i for bg lockscreen / -u not show feedback when typing]
+set $locker i3lock -i /home/pedro/media/wallpaper/lock.png -u
+
+# --- System mode ---
+mode "$mode_system" {
+  bindsym     $mod+1        exec $locker;                        mode "default"
+  bindsym     $mod+2        exec i3-msg exit;                    mode "default"
+  bindsym     $mod+3        exec $locker && systemctl suspend;   mode "default"
+  bindsym     $mod+4        exec systemctl reboot;               mode "default"
+  bindsym     $mod+5        exec systemctl poweroff;             mode "default"
+  # back to default
+  bindsym     Return        mode "default"
+  bindsym     Escape        mode "default"
+  bindsym     $mod+F4       mode "default"
+}
+
+# --- System mode key ---
+bindsym       $mod+F4       mode "$mode_system"
+
+####################################################################################################
+### Bar ############################################################################################
+####################################################################################################
+
+bindsym       $mod+m        bar mode toggle
+
+bar {
+  font pango:             Hack Nerd Font Mono 10
+  
+  position                top
+  
+  status_command          i3blocks
+  
+  colors {
+    background            #282a36
+    statusline            #f0f1f4
+    separator             #666666
+    
+    # Class               Border       Background    Text
+    focused_workspace     #555555      #555555       #cccccc
+    active_workspace      #333333      #5f676a       #ffffff
+    inactive_workspace    #222222      #222222       #999999
+    urgent_workspace      #2f343a      #900000       #ffffff
+    binding_mode          #2f343a      #900000       #ffffff
+  }
+}
+
+####################################################################################################
+### Audio ##########################################################################################
+####################################################################################################
+
+# --- Volume control ---
+bindsym     $mod+plus           exec amixer -q -D pulse sset Master 5%+
+bindsym     $mod+minus          exec amixer -q -D pulse sset Master 5%-
+bindsym     $mod+0              exec amixer -q -D pulse sset Master toggle
+
+# ---  Audio switch script ---
+bindsym     $mod+t              exec $HOME/.config/i3/scripts/i3-sound-switcher/switch-audio-output
+bindsym     $mod+9              exec $HOME/.config/i3/scripts/i3-sound-switcher/switch-audio-output
+
+
+####################################################################################################
+### Apps ###########################################################################################
+####################################################################################################
+
+# --- Terminal ---
+bindsym     $mod+Return         exec alacritty
+
+# --- Dolphin ---
+bindsym     $mod+e              exec dolphin $HOME
+
+# --- Dmenu ---
+bindsym     $mod+d              exec --no-startup-id dmenu_run
+
+# --- Rofi application menu --- 
+bindsym     Mod1+space          exec rofi -modi drun -show drun
+                
+# --- Rofi window menu --- 
+bindsym     ctrl+Mod1+space     exec rofi -show windowb
