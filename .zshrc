@@ -13,7 +13,7 @@ fi
 
 # Aliases
 alias ls='ls --color=auto'
-alias ll='ls -la --color=auto'
+alias ll='ls -lAF'
 alias vim='nvim'
 alias gvim='nvim-qt'
 alias gits='git status'

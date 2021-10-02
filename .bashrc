@@ -137,7 +137,7 @@ ex ()
 }
 
 # Aliases
-alias ll='ls -la'
+alias ll='ls -lA'
 alias vim='nvim'
 alias gvim='nvim-qt'
 
