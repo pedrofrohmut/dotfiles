@@ -95,7 +95,7 @@ layouts = [
     # layout.TreeTab(),
     # layout.VerticalTile(),
     # layout.Zoomy(),
-    layout.Columns(border_focus="#7a7a7a", border_normal="#333333", border_width=3),
+    layout.Columns(border_focus="#959595", border_normal="#333333", border_width=2),
 ]
 
 # Drag floating layouts.
@@ -142,7 +142,7 @@ top_bar = bar.Bar(
         # widget.CurrentLayout(),
         widget.Prompt(),
         widget.Spacer(),
-        widget.PulseVolume(update_interval=2.0),
+        widget.PulseVolume(fmt='Vol: {}', update_interval=2.0),
         widget.Sep(padding=20),
         widget.CPU(format="CPU: {load_percent}%", update_interval=3.0),
         widget.ThermalSensor(
