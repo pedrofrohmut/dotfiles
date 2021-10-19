@@ -28,4 +28,4 @@ pamac-tray &
 unclutter --timeout 2 --ignore-scrolling &
 
 # KDE Polkit
-exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1 &
+exec /usr/lib/polkit-kde-authentication-agent-1 &
