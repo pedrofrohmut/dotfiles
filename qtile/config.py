@@ -45,8 +45,7 @@ keys = [
     Key([mod], "minus", lazy.spawn("pamixer --decrease 5")),
     Key([mod], "equal", lazy.spawn("pamixer --increase 5")),
     Key([mod], "0",     lazy.spawn("pamixer --toggle-mute")),
-    Key([mod], "F9",    lazy.spawn("pacmd set-default-sink 0")),
-    Key([mod], "F10",   lazy.spawn("pacmd set-default-sink 1")),
+    Key([mod], "F9",    lazy.spawn("/home/pedro/programming/dotfiles/scripts/change-default-sink.sh")),
     
     #Programs
     Key([mod], "Return", lazy.spawn("alacritty"), desc="Launch terminal"),
