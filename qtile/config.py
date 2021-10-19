@@ -167,9 +167,9 @@ top_bar = bar.Bar(
             update_interval=3.0
         ),
         widget.Sep(padding=20),
-        widget.Clock(format="%R", update_interval=3.0),
-        widget.Sep(padding=20),
         widget.Clock(format="%d/%m/%Y (%a)", update_interval=60.0),
+        widget.Sep(padding=20),
+        widget.Clock(format="%R", update_interval=3.0),
         widget.Sep(padding=20),
         widget.Systray(foreground="aaaaff")
     ], 
