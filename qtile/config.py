@@ -141,7 +141,7 @@ top_bar = bar.Bar(
         # widget.CurrentLayout(),
         widget.Prompt(),
         widget.Spacer(),
-        widget.PulseVolume(fmt='Vol: {}', update_interval=2.0),
+        widget.Volume(fmt='Vol: {}', update_interval=2.0),
         widget.Sep(padding=20),
         widget.CPU(format="CPU: {load_percent}%", update_interval=3.0),
         widget.ThermalSensor(
