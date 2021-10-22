@@ -9,6 +9,10 @@ xset r rate 250 30 &
 
 # --- Apps ---------------------------------------------------------------------------------
 
+# Set up an icon tray
+trayer --edge top --align right --SetPartialStrut true \
+       --width 5 --tint 0x212121 --height 21 --alpha 0 &
+
 # Wallpaper
 nitrogen --restore &
 
@@ -23,6 +27,9 @@ nm-applet &
 
 # Pamac tray
 pamac-tray &
+
+# Power Management
+xfce4-power-manager &
 
 # Hide Mouse Cursor
 unclutter --timeout 2 --ignore-scrolling &
