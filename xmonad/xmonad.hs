@@ -6,6 +6,7 @@ import XMonad.Util.EZConfig
 import XMonad.Util.Ungrab
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Loggers
+import XMonad.Util.ClickableWorkspaces
 
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageHelpers
@@ -30,7 +31,7 @@ main :: IO ()
 main = xmonad 
      . ewmhFullscreen 
      . ewmh 
-     . withEasySB(statusBarProp "xmobar ~/.config/xmobar/xmobarrc" (pure myXmobarPP)) defToggleStrutsKey
+     . withEasySB(statusBarProp "xmobar ~/.config/xmobar/xmobarrc" (clickablePP myXmobarPP)) defToggleStrutsKey
      $ docks myConfig
 
 -- My Configuration -----------------------------------------------------------------------------
@@ -115,7 +116,7 @@ myStartupHook = do
 -- XMobar ---------------------------------------------------------------------------------------
 myXmobarPP :: PP
 myXmobarPP = def
-    { ppSep             = magenta " • "
+    { ppSep             = white " | "
     , ppTitleSanitize   = xmobarStrip
     , ppCurrent         = white . wrap (white " [") (white "]")
     , ppHidden          = white . wrap " " ""

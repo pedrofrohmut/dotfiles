@@ -1,11 +1,11 @@
 Config 
     { overrideRedirect = False
     , font     = "xft:Hack\ Nerd\ Font\ Mono:pixelsize=13:antialias=true"
-    , bgColor  = "#212121"
+    , bgColor  = "#313131"
     , fgColor  = "#c2c2c2"
     , position = TopW L 90
     , commands = 
-        [ Run XMonadLog
+        [ Run UnsafeXMonadLog
         , Run Alsa "default" "Master"
             [ "--template", "Vol: <volumestatus>"
             , "--suffix"  , "True"
@@ -18,5 +18,5 @@ Config
         ]
     , sepChar  = "%"
     , alignSep = "}{"
-    , template = " %XMonadLog% }{ %alsa:default:Master% | %cpu% | %memory% | %date% "
+    , template = " %UnsafeXMonadLog% }{ %alsa:default:Master% | %cpu% | %memory% | %date% "
     }
