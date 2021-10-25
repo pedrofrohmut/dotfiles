@@ -41,9 +41,9 @@ gaps inner 0
 smart_gaps on
 smart_borders on
 
-####################################################################################################
-### Floating #######################################################################################
-####################################################################################################
+################################################################################
+### Floating ###################################################################
+################################################################################
 
 for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
 for_window [class="Pamac-manager"]                      floating enable
@@ -60,9 +60,9 @@ for_window [class="Pamac-manager"]                      floating enable
 for_window [class="Pavucontrol"]                        floating enable
 for_window [class="(?i)virtualbox"]                     floating enable border normal
 
-####################################################################################################
-### Plasma compatibility improvements ##############################################################
-####################################################################################################
+################################################################################
+### Plasma compatibility improvements ##########################################
+################################################################################
 
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
@@ -81,25 +81,29 @@ for_window [class="(?i)*nextcloud*"] floating disable
 for_window [class="plasmashell" window_type="notification"] border none, move right 700px, move down 450px
 no_focus [class="plasmashell" window_type="notification"]
 
-####################################################################################################
-### i3 Keybinds ####################################################################################
-####################################################################################################
+# for_window [title="Desktop — Plasma"] kill; floating enable; border none
+# for_window [title="Área de traballho"] kill; floating enable; border none
+for_window [class="plasmashell"] kill; floating enable; border none
+
+################################################################################
+### i3 Keybinds ################################################################
+################################################################################
 
 # --- Kill focused window ---
 bindsym         $mod+q              kill
 
 # --- Change focus ---
-bindsym         Mod1+Tab            workspace back_and_forth
+bindsym         $mod+Tab            workspace back_and_forth
 
-bindsym         Mod1+h              workspace prev
-bindsym         Mod1+l              workspace next
-bindsym         Mod1+k              focus next
-bindsym         Mod1+j              focus prev
+bindsym         $mod+h              workspace prev
+bindsym         $mod+l              workspace next
+bindsym         $mod+k              focus next
+bindsym         $mod+j              focus prev
 
-bindsym         $mod+h              focus left
-bindsym         $mod+j              focus down
-bindsym         $mod+k              focus up
-bindsym         $mod+l              focus right
+bindsym         Mod1+h              focus left
+bindsym         Mod1+j              focus down
+bindsym         Mod1+k              focus up
+bindsym         Mod1+l              focus right
 
 # --- Move focused window ---
 bindsym         $mod+Shift+h        move left
@@ -131,6 +135,7 @@ bindsym         $mod+o              layout toggle split
 
 # --- Tilling / Float ---
 bindsym         $mod+Shift+space    floating toggle
+bindsym         $mod+t              floating toggle
 bindsym         $mod+space          focus mode_toggle
 
 # --- Switch to workspace ---
@@ -162,9 +167,19 @@ bindsym         $mod+Shift+r        restart
 # --- No locking suspend ---
 bindsym         $mod+F3             exec systemctl suspend
 
-####################################################################################################
-### Modes ##########################################################################################
-####################################################################################################
+# --- Exit I3 window manager ---
+bindsym         $mod+Shift+q        exec i3-msg exit
+
+# --- KDE/Plasma logout ---
+bindsym         $mod+Shift+e        exec qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1
+
+# --- KDE/Plasma KRunner ---
+bindsym         Mod1+space          exec krunner
+
+
+################################################################################
+### Modes ######################################################################
+################################################################################
 
 set $resize_mode Resize Mode (j and l) to grow, (h and k) to shrink or (Esc) to exit
 
@@ -205,9 +220,9 @@ mode "$mode_system" {
 # --- System mode key ---
 bindsym       $mod+F4       mode "$mode_system"
 
-####################################################################################################
-### Bar ############################################################################################
-####################################################################################################
+################################################################################
+### Bar ########################################################################
+################################################################################
 
 bindsym       $mod+m        bar mode toggle
 
@@ -232,23 +247,21 @@ bar {
   }
 }
 
-####################################################################################################
-### Audio ##########################################################################################
-####################################################################################################
+################################################################################
+### Audio ######################################################################
+################################################################################
 
 # --- Volume control ---
-bindsym     $mod+plus           exec amixer -q -D pulse sset Master 5%+
-bindsym     $mod+minus          exec amixer -q -D pulse sset Master 5%-
-bindsym     $mod+0              exec amixer -q -D pulse sset Master toggle
+bindsym     $mod+plus           exec pamixer --increase 5
+bindsym     $mod+minus          exec pamixer --decrease 5
+bindsym     $mod+Shift+0        exec pamixer --toggle-mute
 
 # ---  Audio switch script ---
-bindsym     $mod+t              exec $HOME/.config/i3/scripts/i3-sound-switcher/switch-audio-output
-bindsym     $mod+9              exec $HOME/.config/i3/scripts/i3-sound-switcher/switch-audio-output
+bindsym     $mod+0              exec ~/programming/dotfiles/scripts/change-default-sink.sh
 
-
-####################################################################################################
-### Apps ###########################################################################################
-####################################################################################################
+################################################################################
+### Apps #######################################################################
+################################################################################
 
 # --- Terminal ---
 bindsym     $mod+Return         exec alacritty
@@ -263,4 +276,4 @@ bindsym     $mod+d              exec --no-startup-id dmenu_run
 bindsym     $mod+p              exec rofi -modi drun -show drun -theme ~/.config/rofi/themes/my_dracula.rasi
                 
 # --- Rofi window menu --- 
-bindsym     Mod1+space          exec rofi -modi window -show window -theme ~/.config/rofi/themes/my_dracula.rasi
+bindsym     $mod+w              exec rofi -modi window -show window -theme ~/.config/rofi/themes/my_dracula.rasi
