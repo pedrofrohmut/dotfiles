@@ -25,13 +25,10 @@ xfce4-power-manager &
 unclutter --timeout 2 --ignore-scrolling &
 
 # KDE Polkit
-exec /usr/lib/polkit-kde-authentication-agent-1 &
+#exec /usr/lib/polkit-kde-authentication-agent-1 &
+lxsession &
 
 # --- Tray ------------------------------------------------------------------------------
-
-# Set up an icon tray
-trayer --edge top --align right --SetPartialStrut true \
-       --width 5 --tint 0x212121 --height 21 --alpha 0 &
 
 # Vomulme
 volumeicon &
