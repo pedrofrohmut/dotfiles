@@ -9,6 +9,7 @@ import XMonad.Util.Loggers
 
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageHelpers
+import XMonad.Hooks.ManageDocks
 
 
 import qualified XMonad.StackSet as W
@@ -30,7 +31,7 @@ main = xmonad
      . ewmhFullscreen 
      . ewmh 
      . withEasySB(statusBarProp "xmobar ~/.config/xmobar/xmobarrc" (pure myXmobarPP)) defToggleStrutsKey
-     $ myConfig
+     $ docks myConfig
 
 -- My Configuration -----------------------------------------------------------------------------
 myConfig = def 
@@ -62,26 +63,29 @@ myConfig = def
     , ((mod4Mask, xK_h),   prevWS)
     , ((mod4Mask, xK_l),   nextWS)
 
+    -- Layouts
+    , ((mod4Mask, xK_b), sendMessage ToggleStruts)
+
     -- Apps
     , ((mod4Mask, xK_Return), spawn "alacritty")
+    , ((mod4Mask, xK_e),      spawn "dolphin")
     , ((mod4Mask, xK_p),      spawn "rofi -modi drun -show drun -theme ~/.config/rofi/themes/my_dracula.rasi")
 
     -- Audio/Volume
     , ((mod4Mask, xK_minus), spawn "pamixer --decrease 5")
     , ((mod4Mask, xK_equal), spawn "pamixer --increase 5")
     , ((mod4Mask, xK_0),     spawn "pamixer --toggle-mute")
-    , ((mod4Mask, xK_F9),    spawn "pacmd set-default-sink 0")
-    , ((mod4Mask, xK_F10),   spawn "pacmd set-default-sink 1")
+    , ((mod4Mask, xK_F9),    spawn "/home/pedro/programming/dotfiles/scripts/change-default-sink.sh")
 
     -- Session managment
     , ((mod4Mask .|. shiftMask, xK_z),  spawn "i3lock -i /home/pedro/media/images/wallpaper/lock.png -u")
-    , ((mod4Mask .|. shiftMask, xK_r),  spawn "killall xmobar; xmonad --recompile; xmonad --restart")
+    , ((mod4Mask .|. shiftMask, xK_r),  spawn "xmonad --recompile; xmonad --restart")
     , ((mod4Mask .|. shiftMask, xK_F3), spawn "systemctl suspend")
     , ((mod4Mask .|. shiftMask, xK_F4), io (exitWith ExitSuccess))
     ]
 
 -- LayoutHook -----------------------------------------------------------------------------------
-myLayouts = smartBorders(tiled ||| Mirror tiled ||| Full)
+myLayouts = avoidStruts( smartBorders( tiled ||| Mirror tiled ||| Full ) )
   where
     nmaster = 1      -- Default number of windows in the master pane
     delta   = 3/100  -- Percent of screen to increment by when resizing panes
@@ -97,14 +101,16 @@ myManageHook = composeAll
   ]
 
 -- Handle event hook ----------------------------------------------------------------------------
-myHandleEvenHook = mempty
+myHandleEvenHook = docksEventHook
 -- myHandleEvenHook = fullscreenEventHook
 
 -- Log hook -------------------------------------------------------------------------------------
 myLogHook = return ()
 
 -- Startup hook ---------------------------------------------------------------------------------
-myStartupHook = return ()
+myStartupHook :: X ()
+myStartupHook = do
+    spawnOnce "trayer --edge top --align right --SetPartialStrut true --width 10 --tint 0x212121 --height 21 --alpha 0"
 
 -- XMobar ---------------------------------------------------------------------------------------
 myXmobarPP :: PP
@@ -115,12 +121,12 @@ myXmobarPP = def
     , ppHidden          = white . wrap " " ""
     , ppHiddenNoWindows = gray . wrap " " ""
     , ppUrgent          = red . wrap (yellow "!") (yellow "!")
-    , ppOrder           = \[ws, l, _, wins] -> [ws, l, wins]
+    , ppOrder           = \[ws, l, _, wins] -> [ws, wins]
     , ppExtras          = [logTitles formatFocused formatUnfocused]
     }
   where
-    formatFocused   = wrap (white    "[") (white    "]") . magenta . ppWindow
-    formatUnfocused = wrap (lowWhite "[") (lowWhite "]") . blue    . ppWindow
+    formatFocused   = wrap (white    "[ ") (white    " ]") . white . ppWindow
+    formatUnfocused = wrap (lowWhite "[") (lowWhite "]") . gray    . ppWindow
 
     -- Windows should have *some* title, which should not not exceed a sane length.
     ppWindow :: String -> String

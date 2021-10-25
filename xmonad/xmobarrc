@@ -1,36 +1,22 @@
 Config 
-    { font = "xft:Hack:weight=regular:pixelsize=12:antialias=true:hinting=true"
-    , additionalFonts = []
-    , borderColor = "#212121"
-    , borderWidth = 0
-    , border = FullB
-    , bgColor = "#212121"
-    , fgColor = "#c1c1c1"
-    , alpha = 200
-    , position = Top
-    , textOffset = -1
-    , iconOffset = -1
-    , lowerOnStart = True
-    , pickBroadest = False
-    , persistent = False
-    , hideOnStart = False
-    , iconRoot = "."
-    , allDesktops = True
-    , overrideRedirect = True
+    { overrideRedirect = False
+    , font     = "xft:Hack\ Nerd\ Font\ Mono:pixelsize=13:antialias=true"
+    , bgColor  = "#212121"
+    , fgColor  = "#c2c2c2"
+    , position = TopW L 90
     , commands = 
-        [ Run StdinReader 
-        , Run XMonadLog
+        [ Run XMonadLog
         , Run Alsa "default" "Master"
             [ "--template", "Vol: <volumestatus>"
             , "--suffix"  , "True"
             , "--"
             , "--on", ""
             ]
-        , Run Cpu ["-L","3","-H","50", "--normal","green","--high","red"] 10
-        , Run Memory ["-t","Mem: <usedratio>%"] 10
-        , Run Date "(%a) %d/%m/%Y %H:%M" "date" 10
+        , Run Cpu ["--template", "CPU: <total>%"] 10
+        , Run Memory ["--template", "RAM: <usedratio>%"] 10
+        , Run Date "%a %d/%m/%Y | <fc=#8be9fd>%H:%M</fc>" "date" 10
         ]
-    , sepChar = "%"
+    , sepChar  = "%"
     , alignSep = "}{"
-    , template = " %StdinReader% }{ %alsa:default:Master% | %cpu% | %memory% | %date% "
+    , template = " %XMonadLog% }{ %alsa:default:Master% | %cpu% | %memory% | %date% "
     }
