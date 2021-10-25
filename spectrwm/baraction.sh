@@ -1,9 +1,9 @@
 volume() {
-  volume=$(amixer get Master | awk -F'[][]' 'END{ print $4":"$2 }' | sed 's/on://g')
+  volume=$(pamixer --get-volume)
   echo -e "$volume"
 }
 
 while :; do
-  echo "Vol: $(volume)"
+  echo "Vol: $(volume)%"
   sleep 5
 done
