@@ -42,19 +42,23 @@ keys = [
     Key([mod,  "shift"], "F3", lazy.spawn("systemctl suspend"), desc="Shutdown Qtile"),
 
     # Audio
-    Key([mod], "minus", lazy.spawn("pamixer --decrease 5")),
-    Key([mod], "equal", lazy.spawn("pamixer --increase 5")),
-    Key([mod], "0",     lazy.spawn("pamixer --toggle-mute")),
-    Key([mod], "F9",    lazy.spawn("/home/pedro/programming/dotfiles/scripts/change-default-sink.sh")),
+    Key([mod], "minus",      lazy.spawn("pamixer --decrease 5")),
+    Key([mod], "equal",      lazy.spawn("pamixer --increase 5")),
+    Key([mod, "shift"], "0", lazy.spawn("pamixer --toggle-mute")),
+    Key(
+        [mod], "0",          
+        lazy.spawn("/home/pedro/programming/dotfiles/scripts/change-default-sink.sh")
+    ),
     
     #Programs
     Key([mod], "Return", lazy.spawn("alacritty"), desc="Launch terminal"),
     Key([mod], "r",      lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
-    Key([mod], "p",      
+    Key(
+        [mod], "p",      
         lazy.spawn("rofi -show drun -modi drun -theme ~/.config/rofi/themes/my_dracula.rasi"),  
         desc="Rofi run"
     ),
-    Key([mod], "e",     lazy.spawn("dolphin"), desc="File Manager"),
+    Key([mod], "e",      lazy.spawn("dolphin"), desc="File Manager"),
 
 ]
 
@@ -70,12 +74,14 @@ for i in groups:
         Key(
             [mod], i.name, 
             lazy.group[i.name].toscreen(),
-            desc="Switch to group {}".format(i.name)),
+            desc="Switch to group {}".format(i.name)
+        ),
         # Mod + Shift + [1..9] to send window to group n
         Key(
             [mod, "shift"], i.name, 
             lazy.window.togroup(i.name),
-            desc="move focused window to group {}".format(i.name)),
+            desc="move focused window to group {}".format(i.name)
+        ),
     ])
 
 #############################################################################################
@@ -114,6 +120,7 @@ floating_layout = layout.Floating(
         Match(wm_class="makebranch"),  # gitk
         Match(wm_class="maketag"),  # gitk
         Match(wm_class="ssh-askpass"),  # ssh-askpass
+        Match(wm_class="pavucontrol"),
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
     ],
