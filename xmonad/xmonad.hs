@@ -53,40 +53,40 @@ myConfig = def
   }
 
 -- Keybinds -------------------------------------------------------------------------------------
-  `additionalKeys`
+  `additionalKeysP`
     [ 
     -- Windows
-      ((mod4Mask, xK_q),   kill) 
-    , ((mod4Mask .|. shiftMask, xK_Return), windows W.swapMaster)
+      ("M-q",          kill) 
+    , ("M-S-<Return>", windows W.swapMaster)
 
     -- Workspaces
-    , ((mod4Mask, xK_Tab), toggleRecentWS)
-    , ((mod4Mask, xK_h),   prevWS)
-    , ((mod4Mask, xK_l),   nextWS)
+    , ("M-<Tab>", toggleRecentWS)
+    , ("M-h",     prevWS)
+    , ("M-l",     nextWS)
 
     -- Layouts
-    , ((mod4Mask, xK_b), sendMessage ToggleStruts)
+    , ("M-b", sendMessage ToggleStruts)
 
     -- Apps
-    , ((mod4Mask, xK_Return), spawn "alacritty")
-    , ((mod4Mask, xK_e),      spawn "dolphin")
-    , ((mod4Mask, xK_p),      spawn "rofi -modi drun -show drun -theme ~/.config/rofi/themes/my_dracula.rasi")
+    , ("M-<Return>", spawn "alacritty")
+    , ("M-e",        spawn "dolphin")
+    , ("M-p",        spawn "rofi -modi drun -show drun  -theme ~/.config/rofi/themes/my_dracula.rasi")
 
     -- Audio/Volume
-    , ((mod4Mask, xK_minus), spawn "pamixer --decrease 5")
-    , ((mod4Mask, xK_equal), spawn "pamixer --increase 5")
-    , ((mod4Mask, xK_0),     spawn "pamixer --toggle-mute")
-    , ((mod4Mask, xK_F9),    spawn "/home/pedro/programming/dotfiles/scripts/change-default-sink.sh")
+    , ("M--",   spawn "pamixer --decrease 5")
+    , ("M-=",   spawn "pamixer --increase 5")
+    , ("M-S-0", spawn "pamixer --toggle-mute")
+    , ("M-0",   spawn "/home/pedro/programming/dotfiles/scripts/change-default-sink.sh")
 
     -- Session managment
-    , ((mod4Mask .|. shiftMask, xK_z),  spawn "i3lock -i /home/pedro/media/images/wallpaper/lock.png -u")
-    , ((mod4Mask .|. shiftMask, xK_r),  spawn "xmonad --recompile; xmonad --restart")
-    , ((mod4Mask .|. shiftMask, xK_F3), spawn "systemctl suspend")
-    , ((mod4Mask .|. shiftMask, xK_F4), io (exitWith ExitSuccess))
+    , ("M-S-r",  spawn "xmonad --recompile; xmonad --restart")
+    , ("M-S-F2", spawn "i3lock -i /home/pedro/media/images/wallpaper/lock.png -u")
+    , ("M-S-F3", spawn "systemctl suspend")
+    , ("M-S-F4", io (exitWith ExitSuccess))
     ]
 
 -- LayoutHook -----------------------------------------------------------------------------------
-myLayouts = avoidStruts( smartBorders( tiled ||| Mirror tiled ||| Full ) )
+myLayouts = avoidStruts $ smartBorders $ tiled ||| Mirror tiled ||| Full
   where
     nmaster = 1      -- Default number of windows in the master pane
     delta   = 3/100  -- Percent of screen to increment by when resizing panes
@@ -116,7 +116,7 @@ myStartupHook = do
 -- XMobar ---------------------------------------------------------------------------------------
 myXmobarPP :: PP
 myXmobarPP = def
-    { ppSep             = white " | "
+    { ppSep             = gray " : "
     , ppTitleSanitize   = xmobarStrip
     , ppCurrent         = white . wrap (white " [") (white "]")
     , ppHidden          = white . wrap " " ""
