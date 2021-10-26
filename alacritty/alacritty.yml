@@ -1,5 +1,5 @@
 shell:
-  program: /bin/zsh
+  program: /bin/fish
 
 window:
   # startup_mode: Maximized

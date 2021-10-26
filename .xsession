@@ -25,8 +25,8 @@ xfce4-power-manager &
 unclutter --timeout 2 --ignore-scrolling &
 
 # KDE Polkit
-#exec /usr/lib/polkit-kde-authentication-agent-1 &
-lxsession &
+exec /usr/lib/polkit-kde-authentication-agent-1 &
+#lxsession &
 
 # --- Tray ------------------------------------------------------------------------------
 
