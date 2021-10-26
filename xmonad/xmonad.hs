@@ -2,29 +2,29 @@ import XMonad
 import Data.Monoid
 import System.Exit
 
+import qualified XMonad.StackSet as W
+import qualified Data.Map        as M
+
+-- # Utils ---------------------------------------------------------------------
 import XMonad.Util.EZConfig
 import XMonad.Util.Ungrab
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Loggers
 import XMonad.Util.ClickableWorkspaces
 
-import XMonad.Hooks.EwmhDesktops
-import XMonad.Hooks.ManageHelpers
-import XMonad.Hooks.ManageDocks
-
-
-import qualified XMonad.StackSet as W
-import qualified Data.Map        as M
-
--- XMobar imports
+-- # Hooks ---------------------------------------------------------------------
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
 
--- Extending
+-- # Actions -------------------------------------------------------------------
 import XMonad.Actions.CycleRecentWS
 import XMonad.Actions.CycleWS
 
+-- # Layout --------------------------------------------------------------------
 import XMonad.Layout.NoBorders
 
 main :: IO ()
@@ -70,7 +70,8 @@ myConfig = def
     -- Apps
     , ("M-<Return>", spawn "alacritty")
     , ("M-e",        spawn "dolphin")
-    , ("M-p",        spawn "rofi -modi drun -show drun  -theme ~/.config/rofi/themes/my_dracula.rasi")
+    , ("M-p",        spawn "rofi -modi drun -show drun \
+                            \ -theme ~/.config/rofi/themes/my_dracula.rasi")
 
     -- Audio/Volume
     , ("M--",   spawn "pamixer --decrease 5")
@@ -79,10 +80,11 @@ myConfig = def
     , ("M-0",   spawn "/home/pedro/programming/dotfiles/scripts/change-default-sink.sh")
 
     -- Session managment
-    , ("M-S-r",  spawn "xmonad --recompile; xmonad --restart")
-    , ("M-S-F2", spawn "i3lock -i /home/pedro/media/images/wallpaper/lock.png -u")
-    , ("M-S-F3", spawn "systemctl suspend")
-    , ("M-S-F4", io (exitWith ExitSuccess))
+    , ("M-C-r",    spawn "xmonad --recompile")
+    , ("M-S-r",    spawn "xmonad --recompile; xmonad --restart")
+    , ("M-S-<F2>", spawn "i3lock -i /home/pedro/media/images/wallpaper/lock.png -u")
+    , ("M-S-<F3>", spawn "systemctl suspend")
+    , ("M-S-<F4>", io (exitWith ExitSuccess))
     ]
 
 -- LayoutHook -----------------------------------------------------------------------------------
@@ -95,15 +97,18 @@ myLayouts = avoidStruts $ smartBorders $ tiled ||| Mirror tiled ||| Full
 
 -- Manage hook ----------------------------------------------------------------------------------
 -- use $ xprop | grep WM_CLASS then click to get the name to type
+myManageHook :: ManageHook
 myManageHook = composeAll
-  [ className =? "mpv"  --> doFloat
-  , className =? "Gimp" --> doFloat
-  , isDialog            --> doFloat
+  [ isDialog                        --> doCenterFloat 
+  , className =?   "mpv"            --> doFloat
+  , className =?   "Gimp"           --> doFloat
+  , className =?   "pavucontrol"    --> doCenterFloat
+  , title =?       "Downloads"      --> doFloat
+  , title =?       "Save As..."     --> doFloat
   ]
 
 -- Handle event hook ----------------------------------------------------------------------------
 myHandleEvenHook = docksEventHook
--- myHandleEvenHook = fullscreenEventHook
 
 -- Log hook -------------------------------------------------------------------------------------
 myLogHook = return ()
@@ -111,7 +116,8 @@ myLogHook = return ()
 -- Startup hook ---------------------------------------------------------------------------------
 myStartupHook :: X ()
 myStartupHook = do
-    spawnOnce "trayer --edge top --align right --SetPartialStrut true --width 10 --tint 0x212121 --height 21 --alpha 0"
+    spawnOnce "trayer --edge top --align right --SetPartialStrut true --width 10 \
+               \ --tint 0x212121 --height 21 --alpha 0"
 
 -- XMobar ---------------------------------------------------------------------------------------
 myXmobarPP :: PP
@@ -127,7 +133,7 @@ myXmobarPP = def
     }
   where
     formatFocused   = wrap (white    "[ ") (white    " ]") . white . ppWindow
-    formatUnfocused = wrap (lowWhite "[") (lowWhite "]") . gray    . ppWindow
+    formatUnfocused = wrap (lowWhite "[")  (lowWhite "]")  . gray  . ppWindow
 
     -- Windows should have *some* title, which should not not exceed a sane length.
     ppWindow :: String -> String
