@@ -81,9 +81,8 @@ for_window [class="(?i)*nextcloud*"] floating disable
 for_window [class="plasmashell" window_type="notification"] border none, move right 700px, move down 450px
 no_focus [class="plasmashell" window_type="notification"]
 
-# for_window [title="Desktop — Plasma"] kill; floating enable; border none
-# for_window [title="Área de traballho"] kill; floating enable; border none
-for_window [class="plasmashell"] kill; floating enable; border none
+# --- Kill plasma window when login i3 + KDE/Plasma
+for_window [class="plasmashell"] kill;
 
 ################################################################################
 ### i3 Keybinds ################################################################
@@ -171,7 +170,7 @@ bindsym         $mod+F3             exec systemctl suspend
 bindsym         $mod+Shift+q        exec i3-msg exit
 
 # --- KDE/Plasma logout ---
-bindsym         $mod+Shift+e        exec qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1
+bindsym         $mod+F4             exec qdbus org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1
 
 # --- KDE/Plasma KRunner ---
 bindsym         Mod1+space          exec krunner
@@ -218,13 +217,30 @@ mode "$mode_system" {
 }
 
 # --- System mode key ---
-bindsym       $mod+F4       mode "$mode_system"
+bindsym       $mod+Shift+F4       mode "$mode_system"
+
+################################################################################
+### Layouts ####################################################################
+################################################################################
+
+# set $i3l [vstack|hstack|spiral|3columns|2columns|companion|autosplit] <param> ... to workspace [workspace name]
+# set $i3l [tabbed|splitv|splith|stacking] to workspace [workspace name]
+set $i3l vstack 0.5 to workspace $ws1
+set $i3l vstack 0.5 to workspace $ws2
+set $i3l vstack 0.5 to workspace $ws3
+set $i3l vstack 0.5 to workspace $ws4
+set $i3l vstack 0.5 to workspace $ws5
+set $i3l vstack 0.5 to workspace $ws6
+set $i3l vstack 0.5 to workspace $ws7
+set $i3l vstack 0.5 to workspace $ws8
+
+bindsym       $mod+y      exec i3l vstack 0.5 && notify-send 'Layout vstack'
 
 ################################################################################
 ### Bar ########################################################################
 ################################################################################
 
-bindsym       $mod+m        bar mode toggle
+bindsym       $mod+m      bar mode toggle
 
 bar {
   font pango:             Hack Nerd Font Mono 9
@@ -277,3 +293,9 @@ bindsym     $mod+p              exec rofi -modi drun -show drun -theme ~/.config
                 
 # --- Rofi window menu --- 
 bindsym     $mod+w              exec rofi -modi window -show window -theme ~/.config/rofi/themes/my_dracula.rasi
+
+################################################################################
+### Auto start #################################################################
+################################################################################
+
+exec --no-startup-id i3-layouts
