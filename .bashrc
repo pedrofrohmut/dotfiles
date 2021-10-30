@@ -139,9 +139,7 @@ ex () {
 alias ll='ls -lA'
 alias vim='nvim'
 alias gvim='nvim-qt'
+alias gtis='git status'
 
 # Starship Prompt
 eval "$(starship init bash)"
-
-# NeoFetch
-# neofetch
