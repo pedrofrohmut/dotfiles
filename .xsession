@@ -1,3 +1,7 @@
+#############
+# .XSession #
+#############
+
 #Keyboard layout
 setxkbmap br &
 
@@ -6,6 +10,17 @@ setxkbmap -option caps:none  &
 
 # Keyboard input config [delay/rate]
 xset r rate 250 30 &
+
+# --- Tray ------------------------------------------------------------------------------
+
+# Vomulme
+volumeicon &
+
+# Network Manager
+nm-applet &
+
+# Pamac tray
+pamac-tray &
 
 # --- Apps ------------------------------------------------------------------------------
 
@@ -24,17 +39,5 @@ xfce4-power-manager &
 # Hide Mouse Cursor
 unclutter --timeout 2 --ignore-scrolling &
 
-# KDE Polkit
-exec /usr/lib/polkit-kde-authentication-agent-1 &
-#lxsession &
-
-# --- Tray ------------------------------------------------------------------------------
-
-# Vomulme
-volumeicon &
-
-# Network Manager
-nm-applet &
-
-# Pamac tray
-pamac-tray &
+# Polkit
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
