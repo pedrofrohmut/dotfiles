@@ -30,15 +30,18 @@ keys = [
     Key([mod], "h",   lazy.screen.prev_group()),
     Key([mod], "l",   lazy.screen.next_group()),
     Key([mod], "Tab", lazy.screen.toggle_group()),
-    
+
     # Layout toggle
-    Key([mod], "u", lazy.window.toggle_flaoting()),
+    Key([mod], "u", lazy.window.toggle_floating()),
     Key([mod], "i", lazy.window.toggle_fullscreen()),
     Key([mod], "o", lazy.layout.toggle_split()),
-    
+    Key([mod], "b", lazy.hide_show_bar()),
+
+    # Others
     Key([mod], "q",            lazy.window.kill(), desc="Kill focused window"),
-    Key([mod,  "shift"], "r",  lazy.restart(), desc="Restart Qtile"),
+    Key([mod,  "shift"], "r",  lazy.restart(),  desc="Restart Qtile"),
     Key([mod,  "shift"], "F4", lazy.shutdown(), desc="Shutdown Qtile"),
+    Key([mod,  "shift"], "q",  lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod,  "shift"], "F3", lazy.spawn("systemctl suspend"), desc="Shutdown Qtile"),
 
     # Audio
@@ -46,24 +49,24 @@ keys = [
     Key([mod], "equal",      lazy.spawn("pamixer --increase 5")),
     Key([mod, "shift"], "0", lazy.spawn("pamixer --toggle-mute")),
     Key(
-        [mod], "0",          
-        lazy.spawn("/home/pedro/programming/dotfiles/scripts/change-default-sink.sh")
+        [mod], "0",
+        lazy.spawn("/home/pedro/dotfiles/scripts/change-default-sink.sh")
     ),
-    
-    #Programs
+
+    # Programs
     Key([mod], "Return", lazy.spawn("alacritty"), desc="Launch terminal"),
     Key([mod], "r",      lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     Key(
-        [mod], "p",      
-        lazy.spawn("rofi -show drun -modi drun -theme ~/.config/rofi/themes/my_dracula.rasi"),  
+        [mod], "p",
+        lazy.spawn("rofi -show drun -modi drun -theme ~/.config/rofi/themes/my_dracula.rasi"),
         desc="Rofi run"
     ),
-    Key([mod], "e",      lazy.spawn("dolphin"), desc="File Manager"),
+    Key([mod], "e",      lazy.spawn("thunar"), desc="File Manager"),
 
 ]
 
 #############################################################################################
-#### Groups #################################################################################
+# Groups ####################################################################################
 #############################################################################################
 
 groups = [Group(i) for i in "123456789"]
@@ -72,20 +75,20 @@ for i in groups:
     keys.extend([
         # Mod + [1..9] to focus group n
         Key(
-            [mod], i.name, 
+            [mod], i.name,
             lazy.group[i.name].toscreen(),
             desc="Switch to group {}".format(i.name)
         ),
         # Mod + Shift + [1..9] to send window to group n
         Key(
-            [mod, "shift"], i.name, 
+            [mod, "shift"], i.name,
             lazy.window.togroup(i.name),
             desc="move focused window to group {}".format(i.name)
         ),
     ])
 
 #############################################################################################
-#### Layouts ################################################################################
+# Layouts ###################################################################################
 #############################################################################################
 
 layouts = [
@@ -109,7 +112,7 @@ mouse = [
     Drag([mod], "Button1",  lazy.window.set_position_floating(), start=lazy.window.get_position()),
     # Super+Right_mouse resizes
     Drag([mod], "Button3",  lazy.window.set_size_floating(), start=lazy.window.get_size()),
-    # Click([mod], "Button2", lazy.window.bring_to_front())
+    Click([mod], "Button2", lazy.window.bring_to_front())
 ]
 
 floating_layout = layout.Floating(
@@ -130,11 +133,11 @@ floating_layout = layout.Floating(
 )
 
 #############################################################################################
-#### Widgets ################################################################################
+# Widgets ###################################################################################
 #############################################################################################
 
 widget_defaults = dict(
-    font="FiraCode Nerd Font",
+    font="FiraCode Nerd Font Mono",
     fontsize=13,
     padding=1,
     foreground="aaaaff"
@@ -144,7 +147,7 @@ extension_defaults = widget_defaults.copy()
 
 top_bar = bar.Bar(
     [
-        widget.GroupBox(),
+        widget.GroupBox(active="aaaaff", inactive="545454"),
         # widget.CurrentLayout(),
         widget.Prompt(),
         widget.Spacer(),
@@ -152,7 +155,7 @@ top_bar = bar.Bar(
         widget.Sep(padding=20),
         widget.CPU(format="CPU: {load_percent}%", update_interval=3.0),
         widget.ThermalSensor(
-            foreground = "aaaaff",
+            foreground="aaaaff",
             fmt=' /  {}',
             tag_sensor="temp1",
             update_interval=3.0
@@ -161,8 +164,8 @@ top_bar = bar.Bar(
         widget.Memory(format="RAM: {MemUsed: .0f}MB", update_interval=3.0),
         widget.ThermalSensor(
             foreground="aaaaff",
-            fmt=' /  {}', 
-            tag_sensor="mem", 
+            fmt=' /  {}',
+            tag_sensor="mem",
             update_interval=3.0
         ),
         widget.Sep(padding=20),
@@ -178,15 +181,15 @@ top_bar = bar.Bar(
         widget.Clock(format="%R", update_interval=3.0),
         widget.Sep(padding=20),
         widget.Systray(foreground="aaaaff")
-    ], 
+    ],
     24,
-    background = "#2f2838"
+    background="#2f2838"
 )
 
 screens = [Screen(top=top_bar)]
 
 #############################################################################################
-#### Configuartion Variables ################################################################
+# Configuartion Variables ###################################################################
 #############################################################################################
 
 dgroups_key_binder = None
@@ -213,7 +216,7 @@ auto_minimize = True
 
 
 #############################################################################################
-#### Don't know don't care ##################################################################
+# Don't know don't care #####################################################################
 #############################################################################################
 
 # XXX: Gasp! We"re lying here. In fact, nobody really uses or cares about this
@@ -225,4 +228,3 @@ auto_minimize = True
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java"s whitelist.
 wmname = "LG3D"
-
