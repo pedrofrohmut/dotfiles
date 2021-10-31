@@ -1,0 +1,5 @@
+[user]
+	email = pedrofrohmut@gmail.com
+	name = pedrofrohmut
+[core]
+	editor = nvim
