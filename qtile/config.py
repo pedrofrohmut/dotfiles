@@ -6,6 +6,7 @@ from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
 mod = "mod4"
+altKey = "mod1"
 terminal = guess_terminal()
 
 keys = [
@@ -38,11 +39,12 @@ keys = [
     Key([mod], "b", lazy.hide_show_bar()),
 
     # Others
-    Key([mod], "q",            lazy.window.kill(), desc="Kill focused window"),
-    Key([mod,  "shift"], "r",  lazy.restart(),  desc="Restart Qtile"),
-    Key([mod,  "shift"], "F4", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod,  "shift"], "q",  lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod,  "shift"], "F3", lazy.spawn("systemctl suspend"), desc="Shutdown Qtile"),
+    Key([mod], "q",              lazy.window.kill(), desc="Kill focused window"),
+    Key([mod,  "shift"],   "r",  lazy.restart(),  desc="Restart Qtile"),
+    Key([mod,  "shift"],   "F4", lazy.shutdown(), desc="Shutdown Qtile"),
+    Key([mod,  "shift"],   "q",  lazy.shutdown(), desc="Shutdown Qtile"),
+    Key([mod,  "shift"],   "F3", lazy.spawn("systemctl suspend")),
+    Key([altKey, "shift"], "F4", lazy.spawn("systemctl poweroff")),
 
     # Audio
     Key([mod], "minus",      lazy.spawn("pamixer --decrease 5")),
@@ -61,6 +63,7 @@ keys = [
         lazy.spawn("rofi -show drun -modi drun -theme ~/.config/rofi/themes/my_dracula.rasi"),
         desc="Rofi run"
     ),
+    Key([mod], "d",      lazy.spawn("dmenu_run -b -f -l 15 -p Apps")),
     Key([mod], "e",      lazy.spawn("thunar"), desc="File Manager"),
 
 ]
