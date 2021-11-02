@@ -8,9 +8,9 @@ import qualified Data.Map        as M
 -- # Utils ---------------------------------------------------------------------
 import XMonad.Util.EZConfig
 import XMonad.Util.Ungrab
-import XMonad.Util.SpawnOnce
+import XMonad.Util.SpawnOnce (spawnOnce)
 import XMonad.Util.Loggers
-import XMonad.Util.ClickableWorkspaces
+import XMonad.Util.ClickableWorkspaces (clickablePP)
 
 -- # Hooks ---------------------------------------------------------------------
 import XMonad.Hooks.DynamicLog
@@ -19,10 +19,11 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
+import XMonad.Hooks.InsertPosition
 
 -- # Actions -------------------------------------------------------------------
-import XMonad.Actions.CycleRecentWS
-import XMonad.Actions.CycleWS
+import XMonad.Actions.CycleRecentWS (toggleRecentWS)
+import XMonad.Actions.CycleWS (prevWS, nextWS)
 
 -- # Layout --------------------------------------------------------------------
 import XMonad.Layout.NoBorders
@@ -32,9 +33,10 @@ main = xmonad
      . ewmhFullscreen 
      . ewmh 
      . withEasySB(statusBarProp "xmobar ~/.config/xmobar/xmobarrc" (clickablePP myXmobarPP)) defToggleStrutsKey
-     $ docks myConfig
+     . docks 
+     $ myConfig
 
--- My Configuration -----------------------------------------------------------------------------
+-- My Configuration ------------------------------------------------------------
 myConfig = def 
   { modMask             = mod4Mask
   , terminal            = "alacritty"
@@ -52,42 +54,57 @@ myConfig = def
   , startupHook         = myStartupHook
   }
 
--- Keybinds -------------------------------------------------------------------------------------
+-- Keybinds --------------------------------------------------------------------
   `additionalKeysP`
     [ 
-    -- Windows
-      ("M-q",          kill) 
-    , ("M-S-<Return>", windows W.swapMaster)
+    -- Windows -----------------------------------------------------------------
+      -- kill focused window
+      ("M-q", kill)  
+      -- swap focused with master
+    , ("M-S-<Return>", windows W.swapMaster)  
 
-    -- Workspaces
-    , ("M-<Tab>", toggleRecentWS)
-    , ("M-h",     prevWS)
-    , ("M-l",     nextWS)
+    -- Workspaces --------------------------------------------------------------
+      -- Go back and forth between 2 workspaces
+    , ("M-<Tab>", toggleRecentWS)  
+      -- Go to previous workspaces (or last when in the first) 
+    , ("M-h", prevWS)  
+      -- Go to next workspaces (or first when in the last)
+    , ("M-l", nextWS)  
 
-    -- Layouts
+    -- Layouts -----------------------------------------------------------------
     , ("M-b", sendMessage ToggleStruts)
 
-    -- Apps
+    -- Apps (change it to fit your apss) ---------------------------------------
+      -- Terminal emulator
     , ("M-<Return>", spawn "alacritty")
-    , ("M-e",        spawn "dolphin")
-    , ("M-p",        spawn "rofi -modi drun -show drun \
-                            \ -theme ~/.config/rofi/themes/my_dracula.rasi")
+      -- File manager
+    , ("M-e", spawn "thunar")  
+      -- AppFinder
+    , ("M-p", spawn "rofi -modi drun -show drun \
+                    \ -theme ~/.config/rofi/themes/my_dracula.rasi")  
 
-    -- Audio/Volume
-    , ("M--",   spawn "pamixer --decrease 5")
-    , ("M-=",   spawn "pamixer --increase 5")
+    -- Audio/Volume ------------------------------------------------------------
+      -- Decrease volume
+    , ("M--", spawn "pamixer --decrease 5")
+      -- Increase volume
+    , ("M-=", spawn "pamixer --increase 5")
+      -- Toggle Mute
     , ("M-S-0", spawn "pamixer --toggle-mute")
-    , ("M-0",   spawn "/home/pedro/programming/dotfiles/scripts/change-default-sink.sh")
+      -- Call my script change output device
+    , ("M-0", spawn "/home/pedro/dotfiles/scripts/change-default-sink.sh")
 
-    -- Session managment
-    , ("M-C-r",    spawn "xmonad --recompile")
+    -- Session managment -------------------------------------------------------
+      -- Recompile the config and restart the window manager
     , ("M-S-r",    spawn "xmonad --recompile; xmonad --restart")
+      -- Lock screen with a lock image. And -u for not showing the feedback animation
     , ("M-S-<F2>", spawn "i3lock -i /home/pedro/media/images/wallpaper/lock.png -u")
+      -- Non-locking suspend (fast way)
     , ("M-S-<F3>", spawn "systemctl suspend")
+      -- Kill then window manager. The same as 'killall xmonad'
     , ("M-S-<F4>", io (exitWith ExitSuccess))
     ]
 
--- LayoutHook -----------------------------------------------------------------------------------
+-- LayoutHook ------------------------------------------------------------------
 myLayouts = avoidStruts $ smartBorders $ tiled ||| Mirror tiled ||| Full
   where
     nmaster = 1      -- Default number of windows in the master pane
@@ -95,10 +112,12 @@ myLayouts = avoidStruts $ smartBorders $ tiled ||| Mirror tiled ||| Full
     ratio   = 1/2    -- Default proportion of screen occupied by master pane
     tiled   = Tall nmaster delta ratio
 
--- Manage hook ----------------------------------------------------------------------------------
+-- Manage hook -----------------------------------------------------------------
 -- use $ xprop | grep WM_CLASS then click to get the name to type
+-- rules for windows
+-- insertPosition: change where the new window will appear
 myManageHook :: ManageHook
-myManageHook = composeAll
+myManageHook = insertPosition End Newer <+> composeAll
   [ isDialog                        --> doCenterFloat 
   , className =?   "mpv"            --> doFloat
   , className =?   "Gimp"           --> doFloat
@@ -107,19 +126,19 @@ myManageHook = composeAll
   , title =?       "Save As..."     --> doFloat
   ]
 
--- Handle event hook ----------------------------------------------------------------------------
-myHandleEvenHook = docksEventHook
+-- Handle event hook -----------------------------------------------------------
+myHandleEvenHook = mempty
 
--- Log hook -------------------------------------------------------------------------------------
+-- Log hook --------------------------------------------------------------------
 myLogHook = return ()
 
--- Startup hook ---------------------------------------------------------------------------------
+-- Startup hook ----------------------------------------------------------------
 myStartupHook :: X ()
 myStartupHook = do
     spawnOnce "trayer --edge top --align right --SetPartialStrut true --width 10 \
-               \ --tint 0x212121 --height 21 --alpha 0"
+               \ --tint 0x212121 --height 21 --alpha 0 &"
 
--- XMobar ---------------------------------------------------------------------------------------
+-- XMobar ----------------------------------------------------------------------
 myXmobarPP :: PP
 myXmobarPP = def
     { ppSep             = gray " : "
@@ -135,7 +154,8 @@ myXmobarPP = def
     formatFocused   = wrap (white    "[ ") (white    " ]") . white . ppWindow
     formatUnfocused = wrap (lowWhite "[")  (lowWhite "]")  . gray  . ppWindow
 
-    -- Windows should have *some* title, which should not not exceed a sane length.
+    -- Windows should have *some* title, which should not not exceed a sane
+    -- length.
     ppWindow :: String -> String
     ppWindow = xmobarRaw . (\w -> if null w then "untitled" else w) . shorten 30
 
