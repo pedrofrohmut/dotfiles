@@ -1,8 +1,8 @@
 Config 
     { overrideRedirect = False
     , font     = "xft:FiraCode\ Nerd\ Font\ Mono:pixelsize=13:antialias=true"
-    , bgColor  = "#2a2a2a"
-    , fgColor  = "#c2c2c2"
+    , bgColor  = "#232323"
+    , fgColor  = "#a2a2f2"
     , position = TopW L 90
     , commands = 
         [ Run UnsafeXMonadLog
