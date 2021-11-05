@@ -44,7 +44,7 @@ myConfig = def
   , focusFollowsMouse   = False
   
   , borderWidth         = 2
-  , normalBorderColor   = "#333333"
+  , normalBorderColor   = "#343434"
   , focusedBorderColor  = "#cc8833"
   
   , layoutHook          = myLayouts
@@ -136,7 +136,7 @@ myLogHook = return ()
 myStartupHook :: X ()
 myStartupHook = do
     spawnOnce "trayer --edge top --align right --SetPartialStrut true --width 10 \
-               \ --tint 0x212121 --height 21 --alpha 0 &"
+               \ --tint 0x212121 --height 20 --alpha 0 &"
 
 -- XMobar ----------------------------------------------------------------------
 myXmobarPP :: PP
@@ -147,7 +147,7 @@ myXmobarPP = def
     , ppHidden          = white . wrap " " ""
     , ppHiddenNoWindows = gray . wrap " " ""
     , ppUrgent          = red . wrap (yellow "!") (yellow "!")
-    , ppOrder           = \[ws, l, _, wins] -> [ws, wins]
+    , ppOrder           = \[ws, l, _, wins] -> [ws]
     , ppExtras          = [logTitles formatFocused formatUnfocused]
     }
   where
