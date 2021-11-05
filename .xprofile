@@ -2,27 +2,7 @@
 # .XProfile #
 #############
 
-#Keyboard layout
-setxkbmap br &
-
-# Disable capslock # [caps:escape] map it to Esc
-setxkbmap -option caps:none  &
-
-# Keyboard input config [delay/rate]
-xset r rate 250 30 &
-
-# --- Tray -------------------------------------------------------------------
-
-# Vomulme
-volumeicon &
-
-# Network Manager
-nm-applet &
-
-# Pamac tray
-pamac-tray &
-
-# --- Apps -------------------------------------------------------------------
+# --- Apps ---------------------------------------------------------------------
 
 # Wallpaper
 nitrogen --restore &
@@ -40,10 +20,29 @@ unclutter --timeout 2 --ignore-scrolling &
 lxsession &
 
 # Night Light [default -t 6500/4500]
-sleep 1 && 
 redshift -l -23.52:-46.35 -t 6500:4500 &
 
 # Composer
-sleep 1 &&
-picom --config /dev/null --inactive-dim 0.3 --inactive-opacity 0.9 &
-# sleep 1 && picom --config /home/pedro/.config/picom/picom.conf &
+picom --config ~/.config/picom/picom.conf &
+
+# --- Keyboard config ----------------------------------------------------------
+
+#Keyboard layout
+setxkbmap br &
+
+# Disable capslock # [caps:escape] map it to Esc
+setxkbmap -option caps:none  &
+
+# Keyboard input config [delay/rate]
+xset r rate 250 30 &
+
+# --- Tray ---------------------------------------------------------------------
+
+# Vomulme
+volumeicon &
+
+# Network Manager
+nm-applet &
+
+# Pamac tray
+pamac-tray &
