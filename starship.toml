@@ -8,4 +8,9 @@ $memory_usage\
 $time\
 $status\
 $shell\
+$python\
 $character"""
+
+[python]
+symbol = ""
+pyenv_version_name = false
