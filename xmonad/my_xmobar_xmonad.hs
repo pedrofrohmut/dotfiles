@@ -6,7 +6,7 @@ import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
 -- # Utils ---------------------------------------------------------------------
-import XMonad.Util.EZConfig
+import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.Ungrab
 import XMonad.Util.SpawnOnce (spawnOnce)
 import XMonad.Util.Loggers
@@ -26,7 +26,7 @@ import XMonad.Actions.CycleRecentWS (toggleRecentWS)
 import XMonad.Actions.CycleWS (prevWS, nextWS)
 
 -- # Layout --------------------------------------------------------------------
-import XMonad.Layout.NoBorders
+import XMonad.Layout.NoBorders (smartBorders)
 
 main :: IO ()
 main = xmonad 
@@ -62,7 +62,11 @@ myConfig = def
       ("M-q", kill)  
       -- swap focused with master
     , ("M-S-<Return>", windows W.swapMaster)  
-
+      -- Shrink Master Stack
+    , ("M-C-h", sendMessage Shrink)
+      -- Expand Master Stack
+    , ("M-C-l", sendMessage Expand)
+    
     -- Workspaces --------------------------------------------------------------
       -- Go back and forth between 2 workspaces
     , ("M-<Tab>", toggleRecentWS)  
@@ -82,6 +86,7 @@ myConfig = def
       -- AppFinder
     , ("M-p", spawn "rofi -modi drun -show drun \
                     \ -theme ~/.config/rofi/themes/my_dracula.rasi")  
+    , ("M1-p", spawn "xfce4-appfinder")
 
     -- Audio/Volume ------------------------------------------------------------
       -- Decrease volume
@@ -92,6 +97,14 @@ myConfig = def
     , ("M-S-0", spawn "pamixer --toggle-mute")
       -- Call my script change output device
     , ("M-0", spawn "/home/pedro/dotfiles/scripts/change-default-sink.sh")
+
+    -- Deadbeef ----------------------------------------------------------------
+      -- Next track - random order
+    , ("M1-m M1-l", spawn "deadbeef --random")
+      -- Toggle pause
+    , ("M1-m M1-k", spawn "deadbeef --toggle-pause")
+      -- Stop playing
+    , ("M1-m M1-j", spawn "deadbeef --stop")
 
     -- Session managment -------------------------------------------------------
       -- Recompile the config and restart the window manager
@@ -118,12 +131,14 @@ myLayouts = avoidStruts $ smartBorders $ tiled ||| Mirror tiled ||| Full
 -- insertPosition: change where the new window will appear
 myManageHook :: ManageHook
 myManageHook = insertPosition End Newer <+> composeAll
-  [ isDialog                        --> doCenterFloat 
-  , className =?   "mpv"            --> doFloat
-  , className =?   "Gimp"           --> doFloat
-  , className =?   "pavucontrol"    --> doCenterFloat
-  , title =?       "Downloads"      --> doFloat
-  , title =?       "Save As..."     --> doFloat
+  [ isDialog                         --> doCenterFloat 
+  , className =?   "mpv"             --> doFloat
+  , className =?   "gimp"            --> doFloat
+  , className =?   "pavucontrol"     --> doCenterFloat
+  , className =?   "xfce4-appfinder" --> doCenterFloat
+  , className =?   "pamac-manager"   --> doCenterFloat
+  , title =?       "Downloads"       --> doFloat
+  , title =?       "Save As..."      --> doFloat
   ]
 
 -- Handle event hook -----------------------------------------------------------
