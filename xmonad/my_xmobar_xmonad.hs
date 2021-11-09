@@ -1,3 +1,6 @@
+-- Pedro Frohmut
+-- github.com/pedrofrohmut
+
 import XMonad
 import Data.Monoid
 import System.Exit
@@ -32,7 +35,9 @@ main :: IO ()
 main = xmonad 
      . ewmhFullscreen 
      . ewmh 
-     . withEasySB(statusBarProp "xmobar ~/.config/xmobar/xmobarrc" (clickablePP myXmobarPP)) defToggleStrutsKey
+     . withEasySB
+         (statusBarProp "xmobar ~/.config/xmobar/xmobarrc" (clickablePP myXmobarPP)) 
+         defToggleStrutsKey
      . docks 
      $ myConfig
 
@@ -55,6 +60,7 @@ myConfig = def
   }
 
 -- Keybinds --------------------------------------------------------------------
+  -- As the name suggest just additional keys, all the rest refer to defaults
   `additionalKeysP`
     [ 
     -- Windows -----------------------------------------------------------------
@@ -84,7 +90,7 @@ myConfig = def
       -- File manager
     , ("M-e", spawn "thunar")  
       -- AppFinder
-    , ("M-p", spawn "rofi -modi drun -show drun \
+    , ("M-p", spawn "rofi -modi drun -show drun -show-icons -normal-window \
                     \ -theme ~/.config/rofi/themes/my_dracula.rasi")  
     , ("M1-p", spawn "xfce4-appfinder")
 
@@ -98,13 +104,17 @@ myConfig = def
       -- Call my script change output device
     , ("M-0", spawn "/home/pedro/dotfiles/scripts/change-default-sink.sh")
 
-    -- Deadbeef ----------------------------------------------------------------
+    -- Deadbeef (Alt M - for Music) --------------------------------------------
       -- Next track - random order
     , ("M1-m M1-l", spawn "deadbeef --random")
       -- Toggle pause
     , ("M1-m M1-k", spawn "deadbeef --toggle-pause")
       -- Stop playing
     , ("M1-m M1-j", spawn "deadbeef --stop")
+      -- Volume Up by 5
+    , ("M1-m M1-=", spawn "deadbeef --volume +5")
+      -- Volume Down by 5
+    , ("M1-m M1--", spawn "deadbeef --volume -5")
 
     -- Session managment -------------------------------------------------------
       -- Recompile the config and restart the window manager
@@ -133,10 +143,11 @@ myManageHook :: ManageHook
 myManageHook = insertPosition End Newer <+> composeAll
   [ isDialog                         --> doCenterFloat 
   , className =?   "mpv"             --> doFloat
-  , className =?   "gimp"            --> doFloat
-  , className =?   "pavucontrol"     --> doCenterFloat
-  , className =?   "xfce4-appfinder" --> doCenterFloat
-  , className =?   "pamac-manager"   --> doCenterFloat
+  , className =?   "Gimp"            --> doFloat
+  , className =?   "Pavucontrol"     --> doCenterFloat
+  , className =?   "Xfce4-appfinder" --> doCenterFloat
+  , className =?   "Pamac-manager"   --> doCenterFloat
+  , className =?   "Rofi"            --> doCenterFloat
   , title =?       "Downloads"       --> doFloat
   , title =?       "Save As..."      --> doFloat
   ]
