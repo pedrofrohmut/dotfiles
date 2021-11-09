@@ -82,6 +82,7 @@ myConfig = def
     , ("M-l", nextWS)  
 
     -- Layouts -----------------------------------------------------------------
+      -- Toggle statusbar (XMobar)
     , ("M-b", sendMessage ToggleStruts)
 
     -- Apps (change it to fit your apss) ---------------------------------------
@@ -90,8 +91,9 @@ myConfig = def
       -- File manager
     , ("M-e", spawn "thunar")  
       -- AppFinder
-    , ("M-p", spawn "rofi -modi drun -show drun -show-icons -normal-window \
+    , ("M-p", spawn "rofi -modi drun -show drun -show-icons \
                     \ -theme ~/.config/rofi/themes/my_dracula.rasi")  
+      -- XFCE4 AppFinder
     , ("M1-p", spawn "xfce4-appfinder")
 
     -- Audio/Volume ------------------------------------------------------------
