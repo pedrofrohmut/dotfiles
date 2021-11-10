@@ -25,3 +25,5 @@ key_bindings:
   - { key: Insert, mods: Control, action: Copy }
   - { key: Return, mods: Alt, action: ToggleFullscreen }
   - { key: F10, action: ToggleFullscreen }
+  - { key: PageUp, action: ScrollPageUp }
+  - { key: PageDown, action: ScrollPageDown }
