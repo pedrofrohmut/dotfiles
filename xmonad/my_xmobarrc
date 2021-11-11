@@ -6,17 +6,17 @@ Config
     , position = TopW L 90
     , commands = 
         [ Run UnsafeXMonadLog
-        , Run Alsa "default" "Master"
-            [ "--template", "Vol: <volumestatus>"
-            , "--suffix"  , "True"
-            , "--"
-            , "--on", ""
-            ]
+        , Run Volume "default" "Master" ["--template", "Vol: <volume>%"] 10
         , Run Cpu ["--template", "CPU: <total>%"] 10
         , Run Memory ["--template", "RAM: <usedratio>%"] 10
         , Run Date "%a %d/%m/%Y | <fc=#8be9fd>%H:%M</fc>" "date" 10
         ]
     , sepChar  = "%"
     , alignSep = "}{"
-    , template = " %UnsafeXMonadLog% }{ %alsa:default:Master% | %cpu% | %memory% | %date% "
+    , template = 
+        " %UnsafeXMonadLog% }{ \
+        \ %default:Master% | \
+        \ %cpu% | \
+        \ %memory% | \
+        \ %date% "
     }
