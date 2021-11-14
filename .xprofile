@@ -27,11 +27,12 @@ picom --config ~/.config/picom/picom.conf &
 
 # --- Keyboard config ----------------------------------------------------------
 
-#Keyboard layout
+# Keyboard layout
 setxkbmap br &
 
 # Disable capslock # [caps:escape] map it to Esc
-setxkbmap -option caps:none  &
+#setxkbmap -option caps:none  &
+setxkbmap -option caps:super  &
 
 # Keyboard input config [delay/rate]
 xset r rate 250 30 &
