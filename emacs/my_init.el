@@ -30,6 +30,9 @@
 		eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
+;; Hightlight Matching parens on hover
+(show-paren-mode t)
+
 ;; Initialize package sources
 (require 'package)
 
@@ -89,11 +92,6 @@
   (unbind-key "<C-return>" emmet-mode-keymap)
   (unbind-key "C-M-<left>" emmet-mode-keymap)
   (unbind-key "C-M-<right>" emmet-mode-keymap))
-
-;; A Frame at the right side that show keys pressed
-;; To show the buffer: 'cml/toggle-command-log-buffer'
-;; To enable: 'global-command-log-mode'
-(use-package command-log-mode)
 
 (use-package ivy
   :diminish ; Does not show the mode in the mode line
@@ -160,10 +158,28 @@
     :prefix "SPC"
     :global-prefix "C-SPC")
   (rune/leader-keys
-    "t" '(:ignore t :which-key "toggles")
+    "t"  '(:ignore t :which-key "toggles")
     "tt" '(counsel-load-theme :which-key "choose theme")
-    "f" '(:ignore t :which-key "files")
+    "f"  '(:ignore t :which-key "files")
     "ff" '(counsel-find-file :which-key "find file")))
+
+(use-package projectile
+  :diminish
+  projectile-mode
+  :init
+  (setq projectile-project-search-path '("~/programming/" "~/dotfiles/"))
+  (setq projectile-switch-project-action #'projectile-dired)
+  :config
+  (projectile-mode 1)
+  :custom
+  (projectile-completion-system 'ivy)
+  :bind (:map projectile-mode-map
+              ("C-p" . projectile-command-map)
+              ("C-c p" . projectile-command-map)))
+
+(use-package counsel-projectile
+  :config
+  (counsel-projectile-mode))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -174,7 +190,7 @@
  '(global-display-line-numbers-mode t)
  '(ivy-mode t)
  '(package-selected-packages
-   '(evil-collection general doom-themes helpful counsel ivy-rich rainbow-delimiters emmet-mode which-key evil doom-modeline use-package ivy command-log-mode)))
+   '(counsel-projectile projectile evil-collection general doom-themes helpful counsel ivy-rich rainbow-delimiters emmet-mode which-key evil doom-modeline use-package ivy command-log-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
