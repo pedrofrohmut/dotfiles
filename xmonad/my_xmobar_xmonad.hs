@@ -94,7 +94,7 @@ myConfig = def
     , ("M-p", spawn "rofi -modi drun -show drun -show-icons \
                     \ -theme ~/.config/rofi/themes/my_dracula.rasi")  
       -- XFCE4 AppFinder
-    , ("M1-p", spawn "xfce4-appfinder")
+    , ("M-S-p", spawn "xfce4-appfinder")
 
     -- Audio/Volume ------------------------------------------------------------
       -- Decrease volume
