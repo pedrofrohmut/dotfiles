@@ -190,6 +190,8 @@
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
+(use-package forge)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -199,7 +201,7 @@
  '(global-display-line-numbers-mode t)
  '(ivy-mode t)
  '(package-selected-packages
-   '(evil-commentary evil-magit magit counsel-projectile projectile evil-collection general doom-themes helpful counsel ivy-rich rainbow-delimiters emmet-mode which-key evil doom-modeline use-package ivy command-log-mode)))
+   '(forge evil-commentary evil-magit magit counsel-projectile projectile evil-collection general doom-themes helpful counsel ivy-rich rainbow-delimiters emmet-mode which-key evil doom-modeline use-package ivy command-log-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
