@@ -38,6 +38,8 @@
 
 (add-to-list 'package-archives
 	     '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives
+	     '("org" . "https://orgmode.org/elpa/") t)
 
 (package-initialize)
 (unless package-archive-contents
@@ -71,8 +73,13 @@
 
 ;; Evil Commentary 'gc<motion>' 'gcc' ...
 (use-package evil-commentary
-  :init
+  :config
   (evil-commentary-mode 1))
+
+;; Evil Surround (emulate tim pope)
+(use-package evil-surround
+  :config
+  (global-evil-surround-mode t))
 
 ;; Show buffer with keys
 (use-package which-key
@@ -81,7 +88,7 @@
   :diminish
   (which-key-mode)
   :config
-  (setq which-key-idle-delay 1.2)
+  (setq which-key-idle-delay 1.0)
   (setq which-key-show-early-on-C-h t)
   (which-key-setup-side-window-right))
 
@@ -163,8 +170,11 @@
     :prefix "SPC"
     :global-prefix "C-SPC")
   (rune/leader-keys
-    "t"  '(:ignore t :which-key "toggles")
-    "tt" '(counsel-load-theme :which-key "choose theme")
+    "t"  '(:ignore t :which-key "tabs")
+    "tj" '(tab-next :which-key "tab-next")
+    "tk" '(tab-previous :which-key "tab-previous")
+    "tn" '(tab-new :whick-key "tab-new")
+    "tc" '(tab-close :whick-key "tab-close")
     "f"  '(:ignore t :which-key "files")
     "ff" '(counsel-find-file :which-key "find file")))
 
@@ -192,6 +202,60 @@
 
 (use-package forge)
 
+(defun pf/org-mode-setup ()
+  (org-indent-mode)
+  (variable-pitch-mode 1)
+  (visual-line-mode t))
+
+(defun pf/org-font-setup ()
+  ;; Replace list hyphen with dot
+  (font-lock-add-keywords 'org-mode
+                          '(("^ *\\([-]\\) "
+                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+;; Set faces for heading levels
+(dolist (face '((org-level-1 . 1.2)
+		(org-level-2 . 1.1)
+		(org-level-3 . 1.05)
+		(org-level-4 . 1.0)
+		(org-level-5 . 1.1)
+		(org-level-6 . 1.1)
+		(org-level-7 . 1.1)
+		(org-level-8 . 1.1)))
+  (set-face-attribute (car face) nil :font "Cantarell" :weight 'regular :height (cdr face)))
+
+;; Ensure that anything that should be fixed-pitch in Org files appears that way
+(set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
+(set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch))
+(set-face-attribute 'org-table nil   :inherit '(shadow fixed-pitch))
+(set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+(set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+(set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+(set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
+
+(use-package org
+  :hook
+  (org-mode . pf/org-mode-setup)
+  :config
+  (setq org-ellipsis " \202" ;; change the standard three dots to character between quotes
+	org-hide-emphasis-markers t) ;; Hide the ** around bold text and similar stuff
+  (pf/org-font-setup)) 
+
+(use-package org-bullets
+  :after
+  org
+  :hook
+  (org-mode . org-bullets-mode)
+  :custom
+  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+
+(defun pf/org-mode-visual-fill ()
+  (setq visual-fill-column-width 120
+        visual-fill-column-center-text t)
+  (visual-fill-column-mode 1))
+
+(use-package visual-fill-column
+  :hook (org-mode . pf/org-mode-visual-fill))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -201,7 +265,7 @@
  '(global-display-line-numbers-mode t)
  '(ivy-mode t)
  '(package-selected-packages
-   '(forge evil-commentary evil-magit magit counsel-projectile projectile evil-collection general doom-themes helpful counsel ivy-rich rainbow-delimiters emmet-mode which-key evil doom-modeline use-package ivy command-log-mode)))
+   '(org-bullets highlight-parentheses focus evil-surround forge evil-commentary evil-magit magit counsel-projectile projectile evil-collection general doom-themes helpful counsel ivy-rich rainbow-delimiters emmet-mode which-key evil doom-modeline use-package ivy command-log-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -213,6 +277,15 @@
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit) ; Make ESC quit prompts
 (global-set-key (kbd "M-b") 'counsel-switch-buffer)     ; Switch to buffer
 
+(global-unset-key (kbd "C-h"))
+(global-unset-key (kbd "C-l"))
+(global-unset-key (kbd "C-j"))
+(global-unset-key (kbd "C-k"))
+
 ; # General Keybinds ############################################################
 (general-define-key
-  "C-c b" 'counsel-switch-buffer)
+ "C-c b" 'counsel-switch-buffer
+ "C-h" 'tab-previous
+ "C-l" 'tab-next
+ "C-j" 'evil-window-next
+ "C-k" 'evil-window-prev)
