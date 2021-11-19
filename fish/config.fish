@@ -6,7 +6,7 @@ end
 alias vim='nvim'
 alias gits='git status'
 alias ll='ls -lA'
-alias hello='echo Hello World!'
+alias cll='clear; ls -lA'
 
 # --- Starship Prompt
 starship init fish | source
