@@ -67,7 +67,7 @@ myConfig = def
       -- kill focused window
       ("M-q", kill)  
       -- swap focused with master
-    , ("M-S-<Return>", windows W.swapMaster)  
+    , ("M-S-m", windows W.swapMaster)  
       -- Shrink Master Stack
     , ("M-C-h", sendMessage Shrink)
       -- Expand Master Stack
@@ -143,15 +143,17 @@ myLayouts = avoidStruts $ smartBorders $ tiled ||| Mirror tiled ||| Full
 -- insertPosition: change where the new window will appear
 myManageHook :: ManageHook
 myManageHook = insertPosition End Newer <+> composeAll
-  [ isDialog                         --> doCenterFloat 
-  , className =?   "mpv"             --> doFloat
-  , className =?   "Gimp"            --> doFloat
-  , className =?   "Pavucontrol"     --> doCenterFloat
-  , className =?   "Xfce4-appfinder" --> doCenterFloat
-  , className =?   "Pamac-manager"   --> doCenterFloat
-  , className =?   "Rofi"            --> doCenterFloat
-  , title =?       "Downloads"       --> doFloat
-  , title =?       "Save As..."      --> doFloat
+  [ isDialog                          --> doCenterFloat 
+  , className =?   "mpv"              --> doFloat
+  , className =?   "Gimp"             --> doFloat
+  , className =?   "Pavucontrol"      --> doCenterFloat
+  , className =?   "Xfce4-appfinder"  --> doCenterFloat
+  , className =?   "Pamac-manager"    --> doCenterFloat
+  , className =?   "Rofi"             --> doCenterFloat
+  , title =?       "Downloads"        --> doFloat
+  , title =?       "Save As..."       --> doFloat
+  -- Games
+  , className =?   "riotclientux.exe" --> doCenterFloat
   ]
 
 -- Handle event hook -----------------------------------------------------------
