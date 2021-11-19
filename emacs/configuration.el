@@ -1,3 +1,12 @@
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit) ; Make ESC quit prompts
+(global-set-key (kbd "M-b") 'counsel-switch-buffer)     ; Switch to buffer
+
+;; Ready Ctrl + h, j, k, l to my navigation as in VIM and XMonad
+(global-unset-key (kbd "C-h"))  ; Can still use help with F1
+(global-unset-key (kbd "C-l"))  ; Can use evil zz 
+(global-unset-key (kbd "C-j"))  ; Not useful before
+(global-unset-key (kbd "C-k"))  ; Not useful either
+
 ;; Set color theme
 (load-theme 'doom-palenight t)
 
@@ -8,9 +17,6 @@
 ;; Set font family/size
 (set-frame-font "FiraCode Nerd Font Mono 11" nil t)
 
-;; Remove startup screen
-(setq inhibit-startup-message t)
-
 ;; Clean up UI
 (tool-bar-mode 0)    ; Hide toolbar
 (menu-bar-mode 0)    ; Hide menubar
@@ -18,40 +24,38 @@
 (tooltip-mode 0)     ; Disable tooltips
 (set-fringe-mode 7)  ; Give some padding
 
-(setq visible-bell t) ; Blinking ui as bell
+;; Color Column/Ruler
+(global-display-fill-column-indicator-mode t)
+(setq-default display-fill-column-indicator-column 121)
+
+;; Blinking ui as bell
+(setq visible-bell t) 
 
 ;; Relative line numbers
 (global-display-line-numbers-mode t)
 (setq display-line-numbers-type 'relative)
 
 ;; Diable line numbers to certain modes
-(dolist (mode '(org-mode-hook
-		term-mode-hook
-		eshell-mode-hook))
+(dolist (mode '(term-mode-hook
+                eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; Hightlight Matching parens on hover
 (show-paren-mode t)
 
+;; Remove startup screen
+(setq inhibit-startup-message t)
+
 ;; Initialize package sources
 (require 'package)
 
-(add-to-list 'package-archives
-	     '("melpa" . "https://melpa.org/packages/") t)
-(add-to-list 'package-archives
-	     '("org" . "https://orgmode.org/elpa/") t)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages") t)
+(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa") t)
 
-(package-initialize)
-(unless package-archive-contents
-  (package-refresh-contents))
-
-;; Install use-package
+;; Install use package
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
-
-(require 'use-package)
-(setq use-package-always-ensure t)
 
 ;; Evil Mode
 (use-package evil
@@ -89,7 +93,6 @@
   (which-key-mode)
   :config
   (setq which-key-idle-delay 1.0)
-  (setq which-key-show-early-on-C-h t)
   (which-key-setup-side-window-right))
 
 ;; Emmet
@@ -178,6 +181,13 @@
     "f"  '(:ignore t :which-key "files")
     "ff" '(counsel-find-file :which-key "find file")))
 
+(general-define-key
+  "C-c b" 'counsel-switch-buffer
+  "C-h" 'tab-previous
+  "C-l" 'tab-next
+  "C-j" 'evil-window-next
+  "C-k" 'evil-window-prev)
+
 (use-package projectile
   :diminish
   projectile-mode
@@ -202,43 +212,72 @@
 
 (use-package forge)
 
+(org-babel-do-load-languages
+  'org-babel-load-languages '((emacs-lisp . t)
+                              (python . t)))
+
+;; Org Tempo - Shortcuts to code blocks in Org Mode
+(require 'org-tempo)
+
+(add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+(add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+(add-to-list 'org-structure-template-alist '("py" . "src python"))
+
 (defun pf/org-mode-setup ()
   (org-indent-mode)
-  (variable-pitch-mode 1)
-  (visual-line-mode t))
+  ;; (variable-pitch-mode 1)
+  (visual-line-mode t)
+  (auto-fill-mode 0)
+  (setq evil-mode-auto-indent nil))
 
-(defun pf/org-font-setup ()
-  ;; Replace list hyphen with dot
-  (font-lock-add-keywords 'org-mode
-                          '(("^ *\\([-]\\) "
-                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
-;; Set faces for heading levels
-(dolist (face '((org-level-1 . 1.2)
-		(org-level-2 . 1.1)
-		(org-level-3 . 1.05)
-		(org-level-4 . 1.0)
-		(org-level-5 . 1.1)
-		(org-level-6 . 1.1)
-		(org-level-7 . 1.1)
-		(org-level-8 . 1.1)))
-  (set-face-attribute (car face) nil :font "Cantarell" :weight 'regular :height (cdr face)))
+(defun pf/org-replace-list-hyphen-with-dot ()
+  (font-lock-add-keywords
+   'org-mode
+   '(("^ *\\([-]\\) "
+      (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•")))))))
 
-;; Ensure that anything that should be fixed-pitch in Org files appears that way
-(set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
-(set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch))
-(set-face-attribute 'org-table nil   :inherit '(shadow fixed-pitch))
-(set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
-(set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
-(set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
-(set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
+(defun pf/org-set-faces-for-heading-levels ()
+  (dolist (face '((org-level-1 . 1.2)
+                  (org-level-2 . 1.1)
+                  (org-level-3 . 1.05)
+                  (org-level-4 . 1.0)
+                  (org-level-5 . 1.1)
+                  (org-level-6 . 1.1)
+                  (org-level-7 . 1.1)
+                  (org-level-8 . 1.1)))
+    (set-face-attribute (car face) nil :font "Cantarell" :weight 'Bold :height (cdr face))))
+
+(defun pf/org-ensure-fixed-pitch-when-needed ()
+  (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-table nil   :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+  (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+  (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
+
+(defun pf/org-setup-font ()
+  (pf/org-replace-list-hyphen-with-dot)
+  (pf/org-set-faces-for-heading-levels)
+  (pf/org-ensure-fixed-pitch-when-needed))
+
+(defun pf/configure-org-agenda ()
+  ;; Org Agenda
+  (setq org-agenda-start-with-log-mode t)
+  (setq org-log-done 'time)
+  (setq org-log-into-drawer t)
+  (setq org-agenda-files
+	'("~/documents/org-files/tasks.org"
+	  "~/documents/org-files/birthdays.org")))
 
 (use-package org
   :hook
   (org-mode . pf/org-mode-setup)
   :config
-  (setq org-ellipsis " \202" ;; change the standard three dots to character between quotes
-	org-hide-emphasis-markers t) ;; Hide the ** around bold text and similar stuff
-  (pf/org-font-setup)) 
+  (setq org-ellipsis " \202"     ; Change the 3 dots to down arrow 
+        org-hide-emphasis-markers t)
+  (pf/configure-org-agenda)
+  (pf/org-setup-font))
 
 (use-package org-bullets
   :after
@@ -255,37 +294,3 @@
 
 (use-package visual-fill-column
   :hook (org-mode . pf/org-mode-visual-fill))
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(column-number-mode t)
- '(global-display-line-numbers-mode t)
- '(ivy-mode t)
- '(package-selected-packages
-   '(org-bullets highlight-parentheses focus evil-surround forge evil-commentary evil-magit magit counsel-projectile projectile evil-collection general doom-themes helpful counsel ivy-rich rainbow-delimiters emmet-mode which-key evil doom-modeline use-package ivy command-log-mode)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-
-; # Keybinds ####################################################################
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit) ; Make ESC quit prompts
-(global-set-key (kbd "M-b") 'counsel-switch-buffer)     ; Switch to buffer
-
-(global-unset-key (kbd "C-h"))
-(global-unset-key (kbd "C-l"))
-(global-unset-key (kbd "C-j"))
-(global-unset-key (kbd "C-k"))
-
-; # General Keybinds ############################################################
-(general-define-key
- "C-c b" 'counsel-switch-buffer
- "C-h" 'tab-previous
- "C-l" 'tab-next
- "C-j" 'evil-window-next
- "C-k" 'evil-window-prev)
