@@ -57,22 +57,24 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-;; Evil ########################################################################
-
 ;; Evil Mode
 (use-package evil
   :init
   (setq evil-want-C-u-scroll t)
   (setq evil-want-keybinding nil) ; Evil collection asks for it
   :config
-  ; Ctrl-k as Esc
+                                        ; Ctrl-k as Esc
   (define-key evil-insert-state-map (kbd "C-k") 'evil-normal-state)
-  ; Ctrl-h as backspace
+                                        ; Ctrl-h as backspace
   (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
-  ; Ctrl-l as delete
+                                        ; Ctrl-l as delete
   (define-key evil-insert-state-map (kbd "C-l") 'evil-delete-char)
-  ; Easy insert linebreak in normal mode
+                                        ; Easy insert linebreak in normal mode
   (define-key evil-normal-state-map (kbd "RET") (kbd "i RET <escape>"))
+  ;; Removed to be used by EasyMotion + Sneak
+  (define-key evil-normal-state-map (kbd "s") nil)
+  ;; Removed to be used by EasyMotion + Sneak (reverse)
+  (define-key evil-normal-state-map (kbd "S") nil)
   (evil-mode 1))
 
 ;; Makes evil keys consistent in more places than just evil mode default
@@ -95,6 +97,35 @@
   evil
   :config
   (global-evil-surround-mode t))
+
+;; Vim Sneak Emualtion
+(use-package evil-snipe
+  :after
+  evil
+  :custom
+  (evil-snipe-scope 'visible)
+  :config
+  (evil-define-key '(normal motion) evil-snipe-local-mode-map
+    "s" nil
+    "S" nil)
+  (evil-snipe-mode 1))
+
+;; Vim Easy Motion Emulation
+(use-package evil-easymotion
+  :after
+  evil
+  :config
+  (evilem-default-keybindings "C-SPC")
+  (evilem-define (kbd "s") 'evil-snipe-repeat
+                 :pre-hook (save-excursion (call-interactively #'evil-snipe-s))
+                 :bind ((evil-snipe-scope 'buffer)
+                        (evil-snipe-enable-highlight)
+                        (evil-snipe-enable-incremental-highlight)))
+  (evilem-define (kbd "S") 'evil-snipe-repeat-reverse
+                 :pre-hook (save-excursion (call-interactively #'evil-snipe-s))
+                 :bind ((evil-snipe-scope 'buffer)
+                        (evil-snipe-enable-highlight)
+                        (evil-snipe-enable-incremental-highlight))))
 
 ;; Show buffer with keys
 (use-package which-key
@@ -218,8 +249,8 @@
 (use-package forge)
 
 (org-babel-do-load-languages
-  'org-babel-load-languages '((emacs-lisp . t)
-			      (python . t)))
+ 'org-babel-load-languages '((emacs-lisp . t)
+                             (python . t)))
 
 ;; Org Tempo - Shortcuts to code blocks in Org Mode
 (require 'org-tempo)
@@ -231,7 +262,7 @@
 (defun pf/org-mode-setup ()
   (org-indent-mode)
   ;; (variable-pitch-mode 1)
-  (visual-line-mode t)
+  (visual-line-mode 1)
   (auto-fill-mode 0)
   (setq evil-mode-auto-indent nil))
 
@@ -300,7 +331,7 @@
 (use-package visual-fill-column
   :hook (org-mode . pf/org-mode-visual-fill))
 
-(defun pf/lsp-mode-setup()
+(defun pf/lsp-breadcrumb-setup()
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
   (lsp-headerline-breadcrumb-mode))
 
@@ -312,25 +343,27 @@
   :hook
   ;; replace XXX-mode with concrete major-mode(e. g. python-mode)
   (typescript-mode . lsp)
-  (lsp-mode . pf/lsp-mode-setup)
-  (lsp-mode . lsp-enable-which-key-integration)
-  )
-;; ;; optionally
-;; (use-package lsp-ui :commands lsp-ui-mode)
-;; ;; if you are helm user
-;; (use-package helm-lsp :commands helm-lsp-workspace-symbol)
-;; ;; if you are ivy user
-;; (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
-;; (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+  (lsp-mode . pf/lsp-breadcrumb-setup)
+  (lsp-mode . lsp-enable-which-key-integration))
 
+;; Lsp Sideline, Peek, Doc and IMenu
+(use-package lsp-ui
+  :commands
+  lsp-ui-mode
+  :hook
+  (lsp-mode . lsp-ui-mode)
+  :custom
+  (lsp-ui-doc-position 'bottom)
+  (lsp-ui-doc-delay 1.5))
+
+(use-package lsp-ivy
+  :commands
+  lsp-ivy-workspace-symbol)
+
+;; (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 ;; ;; optionally if you want to use debugger
 ;; (use-package dap-mode)
 ;; ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
-
-;; ;; optional if you want which-key integration
-;; (use-package which-key
-;;     :config
-;;     (which-key-mode))
 
 (use-package company
   :after
