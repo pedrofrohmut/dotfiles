@@ -1,3 +1,5 @@
+;;; UI ##########################################################################
+
 ;; Clean up UI
 (tool-bar-mode 0)    ; Hide toolbar
 (menu-bar-mode 0)    ; Hide menubar
@@ -7,6 +9,8 @@
 
 ;; Remove startup screen
 (setq inhibit-startup-message t)
+
+;; Theme & Customization ########################################################
 
 ;; Set theme - Comment it in a fresh install or doom-themes not installed
 (load-theme 'doom-palenight t)
@@ -19,14 +23,14 @@
 
 ;; Color Column/Ruler
 (global-display-fill-column-indicator-mode t)
-(setq-default display-fill-column-indicator-column 121)
+(setq-default display-fill-column-indicator-column 81)
 
 ;; Blinking ui as bell
-(setq visible-bell t) 
+(setq visible-bell nil)
 
 ;; Relative line numbers
 (global-display-line-numbers-mode t)
-(setq display-line-numbers-type 'relative)
+(setq-default display-line-numbers-type 'relative)
 
 ;; Diable line numbers to certain modes
 (dolist (mode '(term-mode-hook
@@ -36,12 +40,16 @@
 ;; Hightlight Matching parens on hover
 (show-paren-mode t)
 
+;; MELPA ########################################################################
+
 ;; Adding packages
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 (add-to-list 'package-archives '("elpa" . "https://elpa.gnu.org/packages/") t)
 (package-initialize)
+
+;; USE-PACKAGE ##################################################################
 
 ;; Install Use-Package
 (unless (package-installed-p 'use-package)
@@ -52,20 +60,36 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
+;; Emmet ########################################################################
+
+;; Emmet
+(use-package emmet-mode
+  :defer t
+  :init
+  (add-hook 'css-mode-hook 'emmet-mode)
+  (add-hook 'sgml-mode-hook 'emmet-mode)
+  :config
+  (setq emmet-self-closing-tag-style " /")
+  (setq-default emmet-move-cursor-between-quote t)
+  ;(unbind-key "C-j" emmet-mode-keymap)
+  (unbind-key "<C-return>" emmet-mode-keymap)
+  (unbind-key "C-M-<left>" emmet-mode-keymap)
+  (unbind-key "C-M-<right>" emmet-mode-keymap))
+
+;; Evil #########################################################################
+
 ;; Evil Mode
 (use-package evil
   :init
   (setq evil-want-C-u-scroll t)
   (setq evil-want-keybinding nil) ; Evil collection asks for it
+  (setq evil-vsplit-window-right t)
+  (setq evil-split-window-below t)
   :config
-  ;; Ctrl-k as Esc
-  ;(define-key evil-insert-state-map (kbd "C-k") 'evil-normal-state)
   ;; Ctrl-h as backspace
   (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
   ;; Ctrl-l as delete
   (define-key evil-insert-state-map (kbd "C-l") 'evil-delete-char)
-  ;; Emmet expend line
-  (define-key evil-insert-state-map (kbd "C-,") 'emmet-expand-line)
   ;; Change window normal mode (next)
   (define-key evil-normal-state-map (kbd "C-j") 'evil-window-next)
   ;; Change window normal mode (previous)
@@ -85,6 +109,8 @@
   ;; Removed to be used by treemacs
   (define-key evil-normal-state-map (kbd "C-n") nil)
   (evil-mode 1))
+
+;; Evil - Must Have #############################################################
 
 ;; Makes evil keys consistent in more places than just evil mode default
 (use-package evil-collection
@@ -119,6 +145,8 @@
   (define-key evil-normal-state-map (kbd "C-=") 'evil-numbers/inc-at-pt)
   (define-key evil-normal-state-map (kbd "<kp-add>") 'evil-numbers/inc-at-pt))
 
+;; Evil Jumping #################################################################
+
 ;; Vim Sneak Emualtion
 (use-package evil-snipe
   :after
@@ -148,9 +176,11 @@
                         (evil-snipe-enable-highlight)
                         (evil-snipe-enable-incremental-highlight))))
 
+;; Whick-Key ####################################################################
+
 ;; Show buffer with keys
 (use-package which-key
-  :init 
+  :init
   (which-key-mode)
   :diminish
   (which-key-mode)
@@ -158,20 +188,7 @@
   (setq which-key-idle-delay 1.0)
   (which-key-setup-side-window-right))
 
-;; Emmet
-(use-package emmet-mode
-  :defer 
-  t
-  :init
-  (add-hook 'css-mode-hook 'emmet-mode)
-  (add-hook 'sgml-mode-hook 'emmet-mode)
-  :config
-  (setq emmet-self-closing-tag-style " /")
-  (setq-default emmet-move-cursor-between-quote t)
-  (unbind-key "C-j" emmet-mode-keymap)
-  (unbind-key "<C-return>" emmet-mode-keymap)
-  (unbind-key "C-M-<left>" emmet-mode-keymap)
-  (unbind-key "C-M-<right>" emmet-mode-keymap))
+;; Ivy, Counsel and Swiper ######################################################
 
 (use-package ivy
   :diminish ; Does not show the mode in the mode line
@@ -212,6 +229,8 @@
   :init
   (ivy-rich-mode 1))
 
+;; Doom Styling #################################################################
+
 (use-package doom-modeline
   :ensure t
   :init
@@ -220,6 +239,9 @@
   (doom-modeline-height 10))
 
 (use-package doom-themes)
+
+;; Helpful  #####################################################################
+;; Improve emacs default help and remap help commands
 
 (use-package helpful
   :custom
@@ -231,23 +253,46 @@
   ([remap describe-variable] . counsel-describe-variable)
   ([remap describe-key]      . helpful-key))
 
+;; General ######################################################################
+;; easier set key binds
 (use-package general
   :config
-  (general-evil-setup t)
-  (general-create-definer rune/leader-keys
-    :keymaps '(normal insert visual emacs)
-    :prefix "SPC"
-    :global-prefix "C-SPC")
-  (rune/leader-keys
-    "f"  '(:ignore t :which-key "files")
-    "ff" '(counsel-find-file :which-key "find file")
-    "t"  '(:ignore t :which-key "tabs")
-    "p"  '(projectile-command-map :which-key "projectile commands")
-    "tj" '(tab-next :which-key "tab-next")
-    "tk" '(tab-previous :which-key "tab-previous")
-    "tn" '(tab-new :whick-key "tab-new")
-    "tc" '(tab-close :whick-key "tab-close")))
+  (general-evil-setup t))
 
+(general-nmap
+  :prefix "SPC"
+  "SPC" '(counsel-M-x :which-key "M-x")
+  ;; Buffers
+  "b"   '(:igonre t :which-key "Buffers")
+  "b b" '(ibuffer :which-key "IBuffer")
+  "b j" '(next-buffer :which-key "Next Buffer")
+  "b k" '(previous-buffer :which-key "Previous Buffer")
+  "b k" '(kill-buffer :which-key "Kill Buffer")
+  "b d" '(kill-current-buffer :which-key "Kill Current Buffer")
+  ;; Files
+  "f"   '(:ignore t :which-key "Files")
+  "f f" '(counsel-find-file :which-key "Find File")
+  ;; Projectile
+  "p"   '(projectile-command-map :which-key "Projectile Commands")
+  ;; Tabs
+  "t"   '(:ignore t :which-key "Tabs")
+  "t l" '(tab-next :which-key "Go Next")
+  "t h" '(tab-previous :which-key "Go Previous")
+  "t n" '(tab-new :which-key "New Tab")
+  "t c" '(tab-close :which-key "Close Tab")
+  ;; Window
+  "w"   '(:ignore t :which-key "Window")
+  "w c" '(evil-window-delete :which-key "Close Window")
+  "w s" '(evil-window-split :which-key "Split")
+  "w v" '(evil-window-vsplit :which-key "Vertical Split")
+  "w h" '(evil-window-left :which-key "Go Left")
+  "w j" '(evil-window-down :which-key "Go Down")
+  "w k" '(evil-window-up :which-key "Go Up")
+  "w l" '(evil-window-right :which-key "Go Right")
+  "w r" '(evil-window-rotate-downwards :which-key "Rotate")
+  "w o" '(delete-other-windows :which-key "Close Others"))
+ 
+;; Projectile ###################################################################
 (use-package projectile
   :diminish
   projectile-mode
@@ -266,6 +311,8 @@
   :config
   (counsel-projectile-mode))
 
+;; Git ##########################################################################
+
 (use-package magit
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
@@ -275,6 +322,7 @@
 (org-babel-do-load-languages
  'org-babel-load-languages '((emacs-lisp . t)
                              (python . t)))
+;; Org Mode #####################################################################
 
 ;; Org Tempo - Shortcuts to code blocks in Org Mode
 (require 'org-tempo)
@@ -285,7 +333,6 @@
 
 (defun pf/org-mode-setup ()
   (org-indent-mode)
-  ;; (variable-pitch-mode 1)
   (visual-line-mode 1)
   (auto-fill-mode 0)
   (setq evil-mode-auto-indent nil))
@@ -322,7 +369,6 @@
   (pf/org-ensure-fixed-pitch-when-needed))
 
 (defun pf/configure-org-agenda ()
-  ;; Org Agenda
   (setq org-agenda-start-with-log-mode t)
   (setq org-log-done 'time)
   (setq org-log-into-drawer t)
@@ -343,9 +389,6 @@
   :hook
   (org-mode . pf/org-mode-setup))
 
-;; (define-key org-mode-map (kbd "C-j") nil)
-;; (define-key org-mode-map (kbd "C-k") nil)
-
 (use-package org-bullets
   :after
   org
@@ -354,17 +397,14 @@
   :custom
   (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
-(defun pf/org-mode-visual-fill ()
-  (setq visual-fill-column-width 120
-        visual-fill-column-center-text t)
-  (visual-fill-column-mode 1))
-
 (use-package visual-fill-column
-  :hook (org-mode . pf/org-mode-visual-fill))
+  :config
+  (setq-default visual-fill-column-width 120)
+  (setq-default visual-fill-column-center-text t)
+  :config
+  (global-visual-fill-column-mode 1))
 
-(defun pf/lsp-breadcrumb-setup()
-  (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
-  (lsp-headerline-breadcrumb-mode))
+;; LSP ##########################################################################
 
 (use-package lsp-mode
   :commands
@@ -372,10 +412,8 @@
   :init
   (setq lsp-keymap-prefix "C-c l")
   :hook
-  ;; replace XXX-mode with concrete major-mode(e. g. python-mode)
   (python-mode . lsp)
   (typescript-mode . lsp)
-  (lsp-mode . pf/lsp-breadcrumb-setup)
   (lsp-mode . lsp-enable-which-key-integration))
 
 ;; Lsp Sideline, Peek, Doc and IMenu
@@ -418,6 +456,9 @@
 (use-package flycheck
   :init (global-flycheck-mode))
 
+;; TypeScript ###################################################################
+
+;; Server: $ npm install --global typescript
 (use-package typescript-mode
   :mode
   "\\.ts\\'"
@@ -426,9 +467,14 @@
   :config
   (setq typescript-indent-level 2))
 
+;; Python #######################################################################
+
+;; Server: pip install --user 'python-lsp-server[all]'
 (use-package lsp-pyright
     :hook
     (python-mode . lsp-deferred))
+
+(use-package jinja2-mode)
 
 ; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -439,5 +485,16 @@
 ;(global-unset-key (kbd "C-j"))  ; Not useful before
 ;(global-unset-key (kbd "C-k"))  ; Not useful either
 
-(general-define-key
-  "C-c b" 'counsel-switch-buffer)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(jinja2-mode which-key visual-fill-column use-package typescript-mode org-bullets lsp-ui lsp-pyright lsp-ivy ivy-rich helpful general forge flycheck evil-surround evil-snipe evil-numbers evil-easymotion evil-commentary evil-collection emmet-mode doom-themes doom-modeline counsel-projectile company-box)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

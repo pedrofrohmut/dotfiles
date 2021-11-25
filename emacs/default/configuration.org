@@ -16,7 +16,7 @@
 * Theme & Customization
 #+begin_src emacs-lisp
 
-  ;; Set color theme
+  ;; Set theme - Comment it in a fresh install or doom-themes not installed
   (load-theme 'doom-palenight t)
 
   ;; Set transparency
@@ -80,18 +80,32 @@
     (setq evil-want-C-u-scroll t)
     (setq evil-want-keybinding nil) ; Evil collection asks for it
     :config
-                                          ; Ctrl-k as Esc
-    (define-key evil-insert-state-map (kbd "C-k") 'evil-normal-state)
-                                          ; Ctrl-h as backspace
+    ;; Ctrl-k as Esc
+    ;(define-key evil-insert-state-map (kbd "C-k") 'evil-normal-state)
+    ;; Ctrl-h as backspace
     (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
-                                          ; Ctrl-l as delete
+    ;; Ctrl-l as delete
     (define-key evil-insert-state-map (kbd "C-l") 'evil-delete-char)
-                                          ; Easy insert linebreak in normal mode
+    ;; Emmet expend line
+    (define-key evil-insert-state-map (kbd "C-,") 'emmet-expand-line)
+    ;; Change window normal mode (next)
+    (define-key evil-normal-state-map (kbd "C-j") 'evil-window-next)
+    ;; Change window normal mode (previous)
+    (define-key evil-normal-state-map (kbd "C-k") 'evil-window-prev)
+    ;; Change tab normal mode (next)
+    (define-key evil-normal-state-map (kbd "C-l") 'tab-next)
+    ;; Change tab normal mode (previous)
+    (define-key evil-normal-state-map (kbd "C-h") 'tab-previous)
+    ;; Easy insert linebreak in normal mode
     (define-key evil-normal-state-map (kbd "RET") (kbd "i RET <escape>"))
     ;; Removed to be used by EasyMotion + Sneak
     (define-key evil-normal-state-map (kbd "s") nil)
     ;; Removed to be used by EasyMotion + Sneak (reverse)
     (define-key evil-normal-state-map (kbd "S") nil)
+    ;; Removed to be used by projectile
+    (define-key evil-normal-state-map (kbd "C-p") nil)
+    ;; Removed to be used by treemacs
+    (define-key evil-normal-state-map (kbd "C-n") nil)
     (evil-mode 1))
 
   ;; Makes evil keys consistent in more places than just evil mode default
@@ -124,11 +138,12 @@
     :after
     evil
     :config
+    ;; Evil Increase hovered number
     (define-key evil-normal-state-map (kbd "C--") 'evil-numbers/dec-at-pt)
-    (define-key evil-normal-state-map (kbd "C-=") 'evil-numbers/inc-at-pt)
     (define-key evil-normal-state-map (kbd "<kp-subtract>") 'evil-numbers/dec-at-pt)
-    (define-key evil-normal-state-map (kbd "<kp-add>") 'evil-numbers/inc-at-pt)
-    (evil-numbers))
+    ;; Evil Decrease hovered number
+    (define-key evil-normal-state-map (kbd "C-=") 'evil-numbers/inc-at-pt)
+    (define-key evil-normal-state-map (kbd "<kp-add>") 'evil-numbers/inc-at-pt))
 
 #+end_src
 *** Evil Jumping
@@ -192,6 +207,7 @@
     :config
     (setq emmet-self-closing-tag-style " /")
     (setq-default emmet-move-cursor-between-quote t)
+    (unbind-key "C-j" emmet-mode-keymap)
     (unbind-key "<C-return>" emmet-mode-keymap)
     (unbind-key "C-M-<left>" emmet-mode-keymap)
     (unbind-key "C-M-<right>" emmet-mode-keymap))
@@ -201,43 +217,44 @@
 ** Ivy, counsel and swiper
 #+begin_src emacs-lisp
 
-  (use-package ivy
-    :diminish ; Does not show the mode in the mode line
-    :bind
-    (("C-s" . swiper)
-     :map ivy-minibuffer-map
-     ("TAB" . ivy-alt-done)
-     ("C-l" . ivy-alt-done)
-     ("C-j" . ivy-next-line)
-     ("C-k" . ivy-previous-line)
-     :map ivy-switch-buffer-map
-     ("C-k" . ivy-previous-line)
-     ("C-l" . ivy-done)
-     ("C-d" . ivy-switch-buffer-kill)
-     :map ivy-reverse-i-search-map
-     ("C-k" . ivy-previous-line)
-     ("C-d" . ivy-reverse-i-search-kill))
-    :config
-    (ivy-mode 1))
+      (use-package ivy
+        :diminish ; Does not show the mode in the mode line
+        :bind
+        (("C-s" . swiper)
+         :map ivy-minibuffer-map
+         ("TAB" . ivy-alt-done)
+         ("C-l" . ivy-alt-done)
+         ("C-j" . ivy-next-line)
+         ("C-k" . ivy-previous-line)
+         :map ivy-switch-buffer-map
+         ("C-k" . ivy-previous-line)
+         ("C-l" . ivy-done)
+         ("C-d" . ivy-switch-buffer-kill)
+         :map ivy-reverse-i-search-map
+         ("C-k" . ivy-previous-line)
+         ("C-d" . ivy-reverse-i-search-kill))
+        :config
+        (setq ivy-ignore-buffers '("\\` " "~" "\\`\\*tramp/"))
+        (ivy-mode 1))
 
-  (use-package counsel
-    :after ivy
-    :bind
-    (("M-x" . counsel-M-x)
-     ("C-x b" . counsel-ibuffer)
-     ("C-x C-f" . counsel-find-file)
-     :map minibuffer-local-map
-     ("C-r" . 'counsel-minibuffer-history))
-    :config
-    (counsel-mode 1))
+      (use-package counsel
+        :after ivy
+        :bind
+        (("M-x" . counsel-M-x)
+         ("C-x b" . counsel-ibuffer)
+         ("C-x C-f" . counsel-find-file)
+         :map minibuffer-local-map
+         ("C-r" . 'counsel-minibuffer-history))
+        :config
+        (counsel-mode 1))
 
-  (use-package swiper
-    :after ivy)
+      (use-package swiper
+        :after ivy)
 
-  (use-package ivy-rich
-    :after ivy
-    :init
-    (ivy-rich-mode 1))
+      (use-package ivy-rich
+        :after ivy
+        :init
+        (ivy-rich-mode 1))
 
 #+end_src
 ** Doom modeline and themes
@@ -278,13 +295,14 @@
       :prefix "SPC"
       :global-prefix "C-SPC")
     (rune/leader-keys
+      "f"  '(:ignore t :which-key "files")
+      "ff" '(counsel-find-file :which-key "find file")
       "t"  '(:ignore t :which-key "tabs")
+      "p"  '(projectile-command-map :which-key "projectile commands")
       "tj" '(tab-next :which-key "tab-next")
       "tk" '(tab-previous :which-key "tab-previous")
       "tn" '(tab-new :whick-key "tab-new")
-      "tc" '(tab-close :whick-key "tab-close")
-      "f"  '(:ignore t :which-key "files")
-      "ff" '(counsel-find-file :which-key "find file")))
+      "tc" '(tab-close :whick-key "tab-close")))
 
 #+end_src
 ** Projectile and counsel projectile
@@ -301,7 +319,7 @@
     :custom
     (projectile-completion-system 'ivy)
     :bind (:map projectile-mode-map
-                ("C-p" . projectile-command-map)
+                ("C-p" . projectile-find-file)
                 ("C-c p" . projectile-command-map)))
 
   (use-package counsel-projectile
@@ -402,14 +420,20 @@
 #+begin_src emacs-lisp
 
   (use-package org
-    :hook
-    (org-mode . pf/org-mode-setup)
     :config
     (setq org-ellipsis " \202"     ; Change the 3 dots to down arrow 
           org-hide-emphasis-markers t)
     (pf/configure-org-agenda)
-    (pf/org-setup-font))
+    (pf/org-setup-font)
+    :bind
+    (:map org-mode-map
+          ("<C-j>" . nil)
+          ("<C-k>" . nil))
+    :hook
+    (org-mode . pf/org-mode-setup))
 
+  ;; (define-key org-mode-map (kbd "C-j") nil)
+  ;; (define-key org-mode-map (kbd "C-k") nil)
 #+end_src
 ** Org Mode Bullets
 #+begin_src emacs-lisp
@@ -451,6 +475,7 @@
     (setq lsp-keymap-prefix "C-c l")
     :hook
     ;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+    (python-mode . lsp)
     (typescript-mode . lsp)
     (lsp-mode . pf/lsp-breadcrumb-setup)
     (lsp-mode . lsp-enable-which-key-integration))
@@ -497,6 +522,13 @@
     (company-mode . company-box-mode))
 
 #+end_src
+** Flycheck - Linting
+#+begin_src emacs-lisp
+
+  (use-package flycheck
+    :init (global-flycheck-mode))
+
+#+end_src
 ** Typescript
 #+begin_src emacs-lisp
 
@@ -507,6 +539,14 @@
     (typescript-mode . lsp-deferred)
     :config
     (setq typescript-indent-level 2))
+
+#+end_src
+** Python
+#+begin_src emacs-lisp
+
+  (use-package lsp-pyright
+      :hook
+      (python-mode . lsp-deferred))
 
 #+end_src
 * Keybinds
@@ -523,8 +563,8 @@
   ;; Ready Ctrl + h, j, k, l to my navigation as in VIM and XMonad
   (global-unset-key (kbd "C-h"))  ; Can still use help with F1
   (global-unset-key (kbd "C-l"))  ; Can use evil zz 
-  (global-unset-key (kbd "C-j"))  ; Not useful before
-  (global-unset-key (kbd "C-k"))  ; Not useful either
+  ;(global-unset-key (kbd "C-j"))  ; Not useful before
+  ;(global-unset-key (kbd "C-k"))  ; Not useful either
 
 #+end_src
 
@@ -532,10 +572,6 @@
 #+begin_src emacs-lisp
 
   (general-define-key
-    "C-c b" 'counsel-switch-buffer
-    "C-h" 'tab-previous
-    "C-l" 'tab-next
-    "C-j" 'evil-window-next
-    "C-k" 'evil-window-prev)
+    "C-c b" 'counsel-switch-buffer)
 
 #+end_src
