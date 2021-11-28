@@ -1,0 +1,21 @@
+################################################################################
+# Keyboard config ##############################################################
+################################################################################
+
+# --- Keyboard config ----------------------------------------------------------
+## Rules: /usr/share/X11/xkb/rules/base.lst ##
+## Edit: /etc/X11/xorg.conf.d/00-keyboard.conf
+
+# Keyboard layout
+# Add to xorg.conf: Option "KbdLayout" "br"
+setxkbmap br
+
+# Disable capslock # [caps:escape] map it to Esc
+# Add to xorg.conf: Option "KbdOptions" "caps:ctrl_modifier"
+setxkbmap -option caps:ctrl_modifier
+
+# Keyboard input config [delay/rate]
+xset r rate 250 30
+
+# XCape - makes left control another Escape key when tapped not holded
+xcape -e 'Control_L=Escape'
