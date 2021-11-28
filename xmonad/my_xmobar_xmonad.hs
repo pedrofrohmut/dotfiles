@@ -143,15 +143,16 @@ myLayouts = avoidStruts $ smartBorders $ tiled ||| Mirror tiled ||| Full
 -- insertPosition: change where the new window will appear
 myManageHook :: ManageHook
 myManageHook = insertPosition End Newer <+> composeAll
-  [ isDialog                          --> doCenterFloat 
-  , className =?   "mpv"              --> doFloat
-  , className =?   "Gimp"             --> doFloat
-  , className =?   "Pavucontrol"      --> doCenterFloat
-  , className =?   "Xfce4-appfinder"  --> doCenterFloat
-  , className =?   "Pamac-manager"    --> doCenterFloat
-  , className =?   "Rofi"             --> doCenterFloat
-  , title =?       "Downloads"        --> doFloat
-  , title =?       "Save As..."       --> doFloat
+  [ isDialog                          --> insertPosition Master Newer <+> doCenterFloat
+  , className =?   "mpv"              --> insertPosition Master Newer <+> doFloat
+  , className =?   "gl"               --> insertPosition Master Newer <+> doFloat
+  , className =?   "Gimp"             --> insertPosition Master Newer <+> doFloat
+  , className =?   "Pavucontrol"      --> insertPosition Master Newer <+> doCenterFloat
+  , className =?   "Xfce4-appfinder"  --> insertPosition Master Newer <+> doCenterFloat
+  , className =?   "Pamac-manager"    --> insertPosition Master Newer <+> doCenterFloat
+  , className =?   "Rofi"             --> insertPosition Master Newer <+> doCenterFloat
+  , title =?       "Downloads"        --> insertPosition Master Newer <+> doFloat
+  , title =?       "Save As..."       --> insertPosition Master Newer <+> doFloat
   -- Games
   , className =?   "riotclientux.exe" --> doCenterFloat
   ]
