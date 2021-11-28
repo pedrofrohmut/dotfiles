@@ -7,6 +7,7 @@ alias vim='nvim'
 alias gits='git status'
 alias ll='ls -lA'
 alias cll='clear; ls -lA'
+alias tree='tree -C'
 
 # --- Starship Prompt
 starship init fish | source
