@@ -40,6 +40,9 @@
 ;; Hightlight Matching parens on hover
 (show-paren-mode t)
 
+;; Disable backup files
+(setq make-backup-files nil)
+
 ;; MELPA ########################################################################
 
 ;; Adding packages
@@ -476,6 +479,9 @@
 
 (use-package jinja2-mode)
 
+;; Haskell ######################################################################
+(use-package haskell-mode)
+
 ; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
@@ -491,7 +497,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(jinja2-mode which-key visual-fill-column use-package typescript-mode org-bullets lsp-ui lsp-pyright lsp-ivy ivy-rich helpful general forge flycheck evil-surround evil-snipe evil-numbers evil-easymotion evil-commentary evil-collection emmet-mode doom-themes doom-modeline counsel-projectile company-box)))
+   '(haskell-mode jinja2-mode which-key visual-fill-column use-package typescript-mode org-bullets lsp-ui lsp-pyright lsp-ivy ivy-rich helpful general forge flycheck evil-surround evil-snipe evil-numbers evil-easymotion evil-commentary evil-collection emmet-mode doom-themes doom-modeline counsel-projectile company-box)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
