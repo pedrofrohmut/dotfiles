@@ -35,8 +35,5 @@ pamac-tray &
 
 # --- Keyboard -----------------------------------------------------------------
 
-# XCape - makes left control another Escape key when tapped not holded
-#xcape -e 'Control_L=Escape' &
-
 # Keyboard input config [delay/rate]
-#xset r rate 250 30 &
+xset r rate 250 30 &
