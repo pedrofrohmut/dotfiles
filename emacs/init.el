@@ -43,6 +43,9 @@
 ;; Disable backup files
 (setq make-backup-files nil)
 
+;; Show cursor position in the status bar
+(setq column-number-mode t)
+
 ;; MELPA ########################################################################
 
 ;; Adding packages
@@ -268,13 +271,14 @@
   ;; Buffers
   "b"   '(:igonre t :which-key "Buffers")
   "b b" '(ibuffer :which-key "IBuffer")
-  "b j" '(next-buffer :which-key "Next Buffer")
-  "b k" '(previous-buffer :which-key "Previous Buffer")
+  "b n" '(next-buffer :which-key "Next Buffer")
+  "b p" '(previous-buffer :which-key "Previous Buffer")
   "b k" '(kill-buffer :which-key "Kill Buffer")
   "b d" '(kill-current-buffer :which-key "Kill Current Buffer")
   ;; Files
   "f"   '(:ignore t :which-key "Files")
   "f f" '(counsel-find-file :which-key "Find File")
+  "f d" '(counsel-dired :which-key "DirEd")
   ;; Projectile
   "p"   '(projectile-command-map :which-key "Projectile Commands")
   ;; Tabs
