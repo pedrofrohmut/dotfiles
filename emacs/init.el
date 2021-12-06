@@ -28,6 +28,9 @@
 ;; Blinking ui as bell
 (setq visible-bell nil)
 
+;; Tab
+(setq-default indent-tabs-mode nil)
+
 ;; Relative line numbers
 (global-display-line-numbers-mode t)
 (setq-default display-line-numbers-type 'relative)
@@ -286,7 +289,8 @@
   "t l" '(tab-next :which-key "Go Next")
   "t h" '(tab-previous :which-key "Go Previous")
   "t n" '(tab-new :which-key "New Tab")
-  "t c" '(tab-close :which-key "Close Tab")
+  "t c" '(tab-close :which-key "Close Current")
+  "t o" '(tab-close-other :which-key "Close Others")
   ;; Window
   "w"   '(:ignore t :which-key "Window")
   "w c" '(evil-window-delete :which-key "Close Window")
