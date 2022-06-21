@@ -151,6 +151,7 @@ myManageHook = insertPosition End Newer <+> composeAll
   , className =?   "Xfce4-appfinder"  --> insertPosition Master Newer <+> doCenterFloat
   , className =?   "Pamac-manager"    --> insertPosition Master Newer <+> doCenterFloat
   , className =?   "Rofi"             --> insertPosition Master Newer <+> doCenterFloat
+  , className =?   "Galculator"       --> insertPosition Master Newer <+> doCenterFloat
   , title =?       "Downloads"        --> insertPosition Master Newer <+> doFloat
   , title =?       "Save As..."       --> insertPosition Master Newer <+> doFloat
   -- Games
