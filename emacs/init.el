@@ -99,10 +99,13 @@
   (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
   ;; Ctrl-l as delete
   (define-key evil-insert-state-map (kbd "C-l") 'evil-delete-char)
-  ;; Change window normal mode (next)
-  (define-key evil-normal-state-map (kbd "C-j") 'evil-window-next)
-  ;; Change window normal mode (previous)
-  (define-key evil-normal-state-map (kbd "C-k") 'evil-window-prev)
+
+  ;; Scrolling
+  (define-key evil-normal-state-map (kbd "C-j") 'evil-scroll-line-down)
+  (define-key evil-normal-state-map (kbd "C-k") 'evil-scroll-line-up)
+  ;; (define-key evil-normal-state-map (kbd "{") 'evil-scroll-up)
+  ;; (define-key evil-normal-state-map (kbd "}") 'evil-scroll-down)
+
   ;; Change tab normal mode (next)
   (define-key evil-normal-state-map (kbd "C-l") 'tab-next)
   ;; Change tab normal mode (previous)
