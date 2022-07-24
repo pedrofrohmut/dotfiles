@@ -5,6 +5,7 @@ end
 # --- ALIASES
 alias vim='nvim'
 alias gits='git status'
+alias gitl='git log -n 5'
 alias ll='ls -lA'
 alias cll='clear; ls -lA'
 alias tree='tree -C'
