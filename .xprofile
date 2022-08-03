@@ -2,25 +2,13 @@
 # .XProfile ####################################################################
 ################################################################################
 
-# --- Apps ---------------------------------------------------------------------
+# --- Keyboard -----------------------------------------------------------------
 
-# Wallpaper
-nitrogen --restore &
+# Keyboard repeat dalay/rate
+xset r rate 250 30 &
 
-# Power Management
-xfce4-power-manager &
-
-# Hide Mouse Cursor when idle for 2 seconds
-unclutter --timeout 2 --ignore-scrolling &
-
-# LX Polkit
-lxsession &
-
-# Night Light [default -t 6500/4500]
-redshift -l -23.52:-46.35 -t 6500:4500 &
-
-# Compositor - transparency
-picom --config ~/.config/picom/picom.conf &
+# Keyboard Layout
+setxkbmap -layout br -option caps:escape &
 
 # --- Tray ---------------------------------------------------------------------
 
@@ -33,11 +21,19 @@ nm-applet &
 # Pamac tray
 pamac-tray &
 
-# --- Keyboard -----------------------------------------------------------------
+# --- App ----------------------------------------------------------------------
 
-# Keyboard input config [delay/rate]
-xset r rate 250 30 &
+# LX Polkit
+lxsession &
 
-# XCape - makes left control another Escape key when tapped not holded
-xcape -e 'Control_L=Escape'
-xcape -e 'Caps_lock=Escape'
+# Wallpaper
+nitrogen --restore &
+
+# Hide Mouse Cursor when idle for 2 seconds
+unclutter --timeout 2 --ignore-scrolling &
+
+# Night Light [default -t 6500/4500]
+redshift -l -23.52:-46.35 -t 6500:4500 &
+
+# Compositor - transparency
+picom --config ~/.config/picom/picom.conf &

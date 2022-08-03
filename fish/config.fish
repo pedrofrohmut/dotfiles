@@ -4,6 +4,8 @@ end
 
 # --- ALIASES
 alias vim='nvim'
+alias v='nvim'
+#alias evim='nvim -u ~/programming/nvimconfig-lua/init.lua'
 alias gits='git status'
 alias gitl='git log -n 5'
 alias ll='ls -lA'
