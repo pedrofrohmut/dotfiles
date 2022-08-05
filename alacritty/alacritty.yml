@@ -19,7 +19,7 @@ font:
   size: 11.0
 
 import:
-  - /home/pedro/.config/alacritty/dracula.yml
+  - /home/pedro/.config/alacritty/colors.yml
 
 key_bindings:
   - { key: Insert, mods: Shift, action: Paste }

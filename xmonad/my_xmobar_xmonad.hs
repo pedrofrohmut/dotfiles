@@ -90,6 +90,8 @@ myConfig = def
     , ("M-<Return>", spawn "alacritty")
       -- File manager
     , ("M-e", spawn "thunar")  
+      -- Web Browser
+    , ("M-w", spawn "brave")  
       -- AppFinder
     , ("M-p", spawn "rofi -modi drun -show drun -show-icons \
                     \ -theme ~/.config/rofi/themes/my_dracula.rasi")  

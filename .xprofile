@@ -29,6 +29,9 @@ lxsession &
 # Wallpaper
 nitrogen --restore &
 
+# Power Management
+xfce4-power-manager &
+
 # Hide Mouse Cursor when idle for 2 seconds
 unclutter --timeout 2 --ignore-scrolling &
 
