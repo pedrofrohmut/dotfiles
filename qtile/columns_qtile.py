@@ -33,23 +33,24 @@ keys = [
     Key([mod], "Tab", lazy.screen.toggle_group()),
 
     # Layout toggle
-    Key([mod], "u", lazy.window.toggle_floating()),
-    Key([mod], "i", lazy.window.toggle_fullscreen()),
-    Key([mod], "o", lazy.layout.toggle_split()),
-    Key([mod], "b", lazy.hide_show_bar()),
+    Key([mod], "u",     lazy.window.toggle_floating()),
+    Key([mod], "i",     lazy.window.toggle_fullscreen()),
+    Key([mod], "o",     lazy.layout.toggle_split()),
+    Key([mod], "b",     lazy.hide_show_bar()),
+    Key([mod], "space", lazy.next_layout()),
 
     # Others
-    Key([mod], "q",              lazy.window.kill(), desc="Kill focused window"),
-    Key([mod,  "shift"],   "r",  lazy.restart(),  desc="Restart Qtile"),
-    Key([mod,  "shift"],   "F4", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod,  "shift"],   "q",  lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod,  "shift"],   "F3", lazy.spawn("systemctl suspend")),
+    Key([mod],   "q",            lazy.window.kill(), desc="Kill focused window"),
+    Key([mod,    "shift"], "r",  lazy.restart(),  desc="Restart Qtile"),
+    Key([mod,    "shift"], "F4", lazy.shutdown(), desc="Shutdown Qtile"),
+    Key([mod,    "shift"], "q",  lazy.shutdown(), desc="Shutdown Qtile"),
+    Key([mod,    "shift"], "F3", lazy.spawn("systemctl suspend")),
     Key([altKey, "shift"], "F4", lazy.spawn("systemctl poweroff")),
 
     # Audio
-    Key([mod], "minus",      lazy.spawn("pamixer --decrease 5")),
-    Key([mod], "equal",      lazy.spawn("pamixer --increase 5")),
-    Key([mod, "shift"], "0", lazy.spawn("pamixer --toggle-mute")),
+    Key([mod], "minus",       lazy.spawn("pamixer --decrease 5")),
+    Key([mod], "equal",       lazy.spawn("pamixer --increase 5")),
+    Key([mod,  "shift"], "0", lazy.spawn("pamixer --toggle-mute")),
     Key(
         [mod], "0",
         lazy.spawn("/home/pedro/dotfiles/scripts/change-default-sink.sh")
@@ -106,7 +107,7 @@ layouts = [
     # layout.TreeTab(),
     # layout.VerticalTile(),
     # layout.Zoomy(),
-    layout.Columns(border_focus="#959595", border_normal="#333333", border_width=2),
+    layout.Columns(border_focus="#959595", border_normal="#333333", border_width=2, insert_position=1)
 ]
 
 # Drag floating layouts.
@@ -152,36 +153,35 @@ top_bar = bar.Bar(
     [
         widget.GroupBox(active="aaaaff", inactive="545454"),
         # widget.CurrentLayout(),
-        widget.Prompt(),
+        # widget.Prompt(),
         widget.Spacer(),
-        widget.Volume(fmt='Vol: {}', update_interval=2.0),
+        widget.Volume(fmt='Vol: {}'),
         widget.Sep(padding=20),
-        widget.CPU(format="CPU: {load_percent}%", update_interval=3.0),
-        widget.ThermalSensor(
-            foreground="aaaaff",
-            fmt=' /  {}',
-            tag_sensor="temp1",
-            update_interval=3.0
-        ),
+        widget.CPU(format="CPU: {load_percent}%", update_interval=1.0),
+        # widget.ThermalSensor(
+        #     foreground="aaaaff",
+        #     fmt=' / {}',
+        #     update_interval=3.0
+        # ),
         widget.Sep(padding=20),
-        widget.Memory(format="RAM: {MemUsed: .0f}MB", update_interval=3.0),
-        widget.ThermalSensor(
-            foreground="aaaaff",
-            fmt=' /  {}',
-            tag_sensor="mem",
-            update_interval=3.0
-        ),
-        widget.Sep(padding=20),
-        widget.ThermalSensor(
-            foreground="aaaaff",
-            fmt='GPU: {}',
-            tag_sensor="edge",
-            update_interval=3.0
-        ),
+        widget.Memory(format="RAM: {MemUsed: .0f}MB", update_interval=1.0),
+        # widget.ThermalSensor(
+        #     foreground="aaaaff",
+        #     fmt=' /  {}',
+        #     tag_sensor="mem",
+        #     update_interval=3.0
+        # ),
+        # widget.Sep(padding=20),
+        # widget.ThermalSensor(
+        #     foreground="aaaaff",
+        #     fmt='GPU: {}',
+        #     tag_sensor="edge",
+        #     update_interval=3.0
+        # ),
         widget.Sep(padding=20),
         widget.Clock(format="%d/%m/%Y (%a)", update_interval=60.0),
         widget.Sep(padding=20),
-        widget.Clock(format="%R", update_interval=3.0),
+        widget.Clock(format="%R", update_interval=1.0),
         widget.Sep(padding=20),
         widget.Systray(foreground="aaaaff")
     ],
