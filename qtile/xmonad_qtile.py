@@ -11,8 +11,8 @@ terminal = guess_terminal()
 
 keys = [
     # Switch between windows
-    Key([mod], "h", lazy.layout.left()),
-    Key([mod], "l", lazy.layout.right()),
+    Key([mod], "i", lazy.layout.left()),
+    Key([mod], "o", lazy.layout.right()),
     Key([mod], "j", lazy.layout.down()),
     Key([mod], "k", lazy.layout.up()),
     
@@ -29,8 +29,8 @@ keys = [
     Key([mod, "control"], "h", lazy.layout.shrink_main()),
     
     # Switch between groups
-    Key([mod], "i",   lazy.screen.prev_group()),
-    Key([mod], "o",   lazy.screen.next_group()),
+    Key([mod], "h",   lazy.screen.prev_group()),
+    Key([mod], "l",   lazy.screen.next_group()),
     Key([mod], "Tab", lazy.screen.toggle_group()),
     
     # Layout control
