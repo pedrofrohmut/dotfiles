@@ -104,11 +104,8 @@ layouts = [
     layout.Max()
 ]
 
-# Drag floating layouts.
 mouse = [
-    # Super+Left_mouse moves
     Drag([mod],  "Button1",  lazy.window.set_position_floating(), start=lazy.window.get_position()),
-    # Super+Right_mouse resizes
     Drag([mod],  "Button3",  lazy.window.set_size_floating(), start=lazy.window.get_size()),
     Click([mod], "Button2", lazy.window.bring_to_front())
 ]
@@ -138,25 +135,23 @@ widget_defaults = dict(font="FiraCode Nerd Font Mono", fontsize=13, padding=1, f
 extension_defaults = widget_defaults.copy()
 top_bar = bar.Bar(
     [
-        widget.GroupBox(active="00ffff", inactive="b2b2b2", fontsize=14, 
+        widget.GroupBox(active="ffffff", inactive="989898", fontsize=14, 
             highlight_method="line", highlight_color="005757"),
-        # widget.CurrentLayout(),
-        # widget.Prompt(),
         widget.Spacer(),
         widget.Volume(fmt='Vol: {}'),
         widget.Sep(padding=20),
         widget.CPU(format="CPU: {load_percent}%", update_interval=1.0),
         widget.Sep(padding=20),
-        widget.Memory(format="RAM: {MemUsed: .0f}MB", update_interval=1.0),
+        widget.Memory(format="RAM: {MemUsed:.0f}/{MemTotal:.0f}GB", measure_mem='G', update_interval=1.0),
         widget.Sep(padding=20),
         widget.Clock(format="%d/%m/%Y [%a]", update_interval=60.0),
         widget.Sep(padding=20),
         widget.Clock(format="%R", update_interval=1.0, foreground="00ffff"),
         widget.Sep(padding=20),
-        widget.Systray(foreground="ff0000")
+        widget.Systray()
     ],
     24,
-    background="#2f2838"
+    background="#000000"
 )
 screens = [Screen(top=top_bar)]
 
