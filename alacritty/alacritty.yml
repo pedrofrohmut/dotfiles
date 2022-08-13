@@ -22,9 +22,13 @@ import:
   - /home/pedro/.config/alacritty/colors.yml
 
 key_bindings:
-  - { key: Insert, mods: Shift, action: Paste }
-  - { key: Insert, mods: Control, action: Copy }
-  - { key: Return, mods: Alt, action: ToggleFullscreen }
-  - { key: F10, action: ToggleFullscreen }
-  - { key: PageUp, action: ScrollPageUp }
-  - { key: PageDown, action: ScrollPageDown }
+  - { key: Insert,    mods: Shift,         action: Paste }
+  - { key: Insert,    mods: Control,       action: Copy }
+  - { key: Return,    mods: Alt,           action: ToggleFullscreen }
+  - { key: F10,                            action: ToggleFullscreen }
+  - { key: PageUp,                         action: ScrollPageUp }
+  - { key: PageDown,                       action: ScrollPageDown }
+  - { key: K,         mods: Control,       action: ScrollHalfPageUp }
+  - { key: J,         mods: Control,       action: ScrollHalfPageDown }
+  - { key: K,         mods: Alt,           action: ScrollLineUp }
+  - { key: J,         mods: Alt,           action: ScrollLineDown }
