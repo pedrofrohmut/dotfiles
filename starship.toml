@@ -9,6 +9,8 @@ $time\
 $status\
 $shell\
 $python\
+$c\
+$cmake\
 $character"""
 
 [python]

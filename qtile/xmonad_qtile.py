@@ -11,10 +11,10 @@ terminal = guess_terminal()
 
 keys = [
     # Switch between windows
-    Key([mod], "h", lazy.layout.left()),
+    # Key([mod], "h", lazy.layout.left()),
     Key([mod], "l", lazy.layout.right()),
     Key([mod], "j", lazy.layout.down()),
-    Key([mod], "k", lazy.layout.up()),
+    # Key([mod], "k", lazy.layout.up()),
     
     # Move windows inside the current group
     Key([mod, "shift"], "h", lazy.layout.swap_left()),
@@ -29,16 +29,16 @@ keys = [
     Key([mod, "control"], "h", lazy.layout.shrink_main()),
     
     # Switch between groups
-    Key([mod], "p",   lazy.screen.prev_group()),
-    Key([mod], "n",   lazy.screen.next_group()),
+    Key([mod], "h",   lazy.screen.prev_group()),
+    Key([mod], "l",   lazy.screen.next_group()),
     Key([mod], "Tab", lazy.screen.toggle_group()),
     
     # Layout control
-    Key([mod], "u",      lazy.window.toggle_floating()),
-    Key([mod], "b",      lazy.hide_show_bar()),
-    Key([mod], "space",  lazy.next_layout()),
-    #Key([mod], "n",      lazy.layout.normalize()),
-    Key([mod], "m",      lazy.layout.maximize()),
+    Key([mod], "u",               lazy.window.toggle_floating()),
+    Key([mod], "b",               lazy.hide_show_bar()),
+    Key([mod], "space",           lazy.next_layout()),
+    Key([mod, "control"], "n",    lazy.layout.normalize()),
+    Key([mod], "m",               lazy.layout.maximize()),
     Key([mod,  "shift"], "space", lazy.layout.flip()),
 
     # Others
