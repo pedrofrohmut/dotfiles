@@ -29,26 +29,26 @@ keys = [
     Key([mod, "control"], "h", lazy.layout.shrink_main()),
     
     # Switch between groups
-    Key([mod], "i",   lazy.screen.prev_group()),
-    Key([mod], "o",   lazy.screen.next_group()),
+    Key([mod], "p",   lazy.screen.prev_group()),
+    Key([mod], "n",   lazy.screen.next_group()),
     Key([mod], "Tab", lazy.screen.toggle_group()),
     
     # Layout control
     Key([mod], "u",      lazy.window.toggle_floating()),
     Key([mod], "b",      lazy.hide_show_bar()),
     Key([mod], "space",  lazy.next_layout()),
-    Key([mod], "n",      lazy.layout.normalize()),
+    #Key([mod], "n",      lazy.layout.normalize()),
     Key([mod], "m",      lazy.layout.maximize()),
     Key([mod,  "shift"], "space", lazy.layout.flip()),
 
     # Others
     Key([mod],   "q",              lazy.window.kill(), desc="Kill focused window"),
     Key([mod,    "shift"],   "r",  lazy.restart(),  desc="Restart Qtile"),
-    Key([mod,    "shift"],   "F4", lazy.shutdown(), desc="Shutdown Qtile"),
+    #Key([mod,    "shift"],   "F4", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod,    "shift"],   "q",  lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod,    "shift"],   "F2", lazy.spawn("i3lock -i /home/pedro/media/images/wallpaper/lock.png -u; systemctl suspend")),
+    #Key([mod,    "shift"],   "F2", lazy.spawn("i3lock -i /home/pedro/media/images/wallpaper/lock.png -u; systemctl suspend")),
     Key([mod,    "shift"],   "F3", lazy.spawn("systemctl suspend")),
-    Key([altKey, "control"], "F4", lazy.spawn("systemctl poweroff")),
+    #Key([altKey, "control"], "F4", lazy.spawn("systemctl poweroff")),
 
     # Audio
     Key([mod], "minus",  lazy.spawn("pamixer --decrease 5")),
@@ -67,7 +67,7 @@ keys = [
     # Programs
     Key([mod], "Return", lazy.spawn("alacritty"), desc="Launch terminal"),
     # Key([mod], "r",      lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
-    Key([mod], "p",
+    Key([mod], "r",
         lazy.spawn("rofi -show drun -modi drun -show-icons -theme ~/.config/rofi/themes/my_dracula.rasi"),
         desc="Rofi run"),
     # Key([mod], "d",      lazy.spawn("dmenu_run -b -f -l 15 -p Apps")),

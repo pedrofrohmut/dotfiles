@@ -5,9 +5,7 @@ window:
   padding:
     x: 4
     y: 4
-  opacity: 0.87
-
-# background_opacity: 0.93
+  opacity: 0.88
 
 font:
   normal: 
@@ -22,13 +20,14 @@ import:
   - /home/pedro/.config/alacritty/colors.yml
 
 key_bindings:
-  - { key: Insert,    mods: Shift,         action: Paste }
-  - { key: Insert,    mods: Control,       action: Copy }
-  - { key: Return,    mods: Alt,           action: ToggleFullscreen }
-  - { key: F10,                            action: ToggleFullscreen }
-  - { key: PageUp,                         action: ScrollPageUp }
-  - { key: PageDown,                       action: ScrollPageDown }
-  - { key: K,         mods: Control,       action: ScrollHalfPageUp }
-  - { key: J,         mods: Control,       action: ScrollHalfPageDown }
-  - { key: K,         mods: Alt,           action: ScrollLineUp }
-  - { key: J,         mods: Alt,           action: ScrollLineDown }
+  - { key: Insert,   mods: Shift,         action: Paste }
+  - { key: Insert,   mods: Control,       action: Copy }
+  - { key: Return,   mods: Alt,           action: ToggleFullscreen }
+  - { key: F10,                           action: ToggleFullscreen }
+  - { key: PageUp,                        action: ScrollPageUp }
+  - { key: PageDown,                      action: ScrollPageDown }
+  - { key: Up,       mods: Control,       action: ScrollHalfPageUp }
+  - { key: Down,     mods: Control,       action: ScrollHalfPageDown }
+  - { key: Up,       mods: Alt,           action: ScrollLineUp }
+  - { key: Down,     mods: Alt,           action: ScrollLineDown }
+  - { key: Return,   mods: Control|Shift, action: SpawnNewInstance }
