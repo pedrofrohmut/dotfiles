@@ -1,33 +1,42 @@
 shell:
-  program: /bin/fish
+    program: /bin/fish
 
 window:
-  padding:
-    x: 4
-    y: 4
-  opacity: 0.88
+    padding:
+        x: 4
+        y: 4
+    opacity: 0.88
 
+# Install fonts in /usr/share/fonts/TTF
+# discover the name to use with $ fc-list | rg 'Fira'
+# the last part will be <path>/<file>: <font_family>:style=<style>
+# use font_family on family and style on repective style
+# if not working at all try reboot the SO prob something with the caching stuff
 font:
-  normal: 
-    family: FiraCode Nerd Font Mono
-    style: Regular
-  bold:
-    family: FiraCode Nerd Font Mono
-    style: Bold
-  size: 11.0
+    normal: 
+        family: FiraCode Nerd Font Mono
+        style: Regular
+    bold:
+        family: FiraCode Nerd Font Mono
+        style: Bold
+    size: 11.0
 
+# create a symlink from your color file to color.yml link
+#   $ ln -s /home/<user>/<color_file_path> ~/.config/alacritty/colors.yml
+# !! Important !! to type the full path for color_file_path
+# try to resave (refresh) the alacritty config if don't go firstTime
 import:
   - /home/pedro/.config/alacritty/colors.yml
 
 key_bindings:
-  - { key: Insert,   mods: Shift,         action: Paste }
-  - { key: Insert,   mods: Control,       action: Copy }
-  - { key: Return,   mods: Alt,           action: ToggleFullscreen }
-  - { key: F10,                           action: ToggleFullscreen }
-  - { key: PageUp,                        action: ScrollPageUp }
-  - { key: PageDown,                      action: ScrollPageDown }
-  - { key: Up,       mods: Control,       action: ScrollHalfPageUp }
-  - { key: Down,     mods: Control,       action: ScrollHalfPageDown }
-  - { key: Up,       mods: Alt,           action: ScrollLineUp }
-  - { key: Down,     mods: Alt,           action: ScrollLineDown }
-  - { key: Return,   mods: Control|Shift, action: SpawnNewInstance }
+    - { key: Insert,   mods: Shift,         action: Paste }
+    - { key: Insert,   mods: Control,       action: Copy }
+    - { key: Return,   mods: Alt,           action: ToggleFullscreen }
+    - { key: F10,                           action: ToggleFullscreen }
+    - { key: PageUp,                        action: ScrollHalfPageUp }
+    - { key: PageDown,                      action: ScrollHalfPageDown }
+    - { key: Up,       mods: Control,       action: ScrollHalfPageUp }
+    - { key: Down,     mods: Control,       action: ScrollHalfPageDown }
+    - { key: Up,       mods: Alt,           action: ScrollLineUp }
+    - { key: Down,     mods: Alt,           action: ScrollLineDown }
+    - { key: Return,   mods: Control|Shift, action: SpawnNewInstance }
