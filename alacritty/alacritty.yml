@@ -1,5 +1,5 @@
 shell:
-    program: /bin/fish
+    program: /bin/zsh
 
 window:
     padding:

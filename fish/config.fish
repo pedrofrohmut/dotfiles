@@ -10,6 +10,7 @@ alias vim="nvim"
 
 alias gits='git status'
 alias gitl='git log -n 5'
+alias gitdiff='git diff . | bat'
 
 alias ll='ls -lA'
 alias cll='clear; ls -lA'
@@ -27,7 +28,8 @@ starship init fish | source
 set -U fish_greeting
 
 # --- ENV ----------------------------------------------------------------------
-set DOTNET_ROOT $HOME/.dotnet 
+set EDITOR /usr/bin/nvim
 set DOTNET_CLI_TELEMETRY_OPTOUT 0
-
-set PATH $PATH:$HOME/.dotnet
+set DOTNET_ROOT $HOME/dotnet 
+set DOTNET_TOOLS_HOME $HOME/.dotnet/tools
+set PATH $BASE_PATH $DOTNET_ROOT $DOTNET_TOOLS_HOME
