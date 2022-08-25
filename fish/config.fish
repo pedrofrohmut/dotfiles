@@ -30,6 +30,6 @@ set -U fish_greeting
 # --- ENV ----------------------------------------------------------------------
 set EDITOR /usr/bin/nvim
 set DOTNET_CLI_TELEMETRY_OPTOUT 0
-set DOTNET_ROOT $HOME/dotnet 
+set DOTNET_ROOT $HOME/software/dotnet 
 set DOTNET_TOOLS_HOME $HOME/.dotnet/tools
 set PATH $BASE_PATH $DOTNET_ROOT $DOTNET_TOOLS_HOME
