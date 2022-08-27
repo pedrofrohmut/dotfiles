@@ -140,7 +140,7 @@ alias vim="nvim"
 
 alias gits='git status'
 alias gitl='git log -n 5'
-alias gitdiff='git diff . | bat'
+alias gitd='git diff . | bat'
 
 alias ls='ls --color=auto'
 alias ll='ls -lA'
@@ -151,12 +151,15 @@ alias tree='tree -C'
 
 alias jj='jobs'
 
-# Starship Prompt
+alias cpath='pwd | xclip -selection clipboard'
+
+# --- Starship Prompt ----------------------------------------------------------
 eval "$(starship init bash)"
 
-# ENV
+# --- ENV ----------------------------------------------------------------------
+export SHELL=/usr/bin/zsh
 export EDITOR=/usr/bin/nvim
-export DOTNET_ROOT=$HOME/software/dotnet
+export DOTNET_ROOT=$HOME/software/dotnet6.0.8
 export DOTNET_TOOLS_HOME=$HOME/.dotnet/tools
 export DOTNET_CLI_TELEMETRY_OPTOUT=0
 export PATH=$PATH:$DOTNET_ROOT:$DOTNET_TOOLS_HOME
