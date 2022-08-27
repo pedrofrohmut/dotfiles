@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 # This script is minimal and only works if you have only 2 output devices
 
