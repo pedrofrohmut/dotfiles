@@ -159,7 +159,7 @@ eval "$(starship init bash)"
 # --- ENV ----------------------------------------------------------------------
 export SHELL=/usr/bin/zsh
 export EDITOR=/usr/bin/nvim
-export DOTNET_ROOT=$HOME/software/dotnet6.0.8
+export DOTNET_ROOT=$HOME/software/dotnet6.0.0
 export DOTNET_TOOLS_HOME=$HOME/.dotnet/tools
 export DOTNET_CLI_TELEMETRY_OPTOUT=0
 export PATH=$PATH:$DOTNET_ROOT:$DOTNET_TOOLS_HOME
