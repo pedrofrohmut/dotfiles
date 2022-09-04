@@ -5,13 +5,16 @@
 option=$1
 
 if [ ! $option ]; then
-    echo "Enter your choice [poweroff, lock, lock-suspend, suspend, cancel(Ctrl-c)]:"
+    echo "Enter your choice [poweroff, reboot, lock, lock-suspend, suspend, cancel(Ctrl-c)]:"
     read option
 fi
 
 case $option in
     poweroff ) 
         systemctl poweroff
+        ;;
+    reboot )
+        systemctl reboot
         ;;
     lock ) 
         i3lock -u --image=/home/pedro/media/images/wallpaper/lock.png
