@@ -1,5 +1,19 @@
--- Pedro Frohmut
--- github.com/pedrofrohmut
+-- #############################################################################
+-- #
+-- # Pedro Frohmut
+-- # github.com/pedrofrohmut/dotfiles/xmonad
+-- #
+-- ### CUSTOM_SCRIPTS ##########################################################
+-- # change-default-sink
+-- # power-commands
+-- # rofi-power
+-- ### APP_DEPENDENCIES ########################################################
+-- # thunar 
+-- # bravebrowser 
+-- # pamixer 
+-- # deadbeef 
+-- # rofi
+-- #############################################################################
 
 import XMonad
 import Data.Monoid
@@ -30,6 +44,7 @@ import XMonad.Actions.CycleWS (prevWS, nextWS)
 
 -- # Layout --------------------------------------------------------------------
 import XMonad.Layout.NoBorders (smartBorders)
+import XMonad.Layout.ResizableTile
 
 main :: IO ()
 main = xmonad 
@@ -43,21 +58,21 @@ main = xmonad
 
 -- My Configuration ------------------------------------------------------------
 myConfig = def 
-  { modMask             = mod4Mask
-  , terminal            = "alacritty"
-  , workspaces          = ["1","2","3","4","5","6","7","8","9"]
-  , focusFollowsMouse   = False
-  
-  , borderWidth         = 2
-  , normalBorderColor   = "#343434"
-  , focusedBorderColor  = "#cc8833"
-  
-  , layoutHook          = myLayouts
-  , manageHook          = myManageHook
-  , handleEventHook     = myHandleEvenHook
-  , logHook             = myLogHook
-  , startupHook         = myStartupHook
-  }
+    { modMask             = mod4Mask
+    , terminal            = "alacritty"
+    , workspaces          = ["1","2","3","4","5","6","7","8","9"]
+    , focusFollowsMouse   = False
+    
+    , borderWidth         = 2
+    , normalBorderColor   = "#343434"
+    , focusedBorderColor  = "#cc8833"
+    
+    , layoutHook          = myLayouts
+    , manageHook          = myManageHook
+    , handleEventHook     = myHandleEvenHook
+    , logHook             = myLogHook
+    , startupHook         = myStartupHook
+    }
 
 -- Keybinds --------------------------------------------------------------------
   -- As the name suggest just additional keys, all the rest refer to defaults
@@ -73,12 +88,12 @@ myConfig = def
     , ("M-C-l", sendMessage Expand)
     
     -- Workspaces --------------------------------------------------------------
-      -- Go back and forth between 2 workspaces
-    , ("M-<Tab>", toggleRecentWS)  
       -- Go to previous workspaces (or last when in the first) 
     , ("M-h", prevWS)  
       -- Go to next workspaces (or first when in the last)
     , ("M-l", nextWS)  
+      -- Go back and forth between 2 workspaces
+    , ("M-<Tab>", toggleRecentWS)  
 
     -- Layouts -----------------------------------------------------------------
       -- Toggle statusbar (XMobar)
@@ -105,29 +120,49 @@ myConfig = def
       -- Toggle Mute
     , ("M-S-0", spawn "pamixer --toggle-mute")
       -- Call my script change output device
-    , ("M-0", spawn "/home/pedro/dotfiles/scripts/change-default-sink.sh")
+    , ("M-0", spawn "change-default-sink")
 
-    -- Deadbeef (Alt M - for Music) --------------------------------------------
+    -- Deadbeef (Alt M for Music) --------------------------------------------
       -- Next track - random order
     , ("M1-m M1-l", spawn "deadbeef --random")
       -- Toggle pause
     , ("M1-m M1-k", spawn "deadbeef --toggle-pause")
+      -- Previous track
+    , ("M1-m M1-j", spawn "deadbeef --toggle-pause")
       -- Stop playing
-    , ("M1-m M1-j", spawn "deadbeef --stop")
+    , ("M1-m M1-h", spawn "deadbeef --stop")
       -- Volume Up by 5
     , ("M1-m M1-=", spawn "deadbeef --volume +5")
       -- Volume Down by 5
     , ("M1-m M1--", spawn "deadbeef --volume -5")
+      
+    -- Deadbeef (Ctrl + Alt for Music) --------------------------------------------
+      -- Next track - random order
+    , ("M1-C-l", spawn "deadbeef --random")
+      -- Toggle pause
+    , ("M1-C-k", spawn "deadbeef --toggle-pause")
+      -- Previous track
+    , ("M1-C-j", spawn "deadbeef --toggle-pause")
+      -- Stop playing
+    , ("M1-C-h", spawn "deadbeef --stop")
+      -- Volume Up by 5
+    , ("M1-C-=", spawn "deadbeef --volume +5")
+      -- Volume Down by 5
+    , ("M1-C--", spawn "deadbeef --volume -5")
 
     -- Session managment -------------------------------------------------------
+      -- Lock screen and suspend
+    , ("M-S-<F2>", spawn "power-commands lock-suspend")
+      -- Non-locking suspend (fast way)
+    , ("M-S-<F3>", spawn "power-commands suspend")
+      -- Rofi power menu
+    , ("M1-<F4>",  spawn "rofi-power")
+
+    -- Xmonad Session ----------------------------------------------------------
       -- Recompile the config and restart the window manager
     , ("M-S-r",    spawn "xmonad --recompile; xmonad --restart")
-      -- Lock screen with a lock image. And -u for not showing the feedback animation
-    , ("M-S-<F2>", spawn "i3lock -i /home/pedro/media/images/wallpaper/lock.png -u")
-      -- Non-locking suspend (fast way)
-    , ("M-S-<F3>", spawn "systemctl suspend")
       -- Kill then window manager. The same as 'killall xmonad'
-    , ("M-S-<F4>", io (exitWith ExitSuccess))
+    , ("M1-C-<F4>", io (exitWith ExitSuccess))
     ]
 
 -- LayoutHook ------------------------------------------------------------------

@@ -23,8 +23,6 @@ terminal = guess_terminal()
 
 keys = [
     # Switch between windows
-    # Key([mod], "h", lazy.layout.left()),
-    #Key([mod], "l", lazy.layout.right()),
     Key([mod], "j", lazy.layout.down()),
     Key([mod], "k", lazy.layout.up()),
 
