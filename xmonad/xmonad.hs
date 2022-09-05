@@ -162,7 +162,7 @@ myConfig = def
       -- Recompile the config and restart the window manager
     , ("M-S-r",    spawn "xmonad --recompile; xmonad --restart")
       -- Kill then window manager. The same as 'killall xmonad'
-    , ("M1-C-<F4>", io (exitWith ExitSuccess))
+    , ("M-C-<F4>", io (exitWith ExitSuccess))
     ]
 
 -- LayoutHook ------------------------------------------------------------------
