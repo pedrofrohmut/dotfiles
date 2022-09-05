@@ -20,6 +20,8 @@ alias jj='jobs'
 
 alias cpath='pwd | xclip -selection clipboard'
 
+alias echo='echo -e'
+
 # --- Starship Prompt ----------------------------------------------------------
 eval "$(starship init zsh)"
 

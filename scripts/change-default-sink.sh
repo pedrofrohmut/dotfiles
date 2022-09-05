@@ -1,20 +1,27 @@
 #! /usr/bin/env bash
 
-# This script is minimal and only works if you have only 2 output devices
+# 1. Get a short list of system sinks
+# 2 and 3. tr replaces tabs and spaces for # so the line dont get devided
+# when cahnged to an array
+sinks=($(pactl list sinks short | tr '\t' '#' | tr ' ' '#' ))
 
-# 1. list the sinks available
-# 2. grep the line with index but that does not have the * (that means active)
-# 3. grep and output the number from the line returned from step 2
-inactive_sink_number=$(pacmd list-sinks | grep '. ^* index' | grep -o '[0-9]')
-echo $inactive_sink_number
+# Get the default sink
+default=$(pactl get-default-sink)
 
-# 1. list the sink inputs available
-# 2. grep the line with the word 'index' in it
-# 3. grep output the number from the line returned from step 2
-sink_input_number=$(pacmd list-sink-inputs | grep 'index' | grep -o '[0-9][0-9]')
-echo $sink_input_number
+# Check with the default string to get active and inactive sink numbers
+if [[ ${sinks[0]} == *"$default"* ]]; then
+    active_sink_n=$(echo ${sinks[0]} | grep -o '^[0-9]')
+    inactive_sink_n=$(echo ${sinks[1]} | grep -o '^[0-9]')
+else
+    active_sink_n=$(echo ${sinks[1]} | grep -o '^[0-9]')
+    inactive_sink_n=$(echo ${sinks[0]} | grep -o '^[0-9]')
+fi
 
-# Set the inactive sink as default sink
-# Redirects the input input to the new default sink
-pacmd set-default-sink ${inactive_sink_number} && \
-  pacmd move-sink-input ${sink_input_number} ${inactive_sink_number} 
+# Change default sink to the inactive index
+pacmd set-default-sink $inactive_sink_n
+
+# Get sink input number
+sink_input_number=$(pactl list sink-inputs short | grep -o '^[0-9]*')
+
+# Required for some programs that wont change only with default-sink update
+pacmd move-sink-input ${sink_input_number} ${inactive_sink_n}
