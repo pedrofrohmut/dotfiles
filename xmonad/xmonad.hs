@@ -4,7 +4,7 @@
 -- # github.com/pedrofrohmut/dotfiles/xmonad
 -- #
 -- ### CUSTOM_SCRIPTS ##########################################################
--- # change-default-sink
+-- # audio-commands
 -- # power-commands
 -- # rofi-power
 -- ### APP_DEPENDENCIES ########################################################
@@ -114,13 +114,13 @@ myConfig = def
 
     -- Audio/Volume ------------------------------------------------------------
       -- Decrease volume
-    , ("M--", spawn "pamixer --decrease 5")
+    , ("M--",   spawn "audio-commands decrease")
       -- Increase volume
-    , ("M-=", spawn "pamixer --increase 5")
+    , ("M-=",   spawn "audio-commands increase")
       -- Toggle Mute
-    , ("M-S-0", spawn "pamixer --toggle-mute")
+    , ("M-S-0", spawn "audio-commands toggle-mute")
       -- Call my script change output device
-    , ("M-0", spawn "change-default-sink")
+    , ("M-0",   spawn "audio-commands change")
 
     -- Deadbeef (Alt M for Music) --------------------------------------------
       -- Next track - random order
