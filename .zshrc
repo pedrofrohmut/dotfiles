@@ -1,5 +1,5 @@
 # Aliases
-alias vim="nvim"
+alias vim='nvim'
 
 alias gits='git status'
 alias gitl='git log -n 5'
@@ -13,6 +13,7 @@ alias ..='cd ..'
 alias dnb="dotnet build"
 alias dnr="dotnet run"
 alias dnwr="dotnet watch run"
+alias dnt="clear && dotnet test"
 
 alias tree='tree -C'
 
@@ -21,6 +22,8 @@ alias jj='jobs'
 alias cpath='pwd | xclip -selection clipboard'
 
 alias echo='echo -e'
+
+alias pretty-json='python -m json.tool'
 
 # --- Starship Prompt ----------------------------------------------------------
 eval "$(starship init zsh)"
