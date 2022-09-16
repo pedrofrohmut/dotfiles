@@ -25,6 +25,8 @@ alias echo='echo -e'
 
 alias pretty-json='python -m json.tool'
 
+alias pdf="qpdfview"
+
 # --- Starship Prompt ----------------------------------------------------------
 eval "$(starship init zsh)"
 

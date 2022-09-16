@@ -122,20 +122,6 @@ myConfig = def
       -- Call my script change output device
     , ("M-0",   spawn "audio-commands change")
 
-    -- Deadbeef (Alt M for Music) --------------------------------------------
-      -- Next track - random order
-    , ("M1-m M1-l", spawn "deadbeef --random")
-      -- Toggle pause
-    , ("M1-m M1-k", spawn "deadbeef --toggle-pause")
-      -- Previous track
-    , ("M1-m M1-j", spawn "deadbeef --toggle-pause")
-      -- Stop playing
-    , ("M1-m M1-h", spawn "deadbeef --stop")
-      -- Volume Up by 5
-    , ("M1-m M1-=", spawn "deadbeef --volume +5")
-      -- Volume Down by 5
-    , ("M1-m M1--", spawn "deadbeef --volume -5")
-      
     -- Deadbeef (Ctrl + Alt for Music) --------------------------------------------
       -- Next track - random order
     , ("M1-C-l", spawn "deadbeef --random")
@@ -178,28 +164,13 @@ myLayouts = avoidStruts $ smartBorders $ tiled ||| Mirror tiled ||| Full
 -- insertPosition: change where the new window will appear
 myManageHook :: ManageHook
 myManageHook = composeOne
-    [ checkDock              -?> doIgnore -- equivalent to manageDocks
-    , isDialog               -?> doFloat
-    , className =? "Gimp"    -?> doFloat
-    , className =? "MPlayer" -?> doFloat
+    [ checkDock                    -?> doIgnore -- equivalent to manageDocks
+    , isDialog                     -?> doCenterFloat
+    , className =? "Gimp"          -?> doCenterFloat
+    , className =? "MPlayer"       -?> doCenterFloat
+    , className =? "Pamac-manager" -?> doCenterFloat
     , return True -?> doF W.swapDown
     ]
--- insertPosition End Newer <+> composeAll
---   [ isDialog                          --> insertPosition Master Newer <+> doCenterFloat
---   , className =?   "mpv"              --> insertPosition Master Newer <+> doFloat
---   , className =?   "gl"               --> insertPosition Master Newer <+> doFloat
---   , className =?   "Gimp"             --> insertPosition Master Newer <+> doFloat
---   , className =?   "Pavucontrol"      --> insertPosition Master Newer <+> doCenterFloat
---   , className =?   "Xfce4-appfinder"  --> insertPosition Master Newer <+> doCenterFloat
---   , className =?   "Pamac-manager"    --> insertPosition Master Newer <+> doCenterFloat
---   , className =?   "Rofi"             --> insertPosition Master Newer <+> doCenterFloat
---   , className =?   "Galculator"       --> insertPosition Master Newer <+> doCenterFloat
---   , title =?       "Downloads"        --> insertPosition Master Newer <+> doFloat
---   , title =?       "Save As..."       --> insertPosition Master Newer <+> doFloat
---   -- Games
---   , className =?   "riotclientux.exe" --> doCenterFloat
---   ]
-
 
 -- Handle event hook -----------------------------------------------------------
 myHandleEvenHook = mempty
@@ -210,8 +181,7 @@ myLogHook = return ()
 -- Startup hook ----------------------------------------------------------------
 myStartupHook :: X ()
 myStartupHook = do
-    spawnOnce "trayer --edge top --align right --SetPartialStrut true --width 10 \
-               \ --tint 0x212121 --height 20 --alpha 0 &"
+    spawnOnce "bash ~/dotfiles/scripts/trayer-cmd.sh &"
 
 -- XMobar ----------------------------------------------------------------------
 myXmobarPP :: PP
