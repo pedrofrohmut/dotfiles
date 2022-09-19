@@ -40,3 +40,6 @@ redshift -l -23.52:-46.35 -t 6500:4500 &
 
 # Compositor - transparency
 picom --config ~/.config/picom/picom.conf &
+
+# Emacs Server
+emacs --daemon &

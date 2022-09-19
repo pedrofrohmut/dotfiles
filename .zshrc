@@ -1,5 +1,5 @@
-# Aliases
-alias vim='nvim'
+# --- Aliases ------------------------------------------------------------------
+#alias vim='nvim'
 
 alias gits='git status'
 alias gitl='git log -n 5'
