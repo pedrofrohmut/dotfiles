@@ -135,7 +135,7 @@ ex () {
   fi
 }
 
-# Aliases
+# --- Aliases ------------------------------------------------------------------
 alias vim="nvim"
 
 alias gits='git status'

@@ -1,5 +1,7 @@
 # --- Aliases ------------------------------------------------------------------
-#alias vim='nvim'
+alias vim='nvim'
+
+alias emc='emacsclient -t'
 
 alias gits='git status'
 alias gitl='git log -n 5'

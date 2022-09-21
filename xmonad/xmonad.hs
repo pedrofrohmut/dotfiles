@@ -107,7 +107,7 @@ myConfig = def
       -- Web Browser
     , ("M-w", spawn "brave")  
       -- Emacs client
-    , ("M-a", spawn "emacsclient -c -a 'emacs'")
+    , ("M-a", spawn "emacs")
       -- AppFinder
     , ("M-p", spawn "rofi -modi drun -show drun -show-icons \
                     \ -theme ~/.config/rofi/themes/my_dracula.rasi")  

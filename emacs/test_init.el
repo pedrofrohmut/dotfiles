@@ -1,3 +1,5 @@
+(setq-default load-path "~/.config/emacs")
+
 ;;; UI ##########################################################################
 
 ;; Clean up UI
@@ -33,6 +35,7 @@
 (setq-default tab-width 4)
 (setq indent-line-function 'insert-tab)
 
+
 ;; Relative line numbers
 (global-display-line-numbers-mode t)
 (setq-default display-line-numbers-type 'relative)
@@ -52,7 +55,6 @@
 ;; Show cursor position in the status bar
 (setq column-number-mode t)
 
-
 ;; MELPA ########################################################################
 
 ;; Adding packages
@@ -71,7 +73,7 @@
 
 ;; This is only needed once, near the top of the file
 (eval-when-compile
-  (add-to-list 'load-path "~/.config/emacs/elpa")
+  (add-to-list 'load-path "~/.config/emacs")
   (setq use-package-always-ensure t)
   (require 'use-package))
 
@@ -183,48 +185,88 @@
   :config
   (global-visual-fill-column-mode 1))
 
-;; Syntax HightLight ############################################################
+;; Ivy, Counsel and Swiper ######################################################
 
-(use-package elixir-mode)
+(use-package ivy
+  :diminish ; Does not show the mode in the mode line
+  :bind
+  (("C-s" . swiper)
+   :map ivy-minibuffer-map
+   ("TAB" . ivy-alt-done)
+   ("C-l" . ivy-alt-done)
+   ("C-j" . ivy-next-line)
+   ("C-k" . ivy-previous-line)
+   :map ivy-switch-buffer-map
+   ("C-k" . ivy-previous-line)
+   ("C-l" . ivy-done)
+   ("C-d" . ivy-switch-buffer-kill)
+   :map ivy-reverse-i-search-map
+   ("C-k" . ivy-previous-line)
+   ("C-d" . ivy-reverse-i-search-kill))
+  :config
+  (setq ivy-ignore-buffers '("\\` " "~" "\\`\\*tramp/"))
+  (ivy-mode 1))
+
+(use-package counsel
+  :after ivy
+  :bind
+  (("M-x" . counsel-M-x)
+   ("C-x b" . counsel-ibuffer)
+   ("C-x C-f" . counsel-find-file)
+   :map minibuffer-local-map
+   ("C-r" . 'counsel-minibuffer-history))
+  :config
+  (counsel-mode 1))
+
+(use-package swiper
+  :after ivy)
+
+(use-package ivy-rich
+  :after ivy
+  :init
+  (ivy-rich-mode 1))
+
+
+;; Projectile ###################################################################
+
+(use-package projectile
+  :bind (:map projectile-mode-map
+              ("C-q" . projectile-find-file)
+              ("C-c p" . projectile-command-map))
+  :config
+  (setq projectile-completion-system 'ivy)
+  :init
+  (projectile-mode t))
+
+(use-package counsel-projectile
+  :config
+  (counsel-projectile-mode))
+
+;; Treemacs #####################################################################
+
+; TODO: 
 
 ;; LSP ##########################################################################
 
-;; (use-package lsp-mode
-;;   :config
-;;   (setq lsp-clients-elixir-server-executable "~/software/elixir-ls/language_server.sh")
-;;   :init
-;;   (setq lsp-keymap-prefix "C-c l")
-;;   :hook
-;;   (elixir-mode . lsp-defered)
-;;   ;(lsp-mode . lsp-enable-which-key-integration)
-;;   :commands
-;;   (lsp lsp-defered))
+; TODO:
 
-;; (use-package lsp-ui
-;;   :after
-;;   lsp-mode
-;;   :hook
-;;   (lsp-mode . lsp-ui-mode)
-;;   :custom
-;;   (lsp-ui-doc-position 'bottom)
-;;   (lsp-ui-doc-delay 1.5)
-;;   :commands
-;;   lsp-ui-mode)
+;; Syntax HightLight ############################################################
 
-;; (use-package lsp-ivy
-;;   :after
-;;   lsp-mode
-;;   :commands
-;;   lsp-ivy-workspace-symbol)
+(use-package elixir-mode
+  :config
+  (elixir-mode t))
 
-;(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
-;; optionally if you want to use debugger
-;(use-package dap-mode)
-;; (use-package dap-LANGUAGE) to load the dap adapter for your language
-;; optional if you want which-key integration
-;(use-package which-key
-;    :config
-;    (which-key-mode))
+;; Keybinds #####################################################################
+
+; TODO:
+
+; Make ESC quit prompts
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+
+(global-unset-key (kbd "C-h"))  ; Can still use help with F1
+(global-unset-key (kbd "C-l"))  ; Can use evil zz 
+(global-unset-key (kbd "C-j"))  ; Not useful before
+(global-unset-key (kbd "C-k"))  ; Not useful either
 
 ;; Custom #######################################################################
 
@@ -234,7 +276,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(lsp-ivy lsp-ui lsp-mode ivy-rich counsel ivy elixir-mode visual-fill-column emmet-mode evil-numbers evil-surround evil-commentary evil-collection evil doom-themes doom-modeline use-package)))
+    '(counsel-projectile which-key helpful ivy-rich counsel ivy visual-fill-column emmet-mode projectile marginalia use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
