@@ -1,8 +1,6 @@
 # --- Aliases ------------------------------------------------------------------
 alias vim='nvim'
 
-alias emc='emacsclient -t'
-
 alias gits='git status'
 alias gitl='git log -n 5'
 alias gitd='git diff . | bat'
@@ -22,8 +20,6 @@ alias tree='tree -C'
 alias jj='jobs'
 
 alias cpath='pwd | xclip -selection clipboard'
-
-alias echo='echo -e'
 
 alias pretty-json='python -m json.tool'
 

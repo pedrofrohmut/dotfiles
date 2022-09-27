@@ -5,7 +5,7 @@ window:
     padding:
         x: 4
         y: 4
-    opacity: 0.88
+    opacity: 0.90
 
 # Install fonts in /usr/share/fonts/TTF
 # discover the name to use with $ fc-list | rg 'Fira'

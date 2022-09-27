@@ -9,7 +9,7 @@
 -- # rofi-power
 -- ### APP_DEPENDENCIES ########################################################
 -- # thunar 
--- # bravebrowser 
+-- # firefox 
 -- # pamixer 
 -- # deadbeef 
 -- # rofi
@@ -105,7 +105,7 @@ myConfig = def
       -- File manager
     , ("M-e", spawn "thunar")  
       -- Web Browser
-    , ("M-w", spawn "brave")  
+    , ("M-w", spawn "firefox")  
       -- Emacs client
     , ("M-a", spawn "emacs")
       -- AppFinder
