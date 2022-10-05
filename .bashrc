@@ -163,8 +163,8 @@ alias pdf="qpdfview"
 eval "$(starship init bash)"
 
 # --- ENV ----------------------------------------------------------------------
-export SHELL=/usr/bin/zsh
-export EDITOR=/usr/bin/nvim
+# export SHELL=/usr/bin/zsh
+# export EDITOR=/usr/bin/nvim
 export DOTNET_ROOT=$HOME/software/dotnet6.0.0
 export DOTNET_TOOLS_HOME=$HOME/.dotnet/tools
 export DOTNET_CLI_TELEMETRY_OPTOUT=0

@@ -40,3 +40,7 @@ redshift -l -23.52:-46.35 -t 6500:4500 &
 
 # Compositor - transparency
 picom --config ~/.config/picom/picom.conf &
+
+# --- ENV ----------------------------------------------------------------------
+export SHELL=/usr/bin/zsh
+export EDITOR=/usr/bin/nvim
