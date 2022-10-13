@@ -8,9 +8,8 @@
 -- # power-commands
 -- # rofi-power
 -- ### APP_DEPENDENCIES ########################################################
--- # thunar 
--- # firefox 
--- # pamixer 
+-- # thunar / pcmanfm
+-- # firefox / brave
 -- # deadbeef 
 -- # rofi
 -- #############################################################################
@@ -103,9 +102,9 @@ myConfig = def
       -- Terminal emulator
     , ("M-<Return>", spawn "alacritty")
       -- File manager
-    , ("M-e", spawn "thunar")  
+    , ("M-e", spawn "pcmanfm")  
       -- Web Browser
-    , ("M-w", spawn "firefox")  
+    , ("M-w", spawn "brave")  
       -- Emacs client
     , ("M-a", spawn "emacs")
       -- AppFinder
@@ -170,6 +169,7 @@ myManageHook = composeOne
     , isDialog                     -?> doCenterFloat
     , className =? "Gimp"          -?> doCenterFloat
     , className =? "MPlayer"       -?> doCenterFloat
+    , className =? "Galculator"    -?> doCenterFloat
     , className =? "Pamac-manager" -?> doCenterFloat
     , return True -?> doF W.swapDown
     ]

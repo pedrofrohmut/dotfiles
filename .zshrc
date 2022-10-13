@@ -1,6 +1,12 @@
 # --- Aliases ------------------------------------------------------------------
 alias vim='nvim'
 
+alias hx='helix'
+
+alias emd='emacs --daemon'
+alias emk='emacsclient -e "(save-buffers-kill-emacs)"'
+alias emc='emacsclient -t'
+
 alias gits='git status'
 alias gitl='git log -n 5'
 alias gitd='git diff . | bat'
@@ -10,10 +16,10 @@ alias ll='ls -lA'
 alias cll='clear; ls -lA'
 alias ..='cd ..'
 
-alias dnb="dotnet build"
-alias dnr="dotnet run"
-alias dnwr="dotnet watch run"
-alias dnt="clear && dotnet test"
+alias dnb='dotnet build'
+alias dnr='dotnet run'
+alias dnwr='dotnet watch run'
+alias dnt='clear && dotnet test'
 
 alias tree='tree -C'
 
@@ -23,7 +29,7 @@ alias cpath='pwd | xclip -selection clipboard'
 
 alias pretty-json='python -m json.tool'
 
-alias pdf="qpdfview"
+alias pdf='qpdfview'
 
 # --- Starship Prompt ----------------------------------------------------------
 eval "$(starship init zsh)"

@@ -138,6 +138,8 @@ floating_layout = layout.Floating(
 # Widgets ###################################################################################
 #############################################################################################
 
+# widget.GenPollText(name="deadbeef", fmt="Music: {}", update_interval=3.0, func=lambda: subprocess.check_output("<script>").decode("UTF-8"))
+
 widget_defaults = dict(font="FiraCode Nerd Font Mono", fontsize=13, padding=1, foreground="9999bb")
 extension_defaults = widget_defaults.copy()
 top_bar = bar.Bar(
