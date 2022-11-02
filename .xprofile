@@ -8,7 +8,8 @@
 xset r rate 250 30 &
 
 # Keyboard Layout
-setxkbmap -layout br -option caps:escape &
+#setxkbmap -layout br -option caps:escape &
+setxkbmap -layout us -option caps:escape &
 
 # --- Tray ---------------------------------------------------------------------
 
