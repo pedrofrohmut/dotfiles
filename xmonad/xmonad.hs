@@ -129,7 +129,7 @@ myConfig = def
       -- Toggle pause
     , ("M1-C-k", spawn "deadbeef --toggle-pause")
       -- Previous track
-    , ("M1-C-j", spawn "deadbeef --toggle-pause")
+    , ("M1-C-j", spawn "deadbeef --prev")
       -- Stop playing
     , ("M1-C-h", spawn "deadbeef --stop")
       -- Volume Up by 5
@@ -171,6 +171,8 @@ myManageHook = composeOne
     , className =? "MPlayer"       -?> doCenterFloat
     , className =? "Galculator"    -?> doCenterFloat
     , className =? "Pamac-manager" -?> doCenterFloat
+    , className =? "Lxpolkit"      -?> doCenterFloat
+    , className =? "Image Resizer" -?> doCenterFloat
     , return True -?> doF W.swapDown
     ]
 
