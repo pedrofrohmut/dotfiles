@@ -4,14 +4,15 @@ $username\
 $hostname\
 $directory\
 $git_branch\
-$memory_usage\
-$time\
 $status\
-$shell\
-$python\
-$c\
-$cmake\
 $character"""
+
+# $memory_usage\
+# $time\
+# $python\
+# $c\
+# $shell\
+# $cmake\
 
 [python]
 symbol = ""
