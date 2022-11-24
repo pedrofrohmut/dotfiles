@@ -10,7 +10,7 @@
 -- ### APP_DEPENDENCIES ########################################################
 -- # thunar / pcmanfm
 -- # firefox / brave
--- # deadbeef 
+-- # deadbeef
 -- # rofi
 -- #############################################################################
 
@@ -46,26 +46,26 @@ import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Layout.ResizableTile
 
 main :: IO ()
-main = xmonad 
-     . ewmhFullscreen 
-     . ewmh 
+main = xmonad
+     . ewmhFullscreen
+     . ewmh
      . withEasySB
-         (statusBarProp "xmobar ~/.config/xmobar/xmobarrc" (clickablePP myXmobarPP)) 
+         (statusBarProp "xmobar ~/.config/xmobar/xmobarrc" (clickablePP myXmobarPP))
          defToggleStrutsKey
-     . docks 
+     . docks
      $ myConfig
 
 -- My Configuration ------------------------------------------------------------
-myConfig = def 
+myConfig = def
     { modMask             = mod4Mask
     , terminal            = "alacritty"
     , workspaces          = ["1","2","3","4","5","6","7","8","9"]
     , focusFollowsMouse   = False
-    
+
     , borderWidth         = 2
     , normalBorderColor   = "#343434"
     , focusedBorderColor  = "#cc8833"
-    
+
     , layoutHook          = myLayouts
     , manageHook          = myManageHook
     , handleEventHook     = myHandleEvenHook
@@ -78,21 +78,21 @@ myConfig = def
   `additionalKeysP`
     -- Windows -----------------------------------------------------------------
       -- kill focused window
-    [ ("M-q", kill)  
+    [ ("M-q", kill)
       -- swap focused with master
-    , ("M-S-m", windows W.swapMaster)  
+    , ("M-S-m", windows W.swapMaster)
       -- Shrink Master Stack
     , ("M-C-h", sendMessage Shrink)
       -- Expand Master Stack
     , ("M-C-l", sendMessage Expand)
-    
+
     -- Workspaces --------------------------------------------------------------
-      -- Go to previous workspaces (or last when in the first) 
-    , ("M-h", prevWS)  
+      -- Go to previous workspaces (or last when in the first)
+    , ("M-h", prevWS)
       -- Go to next workspaces (or first when in the last)
-    , ("M-l", nextWS)  
+    , ("M-l", nextWS)
       -- Go back and forth between 2 workspaces
-    , ("M-<Tab>", toggleRecentWS)  
+    , ("M-<Tab>", toggleRecentWS)
 
     -- Layouts -----------------------------------------------------------------
       -- Toggle statusbar (XMobar)
@@ -102,14 +102,14 @@ myConfig = def
       -- Terminal emulator
     , ("M-<Return>", spawn "alacritty")
       -- File manager
-    , ("M-e", spawn "pcmanfm")  
+    , ("M-e", spawn "pcmanfm")
       -- Web Browser
-    , ("M-w", spawn "brave")  
+    , ("M-w", spawn "firefox")
       -- Emacs client
     , ("M-a", spawn "emacs")
       -- AppFinder
     , ("M-p", spawn "rofi -modi drun -show drun -show-icons \
-                    \ -theme ~/.config/rofi/themes/my_dracula.rasi")  
+                    \ -theme ~/.config/rofi/themes/my_dracula.rasi")
       -- XFCE4 AppFinder
     , ("M-S-p", spawn "xfce4-appfinder")
 

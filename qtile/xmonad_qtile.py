@@ -75,12 +75,12 @@ keys = [
     Key([mod], "w",      lazy.spawn("brave")),
 
     # Others
-    Key([mod],   "q",              lazy.window.kill(), desc="Kill focused window"),
-    Key([mod,    "shift"],   "r",  lazy.restart(),  desc="Restart Qtile"),
-    Key([mod,    "shift"],   "F2", lazy.spawn("power-commands lock-suspend")),
-    Key([mod,    "shift"],   "F3", lazy.spawn("power-commands suspend")),
-    Key([altKey, "control"], "F4", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([altKey],            "F4", lazy.spawn("rofi-power")),
+    Key([mod],    "q",              lazy.window.kill(), desc="Kill focused window"),
+    Key([mod,     "shift"],   "r",  lazy.restart(),  desc="Restart Qtile"),
+    Key([mod,     "shift"],   "F2", lazy.spawn("power-commands lock-suspend")),
+    Key([mod,     "shift"],   "F3", lazy.spawn("power-commands suspend")),
+    Key([mod,     "control"], "F4", lazy.shutdown(), desc="Shutdown Qtile"),
+    Key([altKey],             "F4", lazy.spawn("rofi-power")),
 ]
 
 #############################################################################################
