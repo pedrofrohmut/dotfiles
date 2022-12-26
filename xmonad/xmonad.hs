@@ -165,14 +165,15 @@ myLayouts = avoidStruts $ smartBorders $ tiled ||| Mirror tiled ||| Full
 -- insertPosition: change where the new window will appear
 myManageHook :: ManageHook
 myManageHook = composeOne
-    [ checkDock                    -?> doIgnore -- equivalent to manageDocks
-    , isDialog                     -?> doCenterFloat
-    , className =? "Gimp"          -?> doCenterFloat
-    , className =? "MPlayer"       -?> doCenterFloat
-    , className =? "Galculator"    -?> doCenterFloat
-    , className =? "Pamac-manager" -?> doCenterFloat
-    , className =? "Lxpolkit"      -?> doCenterFloat
-    , className =? "Image Resizer" -?> doCenterFloat
+    [ checkDock                      -?> doIgnore -- equivalent to manageDocks
+    , isDialog                       -?> doCenterFloat
+    , className =? "Gimp"            -?> doCenterFloat
+    , className =? "MPlayer"         -?> doCenterFloat
+    , className =? "Galculator"      -?> doCenterFloat
+    , className =? "Pamac-manager"   -?> doCenterFloat
+    , className =? "Lxpolkit"        -?> doCenterFloat
+    , className =? "Image Resizer"   -?> doCenterFloat
+    , className =? "Xfce4-appfinder" -?> doCenterFloat
     , return True -?> doF W.swapDown
     ]
 

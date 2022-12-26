@@ -3,10 +3,10 @@
 # power-commands
 # rofi-power
 ### APP_DEPENDENCIES ###########################################################
-# thunar 
-# bravebrowser 
-# pamixer 
-# deadbeef 
+# thunar/pcmanfm
+# bravebrowser/firefox
+# pamixer
+# deadbeef
 # rofi
 ################################################################################
 
@@ -52,10 +52,10 @@ keys = [
     Key([mod,  "shift"], "space", lazy.layout.flip()),
 
     # Audio
-    Key([mod], "minus",  lazy.spawn("pamixer --decrease 5")),
-    Key([mod], "equal",  lazy.spawn("pamixer --increase 5")),
-    Key([mod,  "shift"], "0", lazy.spawn("pamixer --toggle-mute")),
-    Key([mod], "0", lazy.spawn("change-default-sink")), # add to $HOME/.local/bin
+    Key([mod], "minus",       lazy.spawn("audio-commands decrease")),
+    Key([mod], "equal",       lazy.spawn("audio-commands increase")),
+    Key([mod,  "shift"], "0", lazy.spawn("audio-commands toggle-mute")),
+    Key([mod], "0",           lazy.spawn("audio-commands change")), # Change output
 
     # Deadbeef
     Key([altKey, "control"], "l",     lazy.spawn("deadbeef --random")),
@@ -66,21 +66,25 @@ keys = [
     Key([altKey, "control"], "minus", lazy.spawn("deadbeef --volume -5")),
 
     # Programs
-    Key([mod], "Return", lazy.spawn("alacritty"), desc="Launch terminal"),
-    Key([mod], "p", lazy.spawn("""rofi -show drun \
-                                       -modi drun \
-                                       -show-icons \
-                                       -theme ~/.config/rofi/themes/my_dracula.rasi""")),
-    Key([mod], "e",      lazy.spawn("thunar"), desc="File Manager"),
-    Key([mod], "w",      lazy.spawn("brave")),
+    Key([mod], "Return",     lazy.spawn("alacritty"), desc="Launch terminal"),
+    Key([mod], "e",          lazy.spawn("pcmanfm"), desc="File Manager"),
+    Key([mod], "w",          lazy.spawn("firefox"), desc="Web Browser"),
+    Key([mod, "shift"], "p", lazy.spawn("xfce4-appfinder")),
+    Key([mod], "p",          lazy.spawn("""
+        rofi -show drun \
+             -modi drun \
+             -show-icons \
+             -theme ~/.config/rofi/themes/my_dracula.rasi""")),
+
+    # Power
+    Key([mod,     "shift"],   "F2", lazy.spawn("power-commands lock-suspend")),
+    Key([mod,     "shift"],   "F3", lazy.spawn("power-commands suspend")),
+    Key([altKey],             "F4", lazy.spawn("rofi-power")),
 
     # Others
     Key([mod],    "q",              lazy.window.kill(), desc="Kill focused window"),
-    Key([mod,     "shift"],   "r",  lazy.restart(),  desc="Restart Qtile"),
-    Key([mod,     "shift"],   "F2", lazy.spawn("power-commands lock-suspend")),
-    Key([mod,     "shift"],   "F3", lazy.spawn("power-commands suspend")),
     Key([mod,     "control"], "F4", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([altKey],             "F4", lazy.spawn("rofi-power")),
+    Key([mod,     "shift"],   "r",  lazy.restart(),  desc="Restart Qtile"),
 ]
 
 #############################################################################################
@@ -128,6 +132,13 @@ floating_layout = layout.Floating(
         Match(wm_class="pavucontrol"),
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
+        # My rules
+        Match(wm_class="MPlayer"),
+        Match(wm_class="Galculator"),
+        Match(wm_class="Pamac-manager"),
+        Match(wm_class="Lxpolkit"),
+        Match(wm_class="Image Resizer"),
+        Match(wm_class="Xfce4-appfinder"),
     ],
     border_focus="#7a7a7a",
     border_normal="#333333",
