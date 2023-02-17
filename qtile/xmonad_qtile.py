@@ -44,11 +44,10 @@ keys = [
     Key([mod], "Tab", lazy.screen.toggle_group()),
 
     # Layout control
-    Key([mod], "u",               lazy.window.toggle_floating()),
+    Key([mod], "t",               lazy.window.toggle_floating()),
     Key([mod], "b",               lazy.hide_show_bar()),
     Key([mod], "space",           lazy.next_layout()),
     Key([mod, "control"], "n",    lazy.layout.normalize()),
-    Key([mod], "m",               lazy.layout.maximize()),
     Key([mod,  "shift"], "space", lazy.layout.flip()),
 
     # Audio
@@ -66,9 +65,10 @@ keys = [
     Key([altKey, "control"], "minus", lazy.spawn("deadbeef --volume -5")),
 
     # Programs
-    Key([mod], "Return",     lazy.spawn("alacritty"), desc="Launch terminal"),
-    Key([mod], "e",          lazy.spawn("pcmanfm"), desc="File Manager"),
-    Key([mod], "w",          lazy.spawn("firefox"), desc="Web Browser"),
+    Key([mod], "Return",     lazy.spawn("alacritty"),  desc="Launch terminal"),
+    Key([mod], "e",          lazy.spawn("thunar"),     desc="File Manager"),
+    Key([mod], "w",          lazy.spawn("firefox"),    desc="Web Browser"),
+    Key([mod], "c",          lazy.spawn("galculator"), desc="Calculator"),
     Key([mod, "shift"], "p", lazy.spawn("xfce4-appfinder")),
     Key([mod], "p",          lazy.spawn("""
         rofi -show drun \

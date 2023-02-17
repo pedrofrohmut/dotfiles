@@ -8,19 +8,17 @@
 xset r rate 300 30 &
 
 # Keyboard Layout
-#setxkbmap -layout br -option caps:escape &
 setxkbmap -layout us -option caps:escape &
 
 # --- Tray ---------------------------------------------------------------------
 
-# Vomulme
-# pa-applet &
-volumeicon &
+# Volume
+pa-applet &
 
 # Network Manager
 nm-applet &
 
-# Pamac tray
+# Pamac Tray
 pamac-tray &
 
 # --- App ----------------------------------------------------------------------
