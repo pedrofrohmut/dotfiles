@@ -151,13 +151,15 @@ floating_layout = layout.Floating(
 
 # widget.GenPollText(name="deadbeef", fmt="Music: {}", update_interval=3.0, func=lambda: subprocess.check_output("<script>").decode("UTF-8"))
 
-widget_defaults = dict(font="FiraCode Nerd Font Mono", fontsize=13, padding=1, foreground="9999bb")
+widget_defaults = dict(font="FiraCode Nerd Font Mono", fontsize=13, padding=1, foreground="aaaabb")
 extension_defaults = widget_defaults.copy()
 top_bar = bar.Bar(
     [
         widget.GroupBox(active="ffffff", inactive="989898", fontsize=14,
-            highlight_method="line", highlight_color="005757"),
-        widget.Spacer(),
+                        highlight_method="line", highlight_color="005757"),
+        widget.TaskList(fontsize=14, font="FiraCode Nerd Font Mono", foreground="aaaabb",
+                        highlight_method="block", border="343434", margin_x=20, padding_x=4,
+                        spacing=8, parse_text=lambda x : x[:30]),
         widget.Volume(fmt='Vol: {}'),
         widget.Sep(padding=20),
         widget.CPU(format="CPU: {load_percent}%", update_interval=1.0),
