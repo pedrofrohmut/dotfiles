@@ -160,7 +160,7 @@ top_bar = bar.Bar(
         widget.TaskList(fontsize=14, font="FiraCode Nerd Font Mono", foreground="aaaabb",
                         highlight_method="block", border="343434", margin_x=20, padding_x=4,
                         spacing=8, parse_text=lambda x : x[:30]),
-        widget.Volume(fmt='Vol: {}'),
+        widget.Volume(fmt='Vol: {}', step=5),
         widget.Sep(padding=20),
         widget.CPU(format="CPU: {load_percent}%", update_interval=1.0),
         widget.Sep(padding=20),

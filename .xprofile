@@ -12,8 +12,8 @@ setxkbmap -layout us -option caps:escape &
 
 # --- Tray ---------------------------------------------------------------------
 
-# Volume
-pa-applet &
+# Volume (replace for widget on qtile)
+#pa-applet &
 
 # Network Manager
 nm-applet &
