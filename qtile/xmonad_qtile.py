@@ -139,6 +139,7 @@ floating_layout = layout.Floating(
         Match(wm_class="Lxpolkit"),
         Match(wm_class="Image Resizer"),
         Match(wm_class="Xfce4-appfinder"),
+        Match(wm_class="Deadbeef"),
     ],
     border_focus="#7a7a7a",
     border_normal="#333333",
