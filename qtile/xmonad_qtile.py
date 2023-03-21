@@ -59,8 +59,7 @@ keys = [
     # Deadbeef
     Key([altKey, "control"], "l",     lazy.spawn("deadbeef --random")),
     Key([altKey, "control"], "k",     lazy.spawn("deadbeef --toggle-pause")),
-    Key([altKey, "control"], "j",     lazy.spawn("deadbeef --prev")),
-    Key([altKey, "control"], "h",     lazy.spawn("deadbeef --stop")),
+    Key([altKey, "control"], "j",     lazy.spawn("deadbeef --stop")),
     Key([altKey, "control"], "equal", lazy.spawn("deadbeef --volume +5")),
     Key([altKey, "control"], "minus", lazy.spawn("deadbeef --volume -5")),
 
@@ -140,6 +139,7 @@ floating_layout = layout.Floating(
         Match(wm_class="Image Resizer"),
         Match(wm_class="Xfce4-appfinder"),
         Match(wm_class="Deadbeef"),
+        Match(wm_class="steamwebhelper"),
     ],
     border_focus="#7a7a7a",
     border_normal="#333333",
