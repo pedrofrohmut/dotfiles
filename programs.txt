@@ -1,0 +1,39 @@
+alacritty              - GPU Accelerated Terminal Emulator (Vim Motions Friendly)
+balena-etcher          - To make linux pendrives
+bat                    - Alternative for cat (visualize file contents)
+deadbeef               - Music player (simple with posix controls)
+emacs-nativecomp       - Emacs Compiled Natively
+gparted                - Manage your disks easy
+helix                  - Experimental TUI Editor
+i3lock                 - Nice screen locker to use with Window Managers
+lxapperance            - To manage apperance
+lxsession              - To manage password etc
+mpv                    - Simple Video Player
+nano                   - If you dont have vim
+neovim                 - Best TUI Editor
+network-manager-applet - nm-applet for SysTray
+nitrogen               - To set your desktop background
+okular                 - Good PDF reader: good dark and etc
+pamac                  - To see in SysTray if you need Update
+parole                 - Video Player with good image definition
+paru                   - AUR Helper
+pcmanfm                - Lightweight File manager
+picom                  - X Compositor: transparency, transitions, etc
+polybar                - Bar to use with window managers
+qbittorrent            - Torrents...
+qtile                  - Easy window manager in python
+redshift               - To filter blue light
+ripgrep                - Recursive and Faster grep
+rofi                   - DMenu GUI you can configure with bash scripts
+rustup                 - To manage Rust Stuff
+starship               - Good and simple terminal prompt
+sudo                   - Execute single commands with SuperUser
+thunar                 - Xfce File Manager (Light Weigth and Simple)
+tldr                   - Like shorter help/man pages
+trayer                 - Systray for window managers
+tree                   - To tree folders
+tree-sitter            - Editors use it
+ventoy                 - To make pendrive if you need to install shitsoft windows
+vlc                    - Video player if you want to manage subtitles
+xclip                  - Clipboard util for X
+zsh                    - Posix Shell good alternative to Bash
