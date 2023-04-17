@@ -82,8 +82,8 @@ keys = [
 
     # Others
     Key([mod],    "q",              lazy.window.kill(), desc="Kill focused window"),
-    Key([mod,     "control"], "F4", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod,     "shift"],   "r",  lazy.restart(),  desc="Restart Qtile"),
+    Key([mod,     "control"], "F4", lazy.shutdown(),    desc="Shutdown Qtile"),
+    Key([mod,     "shift"],   "r",  lazy.restart(),     desc="Restart Qtile"),
 ]
 
 #############################################################################################
@@ -109,8 +109,8 @@ for i in groups:
 layouts = [
     layout.MonadTall(border_focus="#ababab", border_normal="#323232",
                      border_width=2, single_border_width=0),
-    layout.MonadWide(border_focus="#ababab", border_normal="#323232",
-                     border_width=2, single_border_width=0),
+    # layout.MonadWide(border_focus="#ababab", border_normal="#323232",
+    #                  border_width=2, single_border_width=0),
     layout.Max()
 ]
 
@@ -140,6 +140,9 @@ floating_layout = layout.Floating(
         Match(wm_class="Xfce4-appfinder"),
         Match(wm_class="Deadbeef"),
         Match(wm_class="steamwebhelper"),
+        # My Apps
+        Match(wm_class="music-downloader"),
+        Match(wm_class="todos-electron"),
     ],
     border_focus="#7a7a7a",
     border_normal="#333333",
@@ -161,11 +164,11 @@ top_bar = bar.Bar(
         widget.TaskList(fontsize=14, font="FiraCode Nerd Font Mono", foreground="aaaabb",
                         highlight_method="block", border="343434", margin_x=20, padding_x=4,
                         spacing=8, parse_text=lambda x : x[:30]),
-        widget.Volume(fmt='Vol: {}', step=5),
-        widget.Sep(padding=20),
-        widget.CPU(format="CPU: {load_percent}%", update_interval=1.0),
-        widget.Sep(padding=20),
-        widget.Memory(format="RAM: {MemUsed:.0f}/{MemTotal:.0f}GB", measure_mem='G', update_interval=1.0),
+        widget.Volume(fmt='Vol: {}', step=5, update_interval=1.0),
+        # widget.Sep(padding=20),
+        # widget.CPU(format="CPU: {load_percent}%", update_interval=1.0),
+        # widget.Sep(padding=20),
+        # widget.Memory(format="RAM: {MemUsed:.0f}/{MemTotal:.0f}GB", measure_mem='G', update_interval=1.0),
         widget.Sep(padding=20),
         widget.Clock(format="%d/%m/%Y [%a]", update_interval=60.0),
         widget.Sep(padding=20),

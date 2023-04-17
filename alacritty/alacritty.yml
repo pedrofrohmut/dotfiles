@@ -13,7 +13,7 @@ window:
 # use font_family on family and style on repective style
 # if not working at all try reboot the SO prob something with the caching stuff
 font:
-    normal: 
+    normal:
         family: FiraCode Nerd Font Mono
         style: Regular
     bold:
@@ -31,7 +31,7 @@ import:
 key_bindings:
     - { key: Insert,   mods: Shift,         action: Paste }
     - { key: Insert,   mods: Control,       action: Copy }
-    - { key: Return,   mods: Alt,           action: ToggleFullscreen }
+    # - { key: Return,   mods: Alt,           action: ToggleFullscreen }
     - { key: F10,                           action: ToggleFullscreen }
     - { key: PageUp,                        action: ScrollHalfPageUp }
     - { key: PageDown,                      action: ScrollHalfPageDown }
