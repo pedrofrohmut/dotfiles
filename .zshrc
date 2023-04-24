@@ -1,18 +1,16 @@
 # --- Aliases ------------------------------------------------------------------
+
 alias vim='nvim'
 
 alias hx='helix'
 
-alias emd='emacs --daemon'
-alias emk='emacsclient -e "(save-buffers-kill-emacs)"'
-alias emc='emacsclient -t'
-
 alias gits='git status'
 alias gitl='git log -n 5'
 alias gitd='git diff . | bat'
+alias gitp='git push'
 
 alias ls='ls --color=auto'
-alias ll='ls -lA'
+alias ll='ls -lAF'
 alias cll='clear; ls -lA'
 alias ..='cd ..'
 
@@ -25,19 +23,24 @@ alias tree='tree -C'
 
 alias jj='jobs'
 
-alias cpath='pwd | xclip -selection clipboard'
+alias c-path='pwd | xclip -selection clipboard'
 
 alias pretty-json='python -m json.tool'
 
-alias pdf='qpdfview'
+alias du-here='du -h -d 1 | sort -hr | head --lines 20'
+
+alias tar-to='tar -xzvf '
 
 # --- Starship Prompt ----------------------------------------------------------
+
 eval "$(starship init zsh)"
 
 # --- ENV ----------------------------------------------------------------------
 # export SHELL=/usr/bin/zsh
 # export EDITOR=/usr/bin/nvim
-export DOTNET_ROOT=$HOME/software/dotnet6.0.0
-export DOTNET_TOOLS_HOME=$HOME/.dotnet/tools
-export DOTNET_CLI_TELEMETRY_OPTOUT=0
-export PATH=$PATH:$DOTNET_ROOT:$DOTNET_TOOLS_HOME
+
+# export DOTNET_ROOT=$HOME/software/dotnet7.0.203
+# export DOTNET_TOOLS_HOME=$HOME/.dotnet/tools
+# export PATH=$PATH:$DOTNET_ROOT:$DOTNET_TOOLS_HOME
+
+export DOTNET_CLI_TELEMETRY_OPTOUT=1 # 1 to refuse
