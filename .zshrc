@@ -11,7 +11,7 @@ alias gitp='git push'
 
 alias ls='ls --color=auto'
 alias ll='ls -lAF'
-alias cll='clear; ls -lA'
+alias cll='clear; ls -lAF'
 alias ..='cd ..'
 
 alias dnb='dotnet build'
