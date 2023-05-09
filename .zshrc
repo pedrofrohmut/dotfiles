@@ -31,6 +31,8 @@ alias du-here='du -h -d 1 | sort -hr | head --lines 20'
 
 alias tar-to='tar -xzvf '
 
+alias last-installed='cat /var/log/pacman.log | grep "installed" | tail -n 10'
+
 # --- Starship Prompt ----------------------------------------------------------
 
 eval "$(starship init zsh)"
@@ -44,3 +46,9 @@ eval "$(starship init zsh)"
 # export PATH=$PATH:$DOTNET_ROOT:$DOTNET_TOOLS_HOME
 
 export DOTNET_CLI_TELEMETRY_OPTOUT=1 # 1 to refuse
+
+export RUST_BIN=$HOME/.cargo/bin
+
+# export JAVA_HOME=/usr/lib/jvm/java-11-openjdk
+
+export PATH=$PATH:$RUST_BIN
