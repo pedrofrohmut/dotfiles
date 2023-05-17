@@ -49,6 +49,4 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=1 # 1 to refuse
 
 export RUST_BIN=$HOME/.cargo/bin
 
-# export JAVA_HOME=/usr/lib/jvm/java-11-openjdk
-
 export PATH=$PATH:$RUST_BIN

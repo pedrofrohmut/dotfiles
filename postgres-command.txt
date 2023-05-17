@@ -1,0 +1,9 @@
+sudo docker run --name mypostgres
+              \ -p 5432:5432
+              \ -v ~/programming/tutorials/docker/postgres-volume/:/var/lib/postgresql/data
+              \ -d
+              \ -e POSTGRES_USER=didorgas
+              \ -e POSTGRES_PASSWORD=89vkhxf8p95sqa2v
+              \ postgres
+
+sudo docker run --name mypostgres  -p 5432:5432  -v ~/programming/tutorials/docker/postgres-volume/:/var/lib/postgresql/data  -d  -e POSTGRES_USER=didorgas  -e POSTGRES_PASSWORD=89vkhxf8p95sqa2v  postgres
