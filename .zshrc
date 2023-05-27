@@ -7,6 +7,7 @@ alias hx='helix'
 alias gits='git status'
 alias gitl='git log -n 5'
 alias gitd='git diff . | bat'
+alias gitdvim='git diff . | nvim -R'
 alias gitp='git push'
 
 alias ls='ls --color=auto'

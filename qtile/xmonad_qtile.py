@@ -46,7 +46,7 @@ keys = [
     # Layout control
     Key([mod], "t",               lazy.window.toggle_floating()),
     Key([mod], "b",               lazy.hide_show_bar()),
-    Key([mod], "space",           lazy.next_layout()),
+    Key([mod], "a",               lazy.next_layout()),
     Key([mod, "control"], "n",    lazy.layout.normalize()),
     Key([mod,  "shift"], "space", lazy.layout.flip()),
 
@@ -140,6 +140,7 @@ floating_layout = layout.Floating(
         Match(wm_class="Xfce4-appfinder"),
         Match(wm_class="Deadbeef"),
         Match(wm_class="steamwebhelper"),
+        Match(wm_class="TIPP10"),
         # My Apps
         Match(wm_class="music-downloader"),
         Match(wm_class="todos-electron"),
