@@ -13,7 +13,7 @@
 from typing import List  # noqa: F401
 
 from libqtile import bar, layout, widget
-from libqtile.config import Click, Drag, Group, Key, Match, Screen
+from libqtile.config import Click, Drag, Group, Key, Match, Screen, ScratchPad, DropDown
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
@@ -23,8 +23,8 @@ terminal = guess_terminal()
 
 keys = [
     # Switch between windows
-    Key([mod], "j", lazy.layout.down()),
-    Key([mod], "k", lazy.layout.up()),
+    Key([mod], "j", lazy.group.next_window()),
+    Key([mod], "k", lazy.group.prev_window()),
 
     # Move windows inside the current group
     Key([mod, "shift"], "h", lazy.layout.swap_left()),
@@ -81,16 +81,18 @@ keys = [
     Key([altKey],             "F4", lazy.spawn("rofi-power")),
 
     # Others
-    Key([mod],    "q",              lazy.window.kill(), desc="Kill focused window"),
-    Key([mod,     "control"], "F4", lazy.shutdown(),    desc="Shutdown Qtile"),
-    Key([mod,     "shift"],   "r",  lazy.restart(),     desc="Restart Qtile"),
+    Key([mod], "q",              lazy.window.kill(), desc="Kill focused window"),
+    Key([mod,  "control"], "F4", lazy.shutdown(),    desc="Shutdown Qtile"),
+    Key([mod,  "shift"],   "r",  lazy.restart(),     desc="Restart Qtile"),
 ]
 
 #############################################################################################
 # Groups ####################################################################################
 #############################################################################################
 
-groups = [Group(i) for i in "123456789"]
+groups = [
+    Group(i) for i in "123456789"
+]
 
 for i in groups:
     keys.extend([
@@ -101,6 +103,25 @@ for i in groups:
         Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
             desc="move focused window to group {}".format(i.name))
     ])
+
+#############################################################################################
+# ScratchPads ###############################################################################
+#############################################################################################
+
+groups.append(ScratchPad("scratchpad", [
+    DropDown("term", "alacritty",
+             width=0.8, height=0.8, y=0.08, opacity=1),
+    DropDown("htop", "alacritty -e htop",
+             width=0.8, height=0.8, y=0.08, opacity=1),
+    DropDown("music", "deadbeef",
+             width=0.8, height=0.8, y=0.08, opacity=1),
+]))
+
+keys.extend([
+    Key([mod], "F10", lazy.group["scratchpad"].dropdown_toggle("term")),
+    Key([mod], "F11", lazy.group["scratchpad"].dropdown_toggle("htop")),
+    Key([mod], "F12", lazy.group["scratchpad"].dropdown_toggle("music")),
+])
 
 #############################################################################################
 # Layouts ###################################################################################
@@ -115,8 +136,8 @@ layouts = [
 ]
 
 mouse = [
-    Drag([mod],  "Button1",  lazy.window.set_position_floating(), start=lazy.window.get_position()),
-    Drag([mod],  "Button3",  lazy.window.set_size_floating(), start=lazy.window.get_size()),
+    Drag([mod],  "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
+    Drag([mod],  "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
     Click([mod], "Button2", lazy.window.bring_to_front())
 ]
 
