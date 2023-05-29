@@ -44,7 +44,8 @@ keys = [
     Key([mod], "Tab", lazy.screen.toggle_group()),
 
     # Layout control
-    Key([mod], "t",               lazy.window.toggle_floating()),
+    Key([mod], "i",               lazy.window.toggle_floating()),
+    Key([mod], "o",               lazy.window.bring_to_front()),
     Key([mod], "b",               lazy.hide_show_bar()),
     Key([mod], "a",               lazy.next_layout()),
     Key([mod, "control"], "n",    lazy.layout.normalize()),
