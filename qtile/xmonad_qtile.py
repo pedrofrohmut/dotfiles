@@ -12,7 +12,7 @@
 
 from typing import List  # noqa: F401
 
-from libqtile import bar, layout, widget
+from libqtile import bar, layout, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen, ScratchPad, DropDown
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
@@ -70,11 +70,13 @@ keys = [
     Key([mod], "w",          lazy.spawn("firefox"),    desc="Web Browser"),
     Key([mod], "c",          lazy.spawn("galculator"), desc="Calculator"),
     Key([mod, "shift"], "p", lazy.spawn("xfce4-appfinder")),
-    Key([mod], "p",          lazy.spawn("""
-        rofi -show drun \
-             -modi drun \
-             -show-icons \
-             -theme ~/.config/rofi/themes/my_dracula.rasi""")),
+    Key([mod], "p",
+        lazy.spawn("""
+            rofi -show drun \
+                 -modi drun \
+                 -show-icons \
+                 -theme ~/.config/rofi/themes/my_dracula.rasi""")),
+    Key([mod], "F9", lazy.spawn("discord")),
 
     # Power
     Key([mod,     "shift"],   "F2", lazy.spawn("power-commands lock-suspend")),
@@ -136,11 +138,25 @@ layouts = [
     layout.Max()
 ]
 
+
 mouse = [
     Drag([mod],  "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
     Drag([mod],  "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
     Click([mod], "Button2", lazy.window.bring_to_front())
 ]
+
+
+@hook.subscribe.client_new
+def set_floating(window):
+    if window.name == "discord":
+        window.floating = True
+        window.place(
+            x=int(window.qtile.screen.width * 0.08),
+            y=int(window.qtile.screen.height * 0.08),
+            width=int(window.qtile.screen.width * 0.8),
+            height=int(window.qtile.screen.height * 0.8),
+        )
+
 
 floating_layout = layout.Floating(
     float_rules=[
@@ -163,6 +179,7 @@ floating_layout = layout.Floating(
         Match(wm_class="Deadbeef"),
         Match(wm_class="steamwebhelper"),
         Match(wm_class="TIPP10"),
+        Match(wm_class="discord"),
         # My Apps
         Match(wm_class="music-downloader"),
         Match(wm_class="todos-electron"),
