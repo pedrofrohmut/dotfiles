@@ -43,14 +43,6 @@ keys = [
     Key([mod], "l",   lazy.screen.next_group()),
     Key([mod], "Tab", lazy.screen.toggle_group()),
 
-    # Layout control
-    Key([mod], "i",               lazy.window.toggle_floating()),
-    Key([mod], "o",               lazy.window.bring_to_front()),
-    Key([mod], "b",               lazy.hide_show_bar()),
-    Key([mod], "a",               lazy.next_layout()),
-    Key([mod, "control"], "n",    lazy.layout.normalize()),
-    Key([mod,  "shift"], "space", lazy.layout.flip()),
-
     # Audio
     Key([mod], "minus",       lazy.spawn("audio-commands decrease")),
     Key([mod], "equal",       lazy.spawn("audio-commands increase")),
@@ -146,6 +138,7 @@ mouse = [
 ]
 
 
+# Floating rule for Discord to be the same size and position as the scrachpads
 @hook.subscribe.client_new
 def set_floating(window):
     if window.name == "discord":
@@ -188,6 +181,26 @@ floating_layout = layout.Floating(
     border_normal="#333333",
     border_width=3
 )
+
+
+@lazy.function
+def minimize_all(qtile):
+    for win in qtile.current_group.windows:
+        if hasattr(win, "toggle_minimize"):
+            win.toggle_minimize()
+
+
+keys.extend([
+    # Layout control
+    Key([mod], "i",                 lazy.window.toggle_floating()),
+    Key([mod], "o",                 lazy.window.bring_to_front()),
+    Key([mod], "u",                 lazy.window.toggle_minimize()),
+    Key([mod,  "shift"],   "u",     minimize_all()),
+    Key([mod], "b",                 lazy.hide_show_bar()),
+    Key([mod], "a",                 lazy.next_layout()),
+    Key([mod,  "control"], "n",     lazy.layout.normalize()),
+    Key([mod,  "shift"],   "space", lazy.layout.flip()),
+])
 
 #############################################################################################
 # Widgets ###################################################################################
