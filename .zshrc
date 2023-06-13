@@ -50,4 +50,6 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=1 # 1 to refuse
 
 export RUST_BIN=$HOME/.cargo/bin
 
-export PATH=$PATH:$RUST_BIN
+export LOCAL_BIN=$HOME/.local/bin
+
+export PATH=$PATH:$RUST_BIN:$LOCAL_BIN

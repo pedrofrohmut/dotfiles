@@ -1,0 +1,36 @@
+################################################################################
+# .XProfile ####################################################################
+################################################################################
+
+# --- Keyboard -----------------------------------------------------------------
+
+# Keyboard Layout
+setxkbmap -layout us -option caps:escape &
+
+# --- Tray ---------------------------------------------------------------------
+
+# PulseAudio 
+pasystray &
+
+# --- App ----------------------------------------------------------------------
+
+# Wallpaper
+nitrogen --restore &
+
+# Hide Mouse Cursor when idle for 2 seconds
+unclutter --timeout 2 --ignore-scrolling &
+
+# Night Light [default -t 6500/4500]
+redshift -l -23.52:-46.35 -t 6500:4500 &
+
+# Compositor - transparency
+picom --config ~/.config/picom/picom.conf &
+
+# Window Manager
+qtile start &
+
+# --- ENV ---------------------------------------------------------------------
+
+export SHELL=/usr/bin/zsh
+export EDITOR=/usr/bin/nvim
+export PATH=$PATH:$HOME/.local/bin

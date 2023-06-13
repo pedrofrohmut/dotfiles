@@ -1,3 +1,4 @@
+# @ ~/.config/alacritty/alacritty.yml
 shell:
     program: /bin/zsh
 
@@ -5,7 +6,7 @@ window:
     padding:
         x: 4
         y: 4
-    opacity: 0.90
+    opacity: 0.95
 
 # Install fonts in /usr/share/fonts/TTF
 # discover the name to use with $ fc-list | rg 'Fira'
@@ -14,12 +15,21 @@ window:
 # if not working at all try reboot the SO prob something with the caching stuff
 font:
     normal:
-        family: FiraCode Nerd Font Mono
+        family: Fira Mono
         style: Regular
     bold:
-        family: FiraCode Nerd Font Mono
+        family: Fira Mono
         style: Bold
     size: 11.0
+
+#font:
+#    normal:
+#        family: FiraCode Nerd Font Mono
+#        style: Regular
+#    bold:
+#        family: FiraCode Nerd Font Mono
+#        style: Bold
+#    size: 11.0
 
 # create a symlink from your color file to color.yml link
 #   $ ln -s /home/<user>/<color_file_path> ~/.config/alacritty/colors.yml
