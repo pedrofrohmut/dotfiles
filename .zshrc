@@ -34,6 +34,8 @@ alias tar-to='tar -xzvf '
 
 alias last-installed='cat /var/log/pacman.log | grep "installed" | tail -n 10'
 
+alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
+
 # --- Starship Prompt ----------------------------------------------------------
 
 eval "$(starship init zsh)"

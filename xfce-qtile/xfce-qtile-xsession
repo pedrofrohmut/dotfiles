@@ -1,5 +1,5 @@
 ################################################################################
-# .XProfile ####################################################################
+# .XSession for Xfce4 + Qtile ##################################################
 ################################################################################
 
 # --- Keyboard -----------------------------------------------------------------
@@ -9,7 +9,7 @@ setxkbmap -layout us -option caps:escape &
 
 # --- Tray ---------------------------------------------------------------------
 
-# PulseAudio 
+# PulseAudio
 pasystray &
 
 # --- App ----------------------------------------------------------------------
@@ -34,3 +34,41 @@ qtile start &
 export SHELL=/usr/bin/zsh
 export EDITOR=/usr/bin/nvim
 export PATH=$PATH:$HOME/.local/bin
+
+# --- fcitx --------------------------------------------------------------------
+
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+
+# fcitx-autostart &
+
+### Xfce4 ######################################################################
+
+# stuff moved from 'Session and Startup' to here so it can be saved on github
+# and easy manage in a text instead of a gui app
+
+# Network (Manage your network connections)
+# nm-applet &
+
+# PolicyKit Authentication Agent (PolicyKit Authentication Agent)
+# /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+
+# Power Manager (Power managment for the Xfce desktop)
+# xfce4-power-manager &
+
+# User folders update (Update common folders names to match current locale)
+# xdg-user-dirs-gtk-update &
+
+# xapp-sn-watcher (A service that provides the org.kde.StatusNotifierWatcher
+# interface for XApps)
+# /usr/lib/xapps/xapp-sn-watcher &
+
+# Xfce Notification Daemon
+# /usr/lib/xfce4/notifyd/xfce4-notifyd &
+
+# Xfce Screensaver (Launch screensaver and locker program)
+# xfce4-screensaver &
+
+# Xfce Settings Daemon (The Xfce Settings Daemon)
+# xfsettingsd &

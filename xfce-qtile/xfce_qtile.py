@@ -44,16 +44,16 @@ keys = [
     Key([mod], "Tab", lazy.screen.toggle_group()),
 
     # Audio
-    Key([mod, "shift"], "0", 
+    Key([mod, "shift"], "0",
         lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle"),
         desc="toggle mute on default sink"),
-    Key([mod], "equal",      
+    Key([mod], "equal",
         lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%"),
         desc="increase volume on default sink by 5%"),
-    Key([mod], "minus",      
+    Key([mod], "minus",
         lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%"),
         desc="decrease volume on default sink by 5%"),
-    Key([mod], "0", 
+    Key([mod], "0",
         lazy.spawn("bash /home/pedro/dotfiles/scripts/new_change_sink.sh")),
 
     # Deadbeef
@@ -69,7 +69,7 @@ keys = [
     Key([mod], "w",      lazy.spawn("firefox"),    desc="Web Browser"),
     Key([mod], "c",      lazy.spawn("galculator"), desc="Calculator"),
     Key([mod], "F9",     lazy.spawn("discord")),
-    
+
     # Others
     Key([mod], "q",              lazy.window.kill(), desc="Kill focused window"),
     Key([mod,  "control"], "F4", lazy.shutdown(),    desc="Shutdown Qtile"),
@@ -77,7 +77,7 @@ keys = [
 
     # New
     Key([mod],    "p",  lazy.spawn("xfce4-appfinder")),
-    Key([mod],    "m",  lazy.spawn("xfce4-appfinder --collapsed")),
+    Key([mod],    "r",  lazy.spawn("xfce4-appfinder --collapsed")),
     Key([altKey], "F4", lazy.spawn("xfce4-session-logout")),
     Key([altKey], "F3", lazy.spawn("xflock4")),
 ]
@@ -209,11 +209,11 @@ keys.extend([
 
 # widget.GenPollText(name="deadbeef", fmt="Music: {}", update_interval=3.0, func=lambda: subprocess.check_output("<script>").decode("UTF-8"))
 
-widget_defaults = dict(font="FiraCode Nerd Font Mono", fontsize=13, padding=1, foreground="aaaabb")
+widget_defaults = dict(font="Fira Mono", fontsize=13, padding=3, foreground="aaaabb")
 extension_defaults = widget_defaults.copy()
 top_bar = bar.Bar(
     [
-        widget.GroupBox(active="ffffff", inactive="989898", fontsize=14,
+        widget.GroupBox(active="d9d9d9", inactive="989898", fontsize=14,
                         highlight_method="line", highlight_color="005757"),
         widget.TaskList(fontsize=14, font="FiraCode Nerd Font Mono", foreground="aaaabb",
                         highlight_method="block", border="343434", margin_x=20, padding_x=4,
