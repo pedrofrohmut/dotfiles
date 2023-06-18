@@ -32,11 +32,23 @@ keys = [
     Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
 
+    # Move floating windows
+    Key([mod, "shift"], "Left",  lazy.window.move_floating(-10, 0)),
+    Key([mod, "shift"], "Right", lazy.window.move_floating(10, 0)),
+    Key([mod, "shift"], "Up",    lazy.window.move_floating(0, -10)),
+    Key([mod, "shift"], "Down",  lazy.window.move_floating(0, 10)),
+
     # Resize
     Key([mod, "control"], "j", lazy.layout.grow()),
     Key([mod, "control"], "l", lazy.layout.grow_main()),
     Key([mod, "control"], "k", lazy.layout.shrink()),
     Key([mod, "control"], "h", lazy.layout.shrink_main()),
+
+    # Move floating windows
+    Key([mod, "control"], "Left",  lazy.window.resize_floating(-10, 0)),
+    Key([mod, "control"], "Right", lazy.window.resize_floating(10, 0)),
+    Key([mod, "control"], "Up",    lazy.window.resize_floating(0, -10)),
+    Key([mod, "control"], "Down",  lazy.window.resize_floating(0, 10)),
 
     # Switch between groups
     Key([mod], "h",   lazy.screen.prev_group()),
