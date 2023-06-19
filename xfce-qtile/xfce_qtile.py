@@ -44,7 +44,7 @@ keys = [
     Key([mod, "control"], "k", lazy.layout.shrink()),
     Key([mod, "control"], "h", lazy.layout.shrink_main()),
 
-    # Move floating windows
+    # Resize floating windows
     Key([mod, "control"], "Left",  lazy.window.resize_floating(-10, 0)),
     Key([mod, "control"], "Right", lazy.window.resize_floating(10, 0)),
     Key([mod, "control"], "Up",    lazy.window.resize_floating(0, -10)),
@@ -76,22 +76,20 @@ keys = [
     Key([altKey, "control"], "minus", lazy.spawn("deadbeef --volume -5")),
 
     # Programs
-    Key([mod], "Return", lazy.spawn("alacritty"),  desc="Launch terminal"),
-    Key([mod], "e",      lazy.spawn("thunar"),     desc="File Manager"),
-    Key([mod], "w",      lazy.spawn("firefox"),    desc="Web Browser"),
-    Key([mod], "c",      lazy.spawn("galculator"), desc="Calculator"),
-    Key([mod], "F9",     lazy.spawn("discord")),
+    Key([mod],    "Return", lazy.spawn("alacritty"),  desc="Launch terminal"),
+    Key([mod],    "e",      lazy.spawn("thunar"),     desc="File Manager"),
+    Key([mod],    "w",      lazy.spawn("firefox"),    desc="Web Browser"),
+    Key([mod],    "c",      lazy.spawn("galculator"), desc="Calculator"),
+    Key([mod],    "F9",     lazy.spawn("discord")),
+    Key([mod],    "p",      lazy.spawn("xfce4-appfinder")),
+    Key([mod],    "r",      lazy.spawn("xfce4-appfinder --collapsed")),
+    Key([altKey], "F3",     lazy.spawn("xflock4")),
+    Key([altKey], "F4",     lazy.spawn("xfce4-session-logout")),
 
     # Others
     Key([mod], "q",              lazy.window.kill(), desc="Kill focused window"),
-    Key([mod,  "control"], "F4", lazy.shutdown(),    desc="Shutdown Qtile"),
+    #Key([mod,  "control"], "F4", lazy.shutdown(),    desc="Shutdown Qtile"),
     Key([mod,  "shift"],   "r",  lazy.restart(),     desc="Restart Qtile"),
-
-    # New
-    Key([mod],    "p",  lazy.spawn("xfce4-appfinder")),
-    Key([mod],    "r",  lazy.spawn("xfce4-appfinder --collapsed")),
-    Key([altKey], "F4", lazy.spawn("xfce4-session-logout")),
-    Key([altKey], "F3", lazy.spawn("xflock4")),
 ]
 
 #############################################################################################
