@@ -5,7 +5,7 @@
 # --- Keyboard -----------------------------------------------------------------
 
 # Keyboard Layout
-setxkbmap -layout us -option caps:escape &
+#setxkbmap -layout us -option caps:escape &
 
 # --- Tray ---------------------------------------------------------------------
 
