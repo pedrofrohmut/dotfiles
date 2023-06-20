@@ -60,6 +60,8 @@ export PATH=$PATH:$RUST_BIN:$LOCAL_BIN
 
 # --- Keybinds -----------------------------------------------------------------
 
+bindkey -v # Enables vi mode
+
 # \e, \E, = Escape
 # ^[      = Alt key (on some keyboards this is the same as escape)
 # ^?      = Delete
