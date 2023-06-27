@@ -82,6 +82,7 @@ keys = [
     Key([mod],    "c",      lazy.spawn("galculator"), desc="Calculator"),
     Key([mod],    "F9",     lazy.spawn("discord")),
     Key([mod],    "p",      lazy.spawn("xfce4-appfinder")),
+    Key([mod],    "m",      lazy.spawn("xfce4-settings-manager")),
     Key([mod],    "r",      lazy.spawn("xfce4-appfinder --collapsed")),
     Key([altKey], "F3",     lazy.spawn("xflock4")),
     Key([altKey], "F4",     lazy.spawn("xfce4-session-logout")),

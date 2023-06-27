@@ -9,6 +9,7 @@ alias gitl='git log -n 5'
 alias gitd='git diff . | bat'
 alias gitdvim='git diff . | nvim -R'
 alias gitp='git push'
+alias gitac='git add . && git commit -m'
 
 alias ls='ls --color=auto'
 alias ll='ls -lAF'
@@ -124,3 +125,5 @@ export LESS_TERMCAP_so=$'\E[01;47;34m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;36m'
 export LESS=-R
+
+bindkey -v # Enables vi mode
