@@ -5,7 +5,7 @@ alias vim='nvim'
 alias hx='helix'
 
 alias gits='git status'
-alias gitl='git log -n 5'
+alias gitl='git log -n 5 | bat'
 alias gitd='git diff . | bat'
 alias gitdvim='git diff . | nvim -R'
 alias gitp='git push'
