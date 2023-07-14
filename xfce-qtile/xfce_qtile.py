@@ -224,7 +224,7 @@ widget_defaults = dict(font="Fira Mono", fontsize=13, padding=3, foreground="aaa
 extension_defaults = widget_defaults.copy()
 top_bar = bar.Bar(
     [
-        widget.GroupBox(active="d9d9d9", inactive="989898", fontsize=14,
+        widget.GroupBox(active="00ffff", inactive="bababa", fontsize=15,
                         highlight_method="line", highlight_color="005757"),
         widget.TaskList(fontsize=14, font="FiraCode Nerd Font Mono", foreground="aaaabb",
                         highlight_method="block", border="343434", margin_x=20, padding_x=4,

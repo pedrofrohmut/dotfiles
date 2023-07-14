@@ -61,8 +61,6 @@ export PATH=$PATH:$RUST_BIN:$LOCAL_BIN
 
 # --- Keybinds -----------------------------------------------------------------
 
-bindkey -v # Enables vi mode
-
 # \e, \E, = Escape
 # ^[      = Alt key (on some keyboards this is the same as escape)
 # ^?      = Delete
@@ -88,22 +86,28 @@ bindkey '^[[A'  up-line-or-history                   # Up key
 bindkey '^[[B'  down-line-or-history                 # Down key
 
 # Navigate words with ctrl+arrow keys
-bindkey '^[Oc'    forward-word                       #
-bindkey '^[Od'    backward-word                      #
-bindkey '^[[1;5D' backward-word                      #
-bindkey '^[[1;5C' forward-word                       #
-bindkey '^H'      backward-kill-word                 # delete previous word with ctrl+backspace
-bindkey '^[[Z'    undo                               # Shift+tab undo last action
+bindkey '^[Oc'    forward-word       #
+bindkey '^[Od'    backward-word      #
+bindkey '^[[1;5D' backward-word      #
+bindkey '^[[1;5C' forward-word       #
+bindkey '^H'      backward-kill-word # delete previous word with ctrl+backspace
+bindkey '^[[Z'    undo               # Shift+tab undo last action
 
 # Removing keys
 bindkey -r '^J' # accept-line
 bindkey -r '^K' # kill-line
 
+bindkey -v # Enables vi mode
+
+# Up/Down line search (Must be after Vi mode - Vi mode bugs ^N and ^P)
+bindkey "^P" history-search-backward
+bindkey "^N" history-search-forward
+
 # --- Completion ---------------------------------------------------------------
 
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' # Case insensitive tab completion
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"         # Colored completion (different colors for dirs/files/etc)
-zstyle ':completion:*' rehash true                              # automatically find new executables in path
+#zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"         # Colored completion (different colors for dirs/files/etc)
+#zstyle ':completion:*' rehash true                              # automatically find new executables in path
 
 # --- History ------------------------------------------------------------------
 
@@ -113,7 +117,7 @@ SAVEHIST=500
 
 # --- Options ------------------------------------------------------------------
 
-setopt nobeep                                                   # No beep
+setopt nobeep # No beep
 
 # --- Color Man Pages ----------------------------------------------------------
 
@@ -125,5 +129,3 @@ export LESS_TERMCAP_so=$'\E[01;47;34m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;36m'
 export LESS=-R
-
-bindkey -v # Enables vi mode

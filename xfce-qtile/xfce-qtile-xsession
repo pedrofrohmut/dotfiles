@@ -6,6 +6,7 @@
 
 # Keyboard Layout
 #setxkbmap -layout us -option caps:escape &
+xmodmap ~/.Xmodmap
 
 # --- Tray ---------------------------------------------------------------------
 

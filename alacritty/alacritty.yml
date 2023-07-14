@@ -22,15 +22,6 @@ font:
         style: Bold
     size: 12.0
 
-#font:
-#    normal:
-#        family: FiraCode Nerd Font Mono
-#        style: Regular
-#    bold:
-#        family: FiraCode Nerd Font Mono
-#        style: Bold
-#    size: 11.0
-
 # create a symlink from your color file to color.yml link
 #   $ ln -s /home/<user>/<color_file_path> ~/.config/alacritty/colors.yml
 # !! Important !! to type the full path for color_file_path
@@ -43,8 +34,6 @@ key_bindings:
 
     - { key: Insert,    mods: Shift,         action: Paste }
     - { key: Insert,    mods: Control,       action: Copy }
-
-   #- { key: F10,       mods: Control,       action: ToggleFullscreen }
 
     - { key: PageUp,                         action: ScrollHalfPageUp }
     - { key: PageDown,                       action: ScrollHalfPageDown }
