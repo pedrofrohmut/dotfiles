@@ -42,21 +42,25 @@ alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
 eval "$(starship init zsh)"
 
 # --- ENV ----------------------------------------------------------------------
+
 # export SHELL=/usr/bin/zsh
 export EDITOR=/usr/bin/nvim
 export VISUAL=/usr/bin/nvim
 
-# export DOTNET_ROOT=$HOME/software/dotnet7.0.203
-# export DOTNET_TOOLS_HOME=$HOME/.dotnet/tools
-# export PATH=$PATH:$DOTNET_ROOT:$DOTNET_TOOLS_HOME
-
+export DOTNET_ROOT=$HOME/software/dotnet7.0.9
+export DOTNET_TOOLS_HOME=$HOME/.dotnet/tools
 export DOTNET_CLI_TELEMETRY_OPTOUT=1 # 1 to refuse
 
 export RUST_BIN=$HOME/.cargo/bin
 
-export LOCAL_BIN=$HOME/.local/bin # For endeavourOS
+# For endeavourOS
+export LOCAL_BIN=$HOME/.local/bin
 
-export PATH=$PATH:$RUST_BIN:$LOCAL_BIN
+export GHC_HOME=$HOME/.ghcup/ghc/9.2.8/bin
+export GHC_TOOLS_HOME=$HOME/.ghcup/bin
+
+export PATH=$PATH:$RUST_BIN:$LOCAL_BIN:$DOTNET_ROOT:\
+$DOTNET_TOOLS_HOME:$GHC_HOME:$GHC_TOOLS_HOME
 
 
 # --- Keybinds -----------------------------------------------------------------
@@ -66,7 +70,9 @@ export PATH=$PATH:$RUST_BIN:$LOCAL_BIN
 # ^?      = Delete
 # ^X, ^   = Control
 
-bindkey -e
+#bindkey -e # Emacs Mode
+
+bindkey -v # Enables vi mode
 
 bindkey '^[[H'  beginning-of-line                    # Home key (xterm)
 bindkey '^[[OH' beginning-of-line                    # Home key (smkx mode)
@@ -97,11 +103,12 @@ bindkey '^[[Z'    undo               # Shift+tab undo last action
 bindkey -r '^J' # accept-line
 bindkey -r '^K' # kill-line
 
-bindkey -v # Enables vi mode
-
 # Up/Down line search (Must be after Vi mode - Vi mode bugs ^N and ^P)
 bindkey "^P" history-search-backward
 bindkey "^N" history-search-forward
+
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
 
 # --- Completion ---------------------------------------------------------------
 
