@@ -15,10 +15,12 @@ window:
 # if not working at all try reboot the SO prob something with the caching stuff
 font:
     normal:
-        family: Fira Mono
+        # family: Fira Mono # Not nerdfont
+        family: FiraMono Nerd Font
         style: Regular
     bold:
-        family: Fira Mono
+        # family: Fira Mono # Not nerdfont
+        family:  FiraMono Nerd Font
         style: Bold
     size: 12.0
 
