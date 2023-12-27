@@ -185,6 +185,7 @@ floating_layout = layout.Floating(
         Match(wm_class="steamwebhelper"),
         Match(wm_class="TIPP10"),
         Match(wm_class="discord"),
+        Match(wm_class="Blueman-manager"),
         # My Apps
         Match(wm_class="music-downloader"),
         Match(wm_class="todos-electron"),
