@@ -1,3 +1,4 @@
 clear lock
+
 keycode 66 = Escape
-keycode 135 =
+keycode 135 = NoSymbol

@@ -37,6 +37,8 @@ alias last-installed='cat /var/log/pacman.log | grep "installed" | tail -n 10'
 
 alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
 
+alias emu='android-emulator'
+
 # --- Starship Prompt ----------------------------------------------------------
 
 eval "$(starship init zsh)"
@@ -59,8 +61,10 @@ export LOCAL_BIN=$HOME/.local/bin
 export GHC_HOME=$HOME/.ghcup/ghc/9.2.8/bin
 export GHC_TOOLS_HOME=$HOME/.ghcup/bin
 
+export ANDROID_HOME=$HOME/Android/Sdk
+
 export PATH=$PATH:$RUST_BIN:$LOCAL_BIN:$DOTNET_ROOT:\
-$DOTNET_TOOLS_HOME:$GHC_HOME:$GHC_TOOLS_HOME
+$DOTNET_TOOLS_HOME:$GHC_HOME:$GHC_TOOLS_HOME:$ANDROID_HOME
 
 
 # --- Keybinds -----------------------------------------------------------------
