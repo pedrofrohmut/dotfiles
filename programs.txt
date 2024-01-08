@@ -2,7 +2,10 @@ alacritty              - GPU Accelerated Terminal Emulator (Vim Motions Friendly
 balena-etcher          - To make linux pendrives
 bat                    - Alternative for cat (visualize file contents)
 deadbeef               - Music player (simple with posix controls)
+docker                 - Makes containers to execute stuff you dont want to install local
+docker-compose         - Use compose files to easier manage docker containers
 emacs-nativecomp       - Emacs Compiled Natively
+fd                     - Easier find
 gparted                - Manage your disks easy
 helix                  - Experimental TUI Editor
 i3lock                 - Nice screen locker to use with Window Managers
@@ -23,6 +26,7 @@ polybar                - Bar to use with window managers
 qbittorrent            - Torrents...
 qtile                  - Easy window manager in python
 redshift               - To filter blue light
+rg                     - Better version of Grep
 ripgrep                - Recursive and Faster grep
 rofi                   - DMenu GUI you can configure with bash scripts
 rustup                 - To manage Rust Stuff

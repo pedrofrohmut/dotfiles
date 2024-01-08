@@ -5,15 +5,15 @@ $hostname\
 $directory\
 $git_branch\
 $status\
+$python\
 $character"""
 
 # $memory_usage\
 # $time\
-# $python\
 # $c\
 # $shell\
 # $cmake\
 
 [python]
 symbol = ""
-pyenv_version_name = false
+pyenv_version_name = true
