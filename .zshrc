@@ -12,7 +12,7 @@ alias gitp='git push'
 alias gitac='git add . && git commit -m'
 
 alias ls='ls --color=auto'
-alias ll='ls -lAF'
+alias ll='ls -lAFh'
 alias cll='clear; ls -lAF'
 alias ..='cd ..'
 alias cp='cp --verbose'
