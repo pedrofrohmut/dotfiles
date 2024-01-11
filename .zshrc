@@ -32,6 +32,7 @@ alias pretty-json='python -m json.tool'
 
 #alias du-here='du -h -d 1 | sort -hr | head --lines 20'
 alias du-here="du --human-readable --max-depth=1 | sort --human-numeric-sort --reverse | head --lines 20"
+alias dh='du-here'
 
 alias tar-to='tar -xzvf '
 
