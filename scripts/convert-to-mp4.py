@@ -1,12 +1,10 @@
 #! /usr/bin/env python3
 
-# ffmpeg -i <input.webm> -preset fast -c:v libx265 -b:v 1M \
-#        -c:a aac -strict experimental -crf 31 -vf scale=-1:720 -r 30 -f mp4 <output.mp4>
-
 import argparse
 import os
 import shutil
 import subprocess
+import shlex
 
 def log(text):
     print("[Convert to MP4] " + text)
@@ -25,9 +23,9 @@ def convert_webm_to_mp4(input_file, output_file=None):
         input_file_name = os.path.splitext(input_file)[0]
         output_file = input_file_name + ".mp4"
 
-    # Surrond with double quotes to avoid breaking the command
-    input_file = f'"{input_file}"'
-    output_file = f'"{output_file}"'
+    # Return a shell-escaped version of the string s
+    input_file = shlex.quote(input_file)
+    output_file = shlex.quote(output_file)
 
     command = [
         'ffmpeg',
@@ -39,15 +37,18 @@ def convert_webm_to_mp4(input_file, output_file=None):
         '-b:a', '192k',            # audio bitrate
         '-strict', 'experimental', # for audio codec
         '-crf', '31',              # set frame rate (default: 28)
-        '-vf', 'scale=-1:720',     # scale the resolution (-1 for auto width, preserve the ratio)
+        '-vf', 'scale=1280:720',     # scale the resolution (-1 for auto width, preserve the ratio)
         '-r', '30',                # fps
         '-f', 'mp4',               # set format
         output_file
     ]
 
+    str_command = " ".join(command)
+    log("Executing: " + str_command)
+
     try:
         log("Start convertion.")
-        subprocess.run(command)
+        subprocess.run(str_command, shell=True)
     except KeyboardInterrupt: # Normal exit and msg on Ctrl + C
         log("Convertion interrupt.")
 
