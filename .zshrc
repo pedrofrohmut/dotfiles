@@ -123,9 +123,26 @@ bindkey "^E" end-of-line
 
 # --- Completion ---------------------------------------------------------------
 
-zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' # Case insensitive tab completion
-#zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"         # Colored completion (different colors for dirs/files/etc)
-#zstyle ':completion:*' rehash true                              # automatically find new executables in path
+# init completion
+autoload -U compinit; compinit
+
+# Case-insensitive completion
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+# Show completion menu if more than one option is available
+zstyle ':completion:*' menu select
+
+# Ignore completion duplicates
+zstyle ':completion:*' unique
+
+# Autocomplete from history
+zstyle ':completion:*' history 1
+
+# Colored completion (different colors for dirs/files/etc)
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+
+# automatically find new executables in path
+zstyle ':completion:*' rehash true
 
 # --- History ------------------------------------------------------------------
 
