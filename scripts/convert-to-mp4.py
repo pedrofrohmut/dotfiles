@@ -25,6 +25,10 @@ def convert_webm_to_mp4(input_file, output_file=None):
         input_file_name = os.path.splitext(input_file)[0]
         output_file = input_file_name + ".mp4"
 
+    # Surrond with double quotes to avoid breaking the command
+    input_file = f'"{input_file}"'
+    output_file = f'"{output_file}"'
+
     command = [
         'ffmpeg',
         '-i', input_file,
@@ -44,14 +48,14 @@ def convert_webm_to_mp4(input_file, output_file=None):
     try:
         log("Start convertion.")
         subprocess.run(command)
-    except KeyboardInterrupt:
+    except KeyboardInterrupt: # Normal exit and msg on Ctrl + C
         log("Convertion interrupt.")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Convert WebM to MP4 using FFmpeg')
     parser.add_argument('input_file', help='Path to the input WebM file')
-    parser.add_argument('output_file', nargs='?', help='Path to the output MP4 file (optional)')
+    parser.add_argument("--output", "-o", help="Path to the output MP4 file (optional)")
 
     args = parser.parse_args()
 
-    convert_webm_to_mp4(args.input_file, args.output_file)
+    convert_webm_to_mp4(args.input_file, args.output)
