@@ -1,5 +1,9 @@
 #! /usr/bin/env python3
 
+# Default is half (50% of the original) the size and compressed is (25% of the original)
+
+# TODO: block the command when the input can be overrided. Optional: sufix CONVERTED
+
 import argparse
 import os
 import shutil
@@ -64,15 +68,26 @@ def main(input_file, output_file=None, compress=False):
     except KeyboardInterrupt: # Normal exit and msg on Ctrl + C
         log("Convertion interrupt.")
 
+
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Convert WebM to MP4 using FFmpeg")
+    parser = argparse.ArgumentParser(description= \
+        "Convert WebM to MP4 using FFmpeg. " \
+        "Default size is half (50% of the original), Compressed is (25% of the original). " \
+        "The only the input-file-path is required. The optional flags are listed below.")
 
     # the path to the input file
-    parser.add_argument("input_file", help="Path to the input WebM file")
-    # Option to name the output file
-    parser.add_argument("--output", "-o", help="Path to the output MP4 file (optional)")
+    parser.add_argument("input_file", help=\
+        "Path to the input WebM file. (required)")
+
+   # Option to name the output file
+    parser.add_argument("--output", "-o", help=\
+        "The output-file-path you can set with the format '<path>/<name>.<extension>' "
+        "If not set. them the output will have the same name of the input file "
+        "with the .mp4 extension (if used in a mp4 file can override the original).")
+
     # Option to set compress flags to true
-    parser.add_argument("--compress", "-c", action="store_true", help="Output file should compressing parameters")
+    parser.add_argument("--compress", "-c", action="store_true", help=\
+        "The output file will have a smaller size but the image is a little affected.")
 
     args = parser.parse_args()
 
