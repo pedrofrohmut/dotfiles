@@ -80,7 +80,7 @@ keys = [
     Key([mod],    "e",      lazy.spawn("thunar"),     desc="File Manager"),
     Key([mod],    "w",      lazy.spawn("firefox"),    desc="Web Browser"),
     Key([mod],    "c",      lazy.spawn("galculator"), desc="Calculator"),
-    Key([mod],    "F9",     lazy.spawn("discord")),
+    #Key([mod],    "F9",     lazy.spawn("discord")),
     Key([mod],    "p",      lazy.spawn("xfce4-appfinder")),
     Key([mod],    "m",      lazy.spawn("xfce4-settings-manager")),
     Key([mod],    "r",      lazy.spawn("xfce4-appfinder --collapsed")),
@@ -126,6 +126,7 @@ groups.append(ScratchPad("scratchpad", [
 
 keys.extend([
     Key([mod], "F10", lazy.group["scratchpad"].dropdown_toggle("term")),
+    Key([mod], "t",   lazy.group["scratchpad"].dropdown_toggle("term")),
     Key([mod], "F11", lazy.group["scratchpad"].dropdown_toggle("htop")),
     Key([mod], "F12", lazy.group["scratchpad"].dropdown_toggle("music")),
 ])
