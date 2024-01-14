@@ -1,43 +1,75 @@
-alacritty              - GPU Accelerated Terminal Emulator (Vim Motions Friendly)
-balena-etcher          - To make linux pendrives
-bat                    - Alternative for cat (visualize file contents)
-deadbeef               - Music player (simple with posix controls)
-docker                 - Makes containers to execute stuff you dont want to install local
-docker-compose         - Use compose files to easier manage docker containers
-emacs-nativecomp       - Emacs Compiled Natively
-fd                     - Easier find
-gparted                - Manage your disks easy
-helix                  - Experimental TUI Editor
-i3lock                 - Nice screen locker to use with Window Managers
-lxapperance            - To manage apperance
-lxsession              - To manage password etc
-mpv                    - Simple Video Player
-nano                   - If you dont have vim
-neovim                 - Best TUI Editor
-network-manager-applet - nm-applet for SysTray
-nitrogen               - To set your desktop background
-okular                 - Good PDF reader: good dark and etc
-pamac                  - To see in SysTray if you need Update
-parole                 - Video Player with good image definition
-paru                   - AUR Helper
-pcmanfm                - Lightweight File manager
-picom                  - X Compositor: transparency, transitions, etc
-polybar                - Bar to use with window managers
-qbittorrent            - Torrents...
-qtile                  - Easy window manager in python
-redshift               - To filter blue light
-rg                     - Better version of Grep
-ripgrep                - Recursive and Faster grep
-rofi                   - DMenu GUI you can configure with bash scripts
-rustup                 - To manage Rust Stuff
-starship               - Good and simple terminal prompt
-sudo                   - Execute single commands with SuperUser
-thunar                 - Xfce File Manager (Light Weigth and Simple)
-tldr                   - Like shorter help/man pages
-trayer                 - Systray for window managers
-tree                   - To tree folders
-tree-sitter            - Editors use it
-ventoy                 - To make pendrive if you need to install shitsoft windows
-vlc                    - Video player if you want to manage subtitles
-xclip                  - Clipboard util for X
-zsh                    - Posix Shell good alternative to Bash
+alacritty               - GPU Accelerated Terminal Emulator (Vim Motions Friendly)
+android-studio          - IDE (I only use to install the emulator)
+balena-etcher           - To make linux pendrives
+chromium                - Extra browser to debug JS apps
+deadbeef                - Music player (simple with posix controls)
+discord                 - To talk to people
+emacs-nativecomp        - Emacs Compiled Natively
+fcitx (mozc configtool) - Type in japanese
+firefox                 - Default Browser on linux
+gparted                 - Manage your disks easy
+helix                   - Experimental TUI Editor
+i3lock                  - Nice screen locker to use with Window Managers
+lxapperance             - To manage apperance
+lxsession               - To manage password etc
+mpv                     - Simple Video Player
+nano                    - If you dont have vim
+neovim                  - Best TUI Editor
+network-manager-applet  - nm-applet for SysTray
+nitrogen                - To set your desktop background
+okular                  - Good PDF reader: good dark and etc
+otf-firamono-nerd       - Fira (Fura) Nerd Font with icons
+pamac                   - To see in SysTray if you need Update
+parole                  - Video Player with good image definition
+paru                    - AUR Helper
+pcmanfm                 - Lightweight File manager
+picom                   - X Compositor: transparency, transitions, etc
+polybar                 - Bar to use with window managers
+postman-bin             - To check API endpoints
+qbittorrent             - Torrents...
+qtile                   - Easy window manager in python
+redshift                - To filter blue light
+rofi                    - DMenu GUI you can configure with bash scripts
+thunar                  - Xfce File Manager (Light Weigth and Simple)
+trayer                  - Systray for window managers
+unclutter               - Hide the mouse when not using
+ventoy                  - To make pendrive if you need to install shitsoft windows
+virtual-bov             - Virtual Machines to test linux
+vlc                     - Video player if you want to manage subtitles
+xclip                   - Clipboard util for X
+zsh                     - Posix Shell good alternative to Bash
+
+## Terminal(CLI/TUI) ###########################################################
+
+bat                     - Alternative for cat (visualize file contents)
+docker                  - Makes containers to execute stuff you dont want to install local
+docker-compose          - Use compose files to easier manage docker containers
+exa                     - LS clone with modern features
+fd                      - Easier find
+ffmpeg                  - Convert videos, extract audio, etc.
+ghcup-hs-bin            - To manage Haskell Stuff
+htop                    - Task Manager (updated version of top)
+npm                     - Install JS stuff (stupid way)
+ripgrep (rg)            - Recursive and Faster grep
+rustup                  - To manage Rust Stuff
+starship                - Good and simple terminal prompt
+sudo                    - Execute single commands with SuperUser
+tldr                    - Like shorter help/man pages
+tree                    - To tree folders
+tree-sitter             - Editors use it
+yarn                    - Install JS stuff
+yt-dlp                  - Download youtube videos
+zsh                     - Shell for UNIX
+
+## C ###########################################################################
+
+clang                   - C compiler
+cmake                   - Building tool for C and C++
+gcc                     - GNU c compiler
+gdb                     - GNU debug for C
+valgrind                - Find memory problems for C
+
+## LIBS ########################################################################
+
+glfw                    - Lib for OpenGL, OpenGL ES and Vulkan (to use raylib in my case)
+raylib                  - Nice C lib make games spartan way

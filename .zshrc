@@ -30,13 +30,13 @@ alias c-path='pwd | xclip -selection clipboard'
 
 alias pretty-json='python -m json.tool'
 
-#alias du-here='du -h -d 1 | sort -hr | head --lines 20'
-alias du-here="du --human-readable --max-depth=1 | sort --human-numeric-sort --reverse | head --lines 20"
+alias du-here='du -h -d 1 | sort -hr | head --lines 20'
 alias dh='du-here'
 
 alias tar-to='tar -xzvf '
 
 alias last-installed='cat /var/log/pacman.log | grep "installed" | tail -n 10'
+alias installed="cat /var/log/pacman.log | grep 'ALPM] installed'"
 
 alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
 
@@ -61,14 +61,11 @@ export RUST_BIN=$HOME/.cargo/bin
 # For endeavourOS
 export LOCAL_BIN=$HOME/.local/bin
 
-export GHC_HOME=$HOME/.ghcup/ghc/9.2.8/bin
-export GHC_TOOLS_HOME=$HOME/.ghcup/bin
-
 export ANDROID_HOME=$HOME/Android/Sdk
 
 # Raylib
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
-export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/lib/pkgconfig:$HOME/.pkgconfig
+#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+#export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/lib/pkgconfig:$HOME/.pkgconfig
 
 export PATH=$PATH:$RUST_BIN:$LOCAL_BIN:$DOTNET_ROOT:\
 $DOTNET_TOOLS_HOME:$GHC_HOME:$GHC_TOOLS_HOME:$ANDROID_HOME
