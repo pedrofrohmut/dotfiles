@@ -1,5 +1,7 @@
 # --- Aliases ------------------------------------------------------------------
 
+alias src-rc='source ~/.zshrc'
+
 alias vim='nvim'
 
 alias hx='helix'
@@ -14,6 +16,13 @@ alias gitac='git add . && git commit -m'
 alias ls='ls --color=auto'
 alias ll='ls -lAFh'
 alias cll='clear; ls -lAF'
+alias tree='tree -C'
+
+alias exa='exa --icons=always'
+alias els='exa'
+alias ell='exa -lAFh'
+alias etree='exa --tree'
+
 alias ..='cd ..'
 alias cp='cp --verbose'
 
@@ -22,7 +31,6 @@ alias dnr='dotnet run'
 alias dnwr='dotnet watch run'
 alias dnt='clear && dotnet test'
 
-alias tree='tree -C'
 
 alias jj='jobs'
 
