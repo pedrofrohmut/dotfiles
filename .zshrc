@@ -1,4 +1,4 @@
-# --- Aliases ------------------------------------------------------------------
+# --- Aliases/Functions --------------------------------------------------------
 
 alias src-rc='source ~/.zshrc'
 
@@ -7,11 +7,26 @@ alias vim='nvim'
 alias hx='helix'
 
 alias gits='git status'
-alias gitl='git log -n 5 | bat'
-alias gitd='git diff . | bat'
-alias gitdvim='git diff . | nvim -R'
 alias gitp='git push'
 alias gitac='git add . && git commit -m'
+
+# Git diff
+gitd() {
+    if [ $1 ]; then
+        git diff "$1" | bat
+    else
+        git diff . | bat
+    fi
+}
+
+# Git logging
+gitl() {
+    if [ $1 ]; then
+        git log -n "$1" | bat
+    else
+        git log -n 5 | bat
+    fi
+}
 
 alias ls='ls --color=auto'
 alias ll='ls -lAFh'
@@ -31,17 +46,24 @@ alias dnr='dotnet run'
 alias dnwr='dotnet watch run'
 alias dnt='clear && dotnet test'
 
-
 alias jj='jobs'
 
 alias c-path='pwd | xclip -selection clipboard'
 
-alias pretty-json='python -m json.tool'
-
 alias du-here='du -h -d 1 | sort -hr | head --lines 20'
 alias dh='du-here'
 
-alias tar-to='tar -xzvf '
+# Tar easy of use
+tar-to() {
+    if [ ! $1 ]; then
+        echo "Missing file input"
+        echo "Usage: tar-to <input-path> <output-path>"
+    elif [ ! $2 ]; then
+        tar -xzvf $1
+    else
+        tar -xzvf $1 -C $2
+    fi
+}
 
 alias last-installed='cat /var/log/pacman.log | grep "installed" | tail -n 10'
 alias installed="cat /var/log/pacman.log | grep 'ALPM] installed'"
