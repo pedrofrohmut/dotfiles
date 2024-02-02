@@ -70,8 +70,6 @@ alias installed="cat /var/log/pacman.log | grep 'ALPM] installed'"
 
 alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
 
-alias emu='android-emulator'
-
 # --- Starship Prompt ----------------------------------------------------------
 
 eval "$(starship init zsh)"
@@ -82,24 +80,16 @@ eval "$(starship init zsh)"
 export EDITOR=/usr/bin/nvim
 export VISUAL=/usr/bin/nvim
 
+# Dotnet
 export DOTNET_ROOT=$HOME/software/dotnet7.0.9
 export DOTNET_TOOLS_HOME=$HOME/.dotnet/tools
 export DOTNET_CLI_TELEMETRY_OPTOUT=1 # 1 to refuse
 
-export RUST_BIN=$HOME/.cargo/bin
+export DOOM_EMACS_PATH=$HOME/.config/emacs/bin
 
-# For endeavourOS
-export LOCAL_BIN=$HOME/.local/bin
+export LOCAL_BIN=$HOME/.local/bin # For endeavourOS
 
-export ANDROID_HOME=$HOME/Android/Sdk
-
-# Raylib
-#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
-#export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/lib/pkgconfig:$HOME/.pkgconfig
-
-export PATH=$PATH:$RUST_BIN:$LOCAL_BIN:$DOTNET_ROOT:\
-$DOTNET_TOOLS_HOME:$GHC_HOME:$GHC_TOOLS_HOME:$ANDROID_HOME
-
+export PATH=$PATH:$LOCAL_BIN:$DOOM_EMACS_PATH
 
 # --- Keybinds -----------------------------------------------------------------
 
@@ -170,12 +160,6 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
 # automatically find new executables in path
 zstyle ':completion:*' rehash true
-
-# --- History ------------------------------------------------------------------
-
-HISTFILE=~/.zhistory
-HISTSIZE=1000
-SAVEHIST=500
 
 # --- Options ------------------------------------------------------------------
 
