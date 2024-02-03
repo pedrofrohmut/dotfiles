@@ -39,6 +39,11 @@ vlc                     - Video player if you want to manage subtitles
 xclip                   - Clipboard util for X
 zsh                     - Posix Shell good alternative to Bash
 
+## Fonts ########################################################################
+
+otf-firamono-nerd       - Mono font with icons
+otf-fira-sans           - Sans font for emacs
+
 ## Terminal(CLI/TUI) ###########################################################
 
 bat                     - Alternative for cat (visualize file contents)
