@@ -88,9 +88,9 @@ keys = [
     Key([altKey], "F4",     lazy.spawn("xfce4-session-logout")),
 
     # Others
-    Key([mod], "q",              lazy.window.kill(), desc="Kill focused window"),
+    Key([mod, "shift"], "q", lazy.window.kill(), desc="Kill focused window"),
+    Key([mod, "shift"], "r", lazy.restart(),     desc="Restart Qtile"),
     #Key([mod,  "control"], "F4", lazy.shutdown(),    desc="Shutdown Qtile"),
-    Key([mod,  "shift"],   "r",  lazy.restart(),     desc="Restart Qtile"),
 ]
 
 #############################################################################################
@@ -187,6 +187,7 @@ floating_layout = layout.Floating(
         Match(wm_class="TIPP10"),
         Match(wm_class="discord"),
         Match(wm_class="Blueman-manager"),
+        Match(wm_class="Gpick"),
         # My Apps
         Match(wm_class="music-downloader"),
         Match(wm_class="todos-electron"),
@@ -211,7 +212,7 @@ keys.extend([
     Key([mod], "u",                 lazy.window.toggle_minimize()),
     Key([mod,  "shift"],   "u",     minimize_all()),
     Key([mod], "b",                 lazy.hide_show_bar()),
-    Key([mod], "a",                 lazy.next_layout()),
+    Key([mod], "F1",                 lazy.next_layout()),
     Key([mod,  "control"], "n",     lazy.layout.normalize()),
     Key([mod,  "shift"],   "space", lazy.layout.flip()),
 ])

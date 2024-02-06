@@ -8,6 +8,7 @@ emacs-nativecomp        - Emacs Compiled Natively
 fcitx (mozc configtool) - Type in japanese
 firefox                 - Default Browser on linux
 gparted                 - Manage your disks easy
+gpick                   - Nice Color Picker
 helix                   - Experimental TUI Editor
 i3lock                  - Nice screen locker to use with Window Managers
 lxapperance             - To manage apperance
@@ -37,6 +38,7 @@ ventoy                  - To make pendrive if you need to install shitsoft windo
 virtual-bov             - Virtual Machines to test linux
 vlc                     - Video player if you want to manage subtitles
 xclip                   - Clipboard util for X
+xcolor                  - ColorPicker for terminal
 zsh                     - Posix Shell good alternative to Bash
 
 ## Fonts ########################################################################
