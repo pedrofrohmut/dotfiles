@@ -3,8 +3,11 @@
 alias src-rc='source ~/.zshrc'
 
 alias vim='nvim'
+alias old='/usr/local/bin/vim'
 
 alias hx='helix'
+
+alias emc='emacs -nw'
 
 alias gits='git status'
 alias gitp='git push'
