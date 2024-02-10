@@ -212,7 +212,7 @@ keys.extend([
     Key([mod], "u",                 lazy.window.toggle_minimize()),
     Key([mod,  "shift"],   "u",     minimize_all()),
     Key([mod], "b",                 lazy.hide_show_bar()),
-    Key([mod], "F1",                 lazy.next_layout()),
+    Key([mod], "n",                 lazy.next_layout()),
     Key([mod,  "control"], "n",     lazy.layout.normalize()),
     Key([mod,  "shift"],   "space", lazy.layout.flip()),
 ])
