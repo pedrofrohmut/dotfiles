@@ -36,6 +36,8 @@ export SHELL=/usr/bin/zsh
 export EDITOR=/usr/bin/nvim
 export PATH=$PATH:$HOME/.local/bin
 
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib:/usr/lib/
+
 # --- fcitx --------------------------------------------------------------------
 
 export GTK_IM_MODULE=fcitx

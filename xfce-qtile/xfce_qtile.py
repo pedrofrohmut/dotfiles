@@ -23,8 +23,11 @@ terminal = guess_terminal()
 
 keys = [
     # Switch between windows
-    Key([mod], "j", lazy.group.next_window()),
-    Key([mod], "k", lazy.group.prev_window()),
+    #Key([mod], "j", lazy.group.next_window()),
+    #Key([mod], "k", lazy.group.prev_window()),
+
+    Key([mod], "j", lazy.layout.next()),
+    Key([mod], "k", lazy.layout.previous()),
 
     # Move windows inside the current group
     Key([mod, "shift"], "h", lazy.layout.swap_left()),
@@ -69,11 +72,11 @@ keys = [
         lazy.spawn("bash /home/pedro/dotfiles/scripts/new_change_sink.sh")),
 
     # Deadbeef
-    Key([altKey, "control"], "l",     lazy.spawn("deadbeef --random")),
-    Key([altKey, "control"], "k",     lazy.spawn("deadbeef --toggle-pause")),
-    Key([altKey, "control"], "j",     lazy.spawn("deadbeef --stop")),
-    Key([altKey, "control"], "equal", lazy.spawn("deadbeef --volume +5")),
-    Key([altKey, "control"], "minus", lazy.spawn("deadbeef --volume -5")),
+    #Key([altKey, "control"], "l",     lazy.spawn("deadbeef --random")),
+    #Key([altKey, "control"], "k",     lazy.spawn("deadbeef --toggle-pause")),
+    #Key([altKey, "control"], "j",     lazy.spawn("deadbeef --stop")),
+    #Key([altKey, "control"], "equal", lazy.spawn("deadbeef --volume +5")),
+    #Key([altKey, "control"], "minus", lazy.spawn("deadbeef --volume -5")),
 
     # Programs
     Key([mod],    "Return", lazy.spawn("alacritty"),  desc="Launch terminal"),

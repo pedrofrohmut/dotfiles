@@ -33,8 +33,13 @@ gitl() {
 
 alias ls='ls --color=auto'
 alias ll='ls -lAFh'
+alias la='ls -1 -AFh'
 alias cll='clear; ls -lAF'
+
 alias tree='tree -C'
+alias gtree='tree --gitignore'
+
+alias fcd='cd $(find . -type d -print | fzf)'
 
 alias exa='exa --icons=always'
 alias els='exa'
@@ -72,10 +77,6 @@ alias last-installed='cat /var/log/pacman.log | grep "installed" | tail -n 10'
 alias installed="cat /var/log/pacman.log | grep 'ALPM] installed'"
 
 alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
-
-# --- Starship Prompt ----------------------------------------------------------
-
-eval "$(starship init zsh)"
 
 # --- ENV ----------------------------------------------------------------------
 
@@ -168,3 +169,11 @@ zstyle ':completion:*' rehash true
 # --- Options ------------------------------------------------------------------
 
 setopt nobeep # No beep
+
+# --- Evals --------------------------------------------------------------------
+
+# Starship Prompt
+eval "$(starship init zsh)"
+
+# Zoxide
+#eval "$(zoxide init zsh)"
