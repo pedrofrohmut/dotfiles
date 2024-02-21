@@ -23,11 +23,11 @@ terminal = guess_terminal()
 
 keys = [
     # Switch between windows
-    #Key([mod], "j", lazy.group.next_window()),
-    #Key([mod], "k", lazy.group.prev_window()),
+    Key([mod], "j", lazy.group.next_window()),
+    Key([mod], "k", lazy.group.prev_window()),
 
-    Key([mod], "j", lazy.layout.next()),
-    Key([mod], "k", lazy.layout.previous()),
+    # Key([mod], "j", lazy.layout.next()),
+    # Key([mod], "k", lazy.layout.previous()),
 
     # Move windows inside the current group
     Key([mod, "shift"], "h", lazy.layout.swap_left()),
@@ -84,10 +84,10 @@ keys = [
     Key([mod],    "w",      lazy.spawn("firefox"),    desc="Web Browser"),
     Key([mod],    "c",      lazy.spawn("galculator"), desc="Calculator"),
     #Key([mod],    "F9",     lazy.spawn("discord")),
-    Key([mod],    "p",      lazy.spawn("xfce4-appfinder")),
     Key([mod],    "m",      lazy.spawn("xfce4-settings-manager")),
+    Key([mod],    "p",      lazy.spawn("xfce4-appfinder")),
     Key([mod],    "r",      lazy.spawn("xfce4-appfinder --collapsed")),
-    Key([altKey], "F3",     lazy.spawn("xflock4")),
+    #Key([altKey], "F3",     lazy.spawn("xflock4")),
     Key([altKey], "F4",     lazy.spawn("xfce4-session-logout")),
 
     # Others
@@ -226,15 +226,15 @@ keys.extend([
 
 # widget.GenPollText(name="deadbeef", fmt="Music: {}", update_interval=3.0, func=lambda: subprocess.check_output("<script>").decode("UTF-8"))
 
-widget_defaults = dict(font="Fira Mono", fontsize=13, padding=3, foreground="aaaabb")
+widget_defaults = dict(font="Fira Code", fontsize=13, padding=3, foreground="aaaabb")
 extension_defaults = widget_defaults.copy()
 top_bar = bar.Bar(
     [
-        widget.GroupBox(active="00ffff", inactive="bababa", fontsize=15,
+        widget.GroupBox(active="00ffff", inactive="bababa", fontsize=14,
                         highlight_method="line", highlight_color="005757"),
-        widget.TaskList(fontsize=14, font="FiraCode Nerd Font Mono", foreground="aaaabb",
-                        highlight_method="block", border="343434", margin_x=20, padding_x=4,
-                        spacing=8, parse_text=lambda x : x[:30]),
+        widget.TaskList(fontsize=13, font="Fira Code",
+                        foreground="aaaabb", highlight_method="block", border="343434",
+                        margin_x=10, padding_x=2, spacing=4, parse_text=lambda x : x[:25]),
         widget.Volume(fmt='Vol: {}', step=5, update_interval=0.4),
         widget.Sep(padding=20),
         widget.Clock(format="%d/%m/%Y [%a]", update_interval=60.0),

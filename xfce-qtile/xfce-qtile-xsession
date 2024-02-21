@@ -22,7 +22,11 @@ nitrogen --restore &
 unclutter --timeout 2 --ignore-scrolling &
 
 # Night Light [default -t 6500/4500]
-redshift -l -23.52:-46.35 -t 6500:4500 &
+#redshift -l -23.52:-46.35 -t 6500:4500 &
+
+# Systray version of redshift (Easy to turn on and off)
+#python3 /usr/bin/redshift-gtk &
+redshift-gtk &
 
 # Compositor - transparency
 picom --config ~/.config/picom/picom.conf &
