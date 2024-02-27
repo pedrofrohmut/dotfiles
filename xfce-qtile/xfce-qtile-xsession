@@ -25,14 +25,13 @@ unclutter --timeout 2 --ignore-scrolling &
 #redshift -l -23.52:-46.35 -t 6500:4500 &
 
 # Systray version of redshift (Easy to turn on and off)
-#python3 /usr/bin/redshift-gtk &
 redshift-gtk &
 
 # Compositor - transparency
 picom --config ~/.config/picom/picom.conf &
 
 # Window Manager
-#qtile start &
+qtile start &
 
 # --- ENV ---------------------------------------------------------------------
 
@@ -48,7 +47,7 @@ export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 
-#fcitx-autostart &
+fcitx-autostart &
 
 ### Xfce4 ######################################################################
 
@@ -56,26 +55,26 @@ export XMODIFIERS=@im=fcitx
 # and easy manage in a text instead of a gui app
 
 # Network (Manage your network connections)
-#nm-applet &
+nm-applet &
 
 # PolicyKit Authentication Agent (PolicyKit Authentication Agent)
-#/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 # Power Manager (Power managment for the Xfce desktop)
-#xfce4-power-manager &
+xfce4-power-manager &
 
 # User folders update (Update common folders names to match current locale)
-# xdg-user-dirs-gtk-update &
+xdg-user-dirs-gtk-update &
 
 # xapp-sn-watcher (A service that provides the org.kde.StatusNotifierWatcher
 # interface for XApps)
-# /usr/lib/xapps/xapp-sn-watcher &
+/usr/lib/xapps/xapp-sn-watcher &
 
 # Xfce Notification Daemon
-#/usr/lib/xfce4/notifyd/xfce4-notifyd &
+/usr/lib/xfce4/notifyd/xfce4-notifyd &
 
 # Xfce Screensaver (Launch screensaver and locker program)
-# xfce4-screensaver &
+xfce4-screensaver &
 
 # Xfce Settings Daemon (The Xfce Settings Daemon)
-#xfsettingsd &
+xfsettingsd &

@@ -78,6 +78,11 @@ alias installed="cat /var/log/pacman.log | grep 'ALPM] installed'"
 
 alias update-grub='grub-mkconfig -o /boot/grub/grub.cfg'
 
+# Setup Ocaml env
+alias opam-env='eval $(opam env)'
+
+alias kitty-themes='kitty +kitten themes'
+
 # --- ENV ----------------------------------------------------------------------
 
 # export SHELL=/usr/bin/zsh

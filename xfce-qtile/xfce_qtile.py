@@ -15,11 +15,12 @@ from typing import List  # noqa: F401
 from libqtile import bar, layout, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen, ScratchPad, DropDown
 from libqtile.lazy import lazy
-from libqtile.utils import guess_terminal
+#from libqtile.utils import guess_terminal
 
 mod = "mod4"
 altKey = "mod1"
-terminal = guess_terminal()
+#terminal = guess_terminal()
+terminal = "kitty"
 
 keys = [
     # Switch between windows
@@ -72,14 +73,15 @@ keys = [
         lazy.spawn("bash /home/pedro/dotfiles/scripts/new_change_sink.sh")),
 
     # Deadbeef
-    #Key([altKey, "control"], "l",     lazy.spawn("deadbeef --random")),
-    #Key([altKey, "control"], "k",     lazy.spawn("deadbeef --toggle-pause")),
-    #Key([altKey, "control"], "j",     lazy.spawn("deadbeef --stop")),
-    #Key([altKey, "control"], "equal", lazy.spawn("deadbeef --volume +5")),
-    #Key([altKey, "control"], "minus", lazy.spawn("deadbeef --volume -5")),
+    Key([altKey, "control"], "l",     lazy.spawn("deadbeef --random")),
+    Key([altKey, "control"], "k",     lazy.spawn("deadbeef --toggle-pause")),
+    Key([altKey, "control"], "j",     lazy.spawn("deadbeef --stop")),
+    Key([altKey, "control"], "equal", lazy.spawn("deadbeef --volume +5")),
+    Key([altKey, "control"], "minus", lazy.spawn("deadbeef --volume -5")),
 
     # Programs
-    Key([mod],    "Return", lazy.spawn("alacritty"),  desc="Launch terminal"),
+    #Key([mod],    "Return", lazy.spawn("alacritty"),  desc="Launch terminal"),
+    Key([mod],    "Return", lazy.spawn(terminal),     desc="Launch terminal"),
     Key([mod],    "e",      lazy.spawn("thunar"),     desc="File Manager"),
     Key([mod],    "w",      lazy.spawn("firefox"),    desc="Web Browser"),
     Key([mod],    "c",      lazy.spawn("galculator"), desc="Calculator"),
@@ -119,12 +121,11 @@ for i in groups:
 #############################################################################################
 
 groups.append(ScratchPad("scratchpad", [
-    DropDown("term", "alacritty",
-             width=0.8, height=0.8, y=0.08, opacity=1),
-    DropDown("htop", "alacritty -e htop",
-             width=0.8, height=0.8, y=0.08, opacity=1),
-    DropDown("music", "deadbeef",
-             width=0.8, height=0.8, y=0.08, opacity=1),
+    #DropDown("term", "alacritty", width=0.8, height=0.8, y=0.08, opacity=1),
+    DropDown("term", terminal, width=0.8, height=0.8, y=0.08, opacity=1),
+    #DropDown("htop", "alacritty -e htop", width=0.8, height=0.8, y=0.08, opacity=1),
+    DropDown("htop", (terminal + " -e htop"), width=0.8, height=0.8, y=0.08, opacity=1),
+    DropDown("music", "deadbeef", width=0.8, height=0.8, y=0.08, opacity=1),
 ]))
 
 keys.extend([
@@ -165,7 +166,6 @@ def set_floating(window):
             width=int(window.qtile.screen.width * 0.8),
             height=int(window.qtile.screen.height * 0.8),
         )
-
 
 floating_layout = layout.Floating(
     float_rules=[
