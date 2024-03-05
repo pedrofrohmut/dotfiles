@@ -7,11 +7,12 @@ alias old='/usr/local/bin/vim'
 
 alias hx='helix'
 
-alias emc='emacs -nw'
+alias emc='emacsclient -c .'
 
 alias gits='git status'
 alias gitp='git push'
 alias gitac='git add . && git commit -m'
+alias git-ops='git reset --soft HEAD^'
 
 # Git diff
 gitd() {
@@ -182,3 +183,6 @@ eval "$(starship init zsh)"
 
 # Zoxide
 #eval "$(zoxide init zsh)"
+
+# Opam (OCaml package manager)
+eval "$(opam env)"

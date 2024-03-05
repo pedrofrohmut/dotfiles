@@ -28,7 +28,8 @@ unclutter --timeout 2 --ignore-scrolling &
 redshift-gtk &
 
 # Compositor - transparency
-picom --config ~/.config/picom/picom.conf &
+#picom --config ~/.config/picom/picom.conf &
+picom &
 
 # Window Manager
 qtile start &
@@ -64,17 +65,17 @@ nm-applet &
 xfce4-power-manager &
 
 # User folders update (Update common folders names to match current locale)
-xdg-user-dirs-gtk-update &
+#xdg-user-dirs-gtk-update &
 
 # xapp-sn-watcher (A service that provides the org.kde.StatusNotifierWatcher
 # interface for XApps)
-/usr/lib/xapps/xapp-sn-watcher &
+#/usr/lib/xapps/xapp-sn-watcher &
 
 # Xfce Notification Daemon
 /usr/lib/xfce4/notifyd/xfce4-notifyd &
 
 # Xfce Screensaver (Launch screensaver and locker program)
-xfce4-screensaver &
+#xfce4-screensaver &
 
 # Xfce Settings Daemon (The Xfce Settings Daemon)
 xfsettingsd &

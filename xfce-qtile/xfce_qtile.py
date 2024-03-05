@@ -20,7 +20,7 @@ from libqtile.lazy import lazy
 mod = "mod4"
 altKey = "mod1"
 #terminal = guess_terminal()
-terminal = "kitty"
+terminal = "alacritty"
 
 keys = [
     # Switch between windows
@@ -73,11 +73,11 @@ keys = [
         lazy.spawn("bash /home/pedro/dotfiles/scripts/new_change_sink.sh")),
 
     # Deadbeef
-    Key([altKey, "control"], "l",     lazy.spawn("deadbeef --random")),
-    Key([altKey, "control"], "k",     lazy.spawn("deadbeef --toggle-pause")),
-    Key([altKey, "control"], "j",     lazy.spawn("deadbeef --stop")),
-    Key([altKey, "control"], "equal", lazy.spawn("deadbeef --volume +5")),
-    Key([altKey, "control"], "minus", lazy.spawn("deadbeef --volume -5")),
+    #Key([altKey, "control"], "l",     lazy.spawn("deadbeef --random")),
+    #Key([altKey, "control"], "k",     lazy.spawn("deadbeef --toggle-pause")),
+    #Key([altKey, "control"], "j",     lazy.spawn("deadbeef --stop")),
+    #Key([altKey, "control"], "equal", lazy.spawn("deadbeef --volume +5")),
+    #Key([altKey, "control"], "minus", lazy.spawn("deadbeef --volume -5")),
 
     # Programs
     #Key([mod],    "Return", lazy.spawn("alacritty"),  desc="Launch terminal"),
