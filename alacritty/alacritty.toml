@@ -43,5 +43,5 @@ program = "/bin/zsh"
 opacity = 0.9
 
 [window.padding]
-x = 4
-y = 4
+x = 8
+y = 8

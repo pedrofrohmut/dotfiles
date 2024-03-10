@@ -91,9 +91,11 @@ export EDITOR=/usr/bin/nvim
 export VISUAL=/usr/bin/nvim
 
 # Dotnet
-export DOTNET_ROOT=$HOME/software/dotnet7.0.9
-export DOTNET_TOOLS_HOME=$HOME/.dotnet/tools
-export DOTNET_CLI_TELEMETRY_OPTOUT=1 # 1 to refuse
+#export DOTNET_ROOT=$HOME/software/dotnet7.0.9
+#export DOTNET_TOOLS_HOME=$HOME/.dotnet/tools
+#export DOTNET_CLI_TELEMETRY_OPTOUT=1 # 1 to refuse
+
+export DOTNET_ROOT=$HOME/opt/dotnet-8.0.201
 
 # My local bin (my symlinks)
 export LOCAL_BIN=$HOME/.local/bin # For endeavourOS
@@ -151,4 +153,4 @@ setopt nobeep
 eval "$(starship init zsh)"
 
 # Opam (OCaml package manager)
-eval "$(opam env)"
+#eval "$(opam env)"

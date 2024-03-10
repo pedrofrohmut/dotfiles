@@ -140,11 +140,11 @@ keys.extend([
 #############################################################################################
 
 layouts = [
+    layout.Max(),
     layout.MonadTall(border_focus="#ababab", border_normal="#323232",
-                     border_width=2, single_border_width=0),
+                     border_width=2, single_border_width=0)
     # layout.MonadWide(border_focus="#ababab", border_normal="#323232",
     #                  border_width=2, single_border_width=0),
-    layout.Max()
 ]
 
 
