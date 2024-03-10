@@ -2,8 +2,11 @@ from libqtile import bar, layout, widget
 from libqtile.config import Drag, Group, Key, Match, Screen, ScratchPad, DropDown
 from libqtile.lazy import lazy
 
+from os import path
+
 mod = "mod4"
 terminal = "alacritty"
+HOMEDIR = path.expanduser("~/")
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -75,6 +78,8 @@ keys = [
     Key([mod], "e",      lazy.spawn("thunar"),  desc="File Manager"),
     Key([mod], "c",      lazy.spawn("galculator"), desc="Calculator"),
     Key([mod], "d",      lazy.spawn("xfce4-appfinder")),
+    Key([mod], "y",      lazy.spawn("emacsclient -c")),
+    Key([mod], "0",      lazy.spawn("bash {0}/dotfiles/scripts/new_change_sink.sh".format(HOMEDIR))),
 ]
 
 @lazy.function
