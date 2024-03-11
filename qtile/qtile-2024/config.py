@@ -81,13 +81,11 @@ keys = [
     Key([mod], "y",      lazy.spawn("emacsclient -c")),
 
     # Sound
-    Key([mod], "equal",
-        lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%"),
+    Key([mod], "equal", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%"),
         desc="increase volume on default sink by 5%"),
-    Key([mod], "minus",
-        lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%"),
+    Key([mod], "minus", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%"),
         desc="decrease volume on default sink by 5%"),
-    Key([mod], "0",      lazy.spawn("bash {0}/dotfiles/scripts/new_change_sink.sh".format(HOMEDIR))),
+    Key([mod], "0",     lazy.spawn("bash {0}/dotfiles/scripts/new_change_sink.sh".format(HOMEDIR))),
 ]
 
 @lazy.function

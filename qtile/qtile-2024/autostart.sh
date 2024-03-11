@@ -1,5 +1,5 @@
 ################################################################################
-# autostart for Qtile Wayland ##################################################
+# autostart for Qtile X11 ######################################################
 ################################################################################
 
 #! /usr/bin/env bash
@@ -7,7 +7,7 @@
 # --- ENV ----------------------------------------------------------------------
 
 export SHELL=/usr/bin/zsh
-export EDITOR=/usr/bin/nvim
+export EDITOR=/usr/local/bin/nvim
 export PATH=$PATH:$HOME/.local/bin
 
 export GTK_IM_MODULE=fcitx
@@ -23,7 +23,8 @@ pasystray &
 redshift-gtk &
 
 # Japanese typing
-fcitx-autostart &
+#fcitx5-autostart &
+fcitx5 &
 
 # Network (Manage your network connections)
 nm-applet &
@@ -42,11 +43,10 @@ unclutter --timeout 2 --ignore-scrolling &
 # Emacs &
 emacs --daemon &
 
-# --- Keyboard config ----------------------------------------------------------
+# Compositor - transparency
+picom &
 
-# Backup caps as escape
-#xmodmap -e "clear lock"
-#xmodmap -e "keycode 66=Escape"
+# --- Keyboard config ----------------------------------------------------------
 
 # Keyboard Layout
 setxkbmap -layout us -option caps:escape &

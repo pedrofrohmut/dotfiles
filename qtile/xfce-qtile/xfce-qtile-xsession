@@ -8,6 +8,10 @@
 setxkbmap -layout us -option caps:escape &
 #xmodmap ~/.Xmodmap
 
+# Backup caps as escape
+#xmodmap -e "clear lock"
+#xmodmap -e "keycode 66=Escape"
+
 # --- Tray ---------------------------------------------------------------------
 
 # PulseAudio
