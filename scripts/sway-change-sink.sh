@@ -1,19 +1,22 @@
 #! /usr/bin/env sh
 
-# List the sinks in short form => replace tabs by # => replace spaces by #
-# so it wont split the output in only 1 item for 1 sink
-sinks=($(pactl list sinks short | tr '\t' '#' | tr ' ' '#' ))
+default_sink_name=$(pactl get-default-sink)
 
-# Get default sink name to compare
-default=$(pactl get-default-sink)
+sink_ids=($(pactl list sinks short | awk '{print $1}'))
+sink_names=($(pactl list sinks short | awk '{print $2}'))
 
-# Expected to be only two sinks so an if is enough
-# Get the sink number of the not-default sink
-if [[ ${sinks[0]} == *"$default"* ]]; then
-    sink_n=$(echo ${sinks[1]} | awk -F '#' '{print $1}')
+if [[ ${sink_names[0]} == ${default_sink_name} ]]; then
+    new_sink_name=${sink_names[1]}
+    new_sink_id=${sink_ids[1]}
 else
-    sink_n=$(echo ${sinks[0]} | awk -F '#' '{print $1}')
+    new_sink_name=${sink_names[0]}
+    new_sink_id=${sink_ids[0]}
 fi
 
-# Set the not-default sink as default sink. (Toggle Between Effect)
-pactl set-default-sink $sink_n
+pactl set-default-sink $new_sink_id
+
+inputs_ids=$(pactl list sink-inputs short | awk '{print $1}')
+
+for input_id in $inputs_ids; do
+    pactl move-sink-input $input_id $new_sink_id
+done
