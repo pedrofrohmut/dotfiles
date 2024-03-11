@@ -88,6 +88,10 @@ alias kitty-themes='kitty +kitten themes'
 
 # My Env should be set on .xprofile (X11) or .zprofile (Wayland)
 
+export SHELL=/usr/bin/zsh
+export EDITOR=/usr/local/bin/nvim
+export PATH=$PATH:$HOME/.local/bin
+
 # Dotnet
 #export DOTNET_ROOT=$HOME/software/dotnet7.0.9
 #export DOTNET_TOOLS_HOME=$HOME/.dotnet/tools

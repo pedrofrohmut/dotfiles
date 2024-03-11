@@ -28,7 +28,7 @@ set $term alacritty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu dmenu_path | wmenu | xargs swaymsg exec --
+#set $menu dmenu_path | wmenu | xargs swaymsg exec --
 
 ### Output configuration
 #
@@ -78,9 +78,13 @@ input "type:keyboard" {
     xkb_layout us
 }
 
+# Hide mouse cursor after a period of inactivity.
+seat seat0 hide_cursor 3000
+#seat seat0 xcursor_theme my_cursor_theme my_cursor_size
+seat seat0 xcursor_theme Mocu-White-Right 32
+
 ### Floating rules
-for_window [class="Pavucontrol"] floating enable
-for_window [class="Xfce4-appfinder" instance="xfce4-appfinder"] floating enable
+#for_window [class="Pavucontrol"] floating enable
 
 ### Key bindings
 #
@@ -93,7 +97,7 @@ for_window [class="Xfce4-appfinder" instance="xfce4-appfinder"] floating enable
     bindsym $mod+Shift+q kill
 
     # Start your launcher
-    bindsym $mod+d exec $menu
+    #bindsym $mod+d exec $menu
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -287,8 +291,8 @@ bindsym $mod+equal exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 # Apps
 bindsym $mod+w exec firefox
 bindsym $mod+e exec thunar
-bindsym $mod+y exec xfce4-appfinder
 bindsym $mod+c exec galculator
+bindsym $mod+y exec wofi --show drun
 
 # My autostart config
 exec ~/.config/sway/autostart.sh &

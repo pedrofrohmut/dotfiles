@@ -15,7 +15,7 @@ function change_default_sink() {
     # 2 and 3. tr replaces tabs and spaces for # so the line dont get devided
     # when cahnged to an array
     sinks=($(pactl list sinks short | tr '\t' '#' | tr ' ' '#' ))
-    
+
     default=$(get_default_sink)
 
     # Check with the default string to get active and inactive sink numbers
@@ -58,5 +58,6 @@ case "$opt" in
     "decrease") decrease_volume;;
     "toggle-mute") toggle_mute;;
     "change") change_default_sink;;
+    *) echo "Commands are: increase decrease toggle-mute change" ;;
 esac
 

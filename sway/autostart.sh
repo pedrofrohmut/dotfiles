@@ -17,9 +17,6 @@ export XMODIFIERS=@im=fcitx
 
 # --- System Tray --------------------------------------------------------------
 
-# PulseAudio
-pasystray &
-
 # Japanese typing
 fcitx5 &
 
@@ -29,16 +26,11 @@ nm-applet &
 # --- Background Apps ----------------------------------------------------------
 
 # Change color temperature
-gammastep &
-
-# Hide Mouse Cursor when idle for 2 seconds
-unclutter --timeout 2 --ignore-scrolling &
+wlsunset -l 23.52 -L 46.35 -T 6500 -t 4500 -g 0.9 & ### My preference temp
+#wlsunset -l 23.52 -L 46.35 -T 5700 -t 3500 &       ### Temp Recommend
 
 # PolicyKit Authentication Agent (PolicyKit Authentication Agent)
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-
-# Emacs &
-emacs --daemon &
 
 # Waybar for sway
 waybat &
