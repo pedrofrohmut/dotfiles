@@ -26,7 +26,7 @@ nm-applet &
 # --- Background Apps ----------------------------------------------------------
 
 # Change color temperature
-wlsunset -l 23.52 -L 46.35 -T 6500 -t 4500 -g 0.9 & ### My preference temp
+wlsunset -T 6500 -t 4500 -g 0.9 -S 06:00 -s 19:00 & ### My preference temp
 #wlsunset -l 23.52 -L 46.35 -T 5700 -t 3500 &       ### Temp Recommend
 
 # PolicyKit Authentication Agent (PolicyKit Authentication Agent)

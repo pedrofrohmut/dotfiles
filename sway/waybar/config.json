@@ -3,7 +3,7 @@
     "modules-left": ["sway/workspaces", "sway/scratchpad", "sway/mode"],
     "modules-center": ["sway/window"],
     "modules-right": [
-        "pulseaudio", "cpu", "memory", "clock", "tray"
+        "cpu", "memory", "pulseaudio", "clock", "tray"
     ],
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
@@ -18,17 +18,17 @@
     "sway/window": {
         "max-length": 50
     },
-    "pulseaudio": {
-        "scroll-step": 2.5,
-        "format": "Vol: {volume}%",
-        "on-click": "sh $HOME/dotfiles/scripts/sway-change-sink.sh"
-    },
     "cpu": {
         "format": "CPU: {usage}%",
         "tooltip": false
     },
     "memory": {
         "format": "RAM: {}%"
+    },
+    "pulseaudio": {
+        "scroll-step": 2.5,
+        "format": "Vol: {volume}%",
+        "on-click": "sh $HOME/dotfiles/scripts/sway-change-sink.sh"
     },
     "clock": {
         "format-alt": "{:%a, %d. %b  %H:%M}"
