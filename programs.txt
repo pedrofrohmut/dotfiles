@@ -11,6 +11,7 @@ gparted                 - Manage your disks easy
 gpick                   - Nice Color Picker
 helix                   - Experimental TUI Editor
 i3lock                  - Nice screen locker to use with Window Managers
+lf                      - Better version of ranger
 lxapperance             - To manage apperance
 lxsession               - To manage password etc
 mpv                     - Simple Video Player
@@ -39,6 +40,7 @@ virtual-bov             - Virtual Machines to test linux
 vlc                     - Video player if you want to manage subtitles
 xclip                   - Clipboard util for X
 xcolor                  - ColorPicker for terminal
+yazi                    - TUI File Manager
 zsh                     - Posix Shell good alternative to Bash
 
 ## Fonts ########################################################################

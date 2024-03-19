@@ -44,7 +44,7 @@ alias fcd='cd $(find . -type d -print | fzf)'
 
 alias exa='exa --icons=always'
 alias els='exa'
-alias ell='exa -lAFh'
+alias ell='exa -lAh'
 alias etree='exa --tree'
 
 alias ..='cd ..'
@@ -84,20 +84,16 @@ alias opam-env='eval $(opam env)'
 
 alias kitty-themes='kitty +kitten themes'
 
+# Setup Dotnet8 env based on file
+alias dotnet8-env="source $HOME/opt/dotnet-8.0.201/dotnet8.env"
+
 # --- ENV ----------------------------------------------------------------------
 
 # My Env should be set on .xprofile (X11) or .zprofile (Wayland)
 
-export SHELL=/usr/bin/zsh
-export EDITOR=/usr/local/bin/nvim
-export PATH=$PATH:$HOME/.local/bin
-
-# Dotnet
-#export DOTNET_ROOT=$HOME/software/dotnet7.0.9
-#export DOTNET_TOOLS_HOME=$HOME/.dotnet/tools
-#export DOTNET_CLI_TELEMETRY_OPTOUT=1 # 1 to refuse
-
-#export DOTNET_ROOT=$HOME/opt/dotnet-8.0.201
+#export SHELL=/usr/bin/zsh
+#export EDITOR=/usr/local/bin/nvim
+#export PATH=$PATH:$HOME/.local/bin
 
 # My local bin (my symlinks)
 #export LOCAL_BIN=$HOME/.local/bin # For endeavourOS
